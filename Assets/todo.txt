@@ -1,0 +1,10 @@
+- Import new frameworks
+- Delete Managers
+- Delete presets
+- GameAssets seem weird, why not static class? Weird loading
+- Delete NewtonSoft 
+- Delete GlobalInfo
+- Look better at DataSaver
+- Delete unused editors
+- Convert Options to Extensions
+- Cleanup utilities
