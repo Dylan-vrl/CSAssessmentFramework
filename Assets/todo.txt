@@ -1,4 +1,5 @@
 - Import new frameworks
+- Convert Options to Extensions
 - Delete Managers
 - Delete presets
 - GameAssets seem weird, why not static class? Weird loading
@@ -6,5 +7,4 @@
 - Delete GlobalInfo
 - Look better at DataSaver
 - Delete unused editors
-- Convert Options to Extensions
 - Cleanup utilities

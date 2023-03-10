@@ -1,0 +1,59 @@
+Button.category {
+    font-size: 12px;
+    flex-basis: 24%;
+    transition-duration: 0.5s;
+}
+
+Button.category.selected {
+    font-size: 12px;
+    flex-basis: 24%;
+    transition-duration: 0.5s;
+    background-color: rgb(69, 96, 125);
+}
+
+Button.icon {
+    font-size: 12px;
+    flex-basis: 24%;
+    transition-duration: 0.5s;
+    background-color: rgba(255, 255, 255, 0);
+    width: 35px;
+    height: 35px;
+    max-height: 35px;
+    max-width: 35px;
+    min-width: 35px;
+    min-height: 35px;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    color: rgba(210, 210, 210, 0);
+}
+
+ScrollView.categoryList {
+    height: 65px;
+    width: auto;
+}
+
+VisualElement.iconLabel {
+    flex-direction: row;
+    font-size: 14px;
+    -unity-text-align: middle-left;
+}
+
+.extension {
+    flex-direction: row;
+    align-items: flex-start;
+    background-color: var(--unity-colors-box-background);
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.categoryRoot {
+}
+
+.line {
+    height: 2px;
+    background-color: var(--unity-colors-input_field-border-hover);
+}
