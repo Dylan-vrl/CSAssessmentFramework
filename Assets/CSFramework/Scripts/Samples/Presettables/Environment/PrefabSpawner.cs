@@ -1,9 +1,13 @@
+using CSFramework.Core;
 using UnityEngine;
 
 namespace CSFramework.Samples
 {
-    public class PrefabSpawner : MonoBehaviour
+    public class PrefabSpawner : PresettableMonoBehaviour<PrefabSpawnerPreset>
     {
+        public int test;
+        public override PresettableCategory Category => PresettableCategory.Vision;
+        
         [SerializeField] private GameObject prefab;
     
         public void SpawnPrefab(

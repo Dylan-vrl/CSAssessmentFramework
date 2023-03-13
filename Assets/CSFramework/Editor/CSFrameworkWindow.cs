@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -18,9 +19,9 @@ namespace CSFramework.Editor
 
         [SerializeField] private StyleSheet styleSheet;
 
-        private Dictionary<ExtensionCategory, VisualElement> _categoriesWindows;
+        private Dictionary<PresettableCategory, VisualElement> _categoriesWindows;
 
-        private ExtensionCategory _selectedCategory;
+        private PresettableCategory _selectedCategory;
 
         [MenuItem("CSFramework/Setup")]
         private static void CreateMenu()
@@ -34,7 +35,12 @@ namespace CSFramework.Editor
             RebuildView(AllCategories[0]);
         }
 
-        private void RebuildView(ExtensionCategory category)
+        private void OnHierarchyChange()
+        {
+            RebuildView(_selectedCategory);
+        }
+
+        private void RebuildView(PresettableCategory category)
         {
             rootVisualElement.Clear();
             rootVisualElement.styleSheets.Add(styleSheet);
@@ -44,8 +50,10 @@ namespace CSFramework.Editor
                 category,
                 RebuildView)
             );
-            rootVisualElement.Add(CategoryElement.Draw(category));
+            var scrollView = new ScrollView();
+            scrollView.Add(CategoryElement.Draw(category, () => RebuildView(category)));
+            rootVisualElement.Add(scrollView);
+            _selectedCategory = category;
         }
-        
     }
 }

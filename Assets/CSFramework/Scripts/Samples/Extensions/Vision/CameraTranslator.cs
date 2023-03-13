@@ -18,6 +18,6 @@ namespace CSFramework.Samples
             _cam.transform.Translate(Preset.Direction * Preset.Speed);
         }
 
-        public override ExtensionCategory Category => ExtensionCategory.Vision;
+        public override PresettableCategory Category => PresettableCategory.Vision;
     }
 }

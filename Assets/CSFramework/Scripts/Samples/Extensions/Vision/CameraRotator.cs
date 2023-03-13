@@ -18,6 +18,6 @@ namespace CSFramework.Samples
             _cam.transform.Rotate(Preset.RotationAxis, Preset.RotationSpeed);
         }
 
-        public override ExtensionCategory Category => ExtensionCategory.Vision;
+        public override PresettableCategory Category => PresettableCategory.Vision;
     }
 }

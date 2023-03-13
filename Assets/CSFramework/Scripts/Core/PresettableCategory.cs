@@ -1,6 +1,6 @@
 namespace CSFramework.Core
 {
-    public enum ExtensionCategory  
+    public enum PresettableCategory  
     {
         Experiment,
         Environment,

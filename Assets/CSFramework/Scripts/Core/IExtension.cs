@@ -2,9 +2,8 @@ using System;
 
 namespace CSFramework.Core
 {
-    public interface IExtension
+    public interface IExtension: IPresettable
     {
-        public ExtensionCategory Category { get; }
-        public Type ExtendedType { get; }
+        public Type ExtendedType { get; } 
     }
 }

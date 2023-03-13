@@ -23,9 +23,9 @@ namespace CSFramework.Editor
         /// <param name="selectedCategory"> The category which is selected </param>
         /// <param name="onClick"> What to execute on click of one button </param>
         public static VisualElement Draw(
-            IEnumerable<ExtensionCategory> categories, 
-            ExtensionCategory selectedCategory,
-            Action<ExtensionCategory> onClick)
+            IEnumerable<PresettableCategory> categories, 
+            PresettableCategory selectedCategory,
+            Action<PresettableCategory> onClick)
         {
             var root = new VisualElement();
             root.AddToClassList(CategoryListClass);

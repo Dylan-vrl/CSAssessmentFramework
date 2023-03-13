@@ -34,7 +34,7 @@ ScrollView.categoryList {
     width: auto;
 }
 
-VisualElement.iconLabel {
+.iconLabel {
     flex-direction: row;
     font-size: 14px;
     -unity-text-align: middle-left;
@@ -44,16 +44,75 @@ VisualElement.iconLabel {
     flex-direction: row;
     align-items: flex-start;
     background-color: var(--unity-colors-box-background);
-    margin-left: 10px;
+    margin-left: 35px;
     margin-right: 10px;
     margin-top: 5px;
     margin-bottom: 10px;
+    align-self: auto;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    -unity-text-align: middle-left;
 }
 
 .categoryRoot {
 }
 
+.extensionsRoot {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 0;
+    padding-bottom: 15px;
+}
+
 .line {
-    height: 2px;
+    height: 3px;
     background-color: var(--unity-colors-input_field-border-hover);
+}
+
+Label.title2 {
+    font-size: 20px;
+    -unity-text-align: middle-left;
+    -unity-font-style: bold;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 0;
+}
+
+Label.title3 {
+    font-size: 16px;
+    -unity-text-align: middle-left;
+    -unity-font-style: bold;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+Box.icon {
+    font-size: 12px;
+    flex-basis: 24%;
+    transition-duration: 0.5s;
+    background-color: rgba(255, 255, 255, 0);
+    width: 35px;
+    height: 35px;
+    max-height: 35px;
+    max-width: 35px;
+    min-width: 35px;
+    min-height: 35px;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    color: rgba(210, 210, 210, 0);
+}
+
+Button.create {
+    flex-basis: auto;
+    transition-duration: 0.5s;
+    position: relative;
+    justify-content: center;
+    align-self: center;
 }

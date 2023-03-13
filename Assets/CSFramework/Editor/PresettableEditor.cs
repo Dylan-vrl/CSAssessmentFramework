@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
@@ -8,29 +9,40 @@ namespace CSFramework.Editor
     /// <summary>
     /// Custom editor for extensions.
     /// </summary>
-    [CustomEditor(typeof(Extension<,>), true)]
-    public class ExtensionEditor : UnityEditor.Editor
+    [CustomEditor(typeof(PresettableMonoBehaviour<>), true)]
+    public class PresettableEditor : UnityEditor.Editor
     {
+        private VisualElement _presetField;
+        private VisualElement _lastFoldout;   
+
         public override VisualElement CreateInspectorGUI()
         {
-            var root = new VisualElement();
 
-            var presetProperty = serializedObject.FindProperty("preset");
-            var presetField = new PropertyField(presetProperty)
-            {
-                label = "" // To directly display the ObjectField
-            };
-            presetField.RegisterValueChangeCallback(RebuildFoldout);
-            root.Add(presetField);
+            var root = new VisualElement();
+            root.Add(PresetField());
+            root.Add(new IMGUIContainer(OnInspectorGUI));
 
             return root;
 
+            VisualElement PresetField()
+            {
+                var presetProperty = serializedObject.FindProperty("preset");
+                var presetField = new PropertyField(presetProperty)
+                {
+                    label = "" // To directly display the ObjectField
+                };
+                presetField.RegisterValueChangeCallback(RebuildFoldout);
+                _presetField = presetField;
+                return presetField;
+            }
+            
             void RebuildFoldout(SerializedPropertyChangeEvent changeEvent)
             {
                 // Remove previous preset's inspector
-                if (root.childCount >= 2)
-                    root.RemoveAt(1);
-
+                if(_lastFoldout != null
+                   && root.Children().Contains(_lastFoldout)) 
+                    root.Remove(_lastFoldout);
+                
                 var newProperty = changeEvent.changedProperty;
 
                 // If no new preset, do not draw the foldout
@@ -45,6 +57,7 @@ namespace CSFramework.Editor
                     viewDataKey = $"{serializedObject.targetObject.name}{newProperty?.boxedValue}InspectorFoldout",
                     text = "Modify preset"
                 };
+                _lastFoldout = foldout;
 
                 // Draw all internal fields of the preset
                 SerializedObject targetObject = new SerializedObject(newProperty?.objectReferenceValue);
@@ -59,8 +72,20 @@ namespace CSFramework.Editor
                     foldout.Add(fieldField);
                 }
 
+                root.Clear();
+                root.Add(_presetField);
                 root.Add(foldout);
+                root.Add(new IMGUIContainer(OnInspectorGUI));
             }
+        }
+        
+        public override void OnInspectorGUI()
+        {
+            serializedObject.Update();
+            EditorGUI.BeginChangeCheck();
+            DrawPropertiesExcluding(serializedObject, "preset", "m_Script");
+            if (EditorGUI.EndChangeCheck())
+                serializedObject.ApplyModifiedProperties();
         }
     }
 }

@@ -1,5 +1,4 @@
-using UnityEditor;
-using UnityEngine;
+using System;
 using UnityEngine.UIElements;
 
 namespace CSFramework.Editor
@@ -8,18 +7,13 @@ namespace CSFramework.Editor
     {
         private const string GameObjectIconButtonClass = "icon";
 
-        public static VisualElement Draw(
-            GameObject gameObject)
+        public static VisualElement Draw(Action onClick = null)
         {
             var iconButton = new Button();
             iconButton.AddToClassList(GameObjectIconButtonClass);
-            var iconTexture = EditorGUIUtility.IconContent("GameObject Icon", "|Open in hierarchy").image;
-            var icon = new Image
-            {
-                image = iconTexture
-            };
-            iconButton.Add(icon);
-            iconButton.clicked += () => Selection.SetActiveObjectWithContext(gameObject, null);
+            iconButton.Add(GameObjectIconElement.Draw());
+            if(onClick != null)
+                iconButton.clicked += onClick;
 
             return iconButton;
         }
