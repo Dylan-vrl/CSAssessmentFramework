@@ -1,4 +1,4 @@
-- Import new frameworks
+DONE Import new frameworks
 - Convert Options to Extensions
 - Delete Managers
 - Delete presets
