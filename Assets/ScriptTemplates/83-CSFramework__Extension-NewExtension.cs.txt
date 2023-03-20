@@ -1,0 +1,20 @@
+using UnityEngine;
+using CSFramework.Core;
+
+namespace CSFramework.Extensions
+{
+    // TODO replace TExtended by the type this extension extends
+    [RequireComponent(typeof(TExtended))]
+    public class #SCRIPTNAME# : Extension<TExtended, TPreset>
+    {
+        // TODO give a more meaningful name to _extended
+        private TExtended _extended;
+
+        private void Awake()
+        {
+            _extended = GetComponent<TExtended>();
+        }
+
+        public override PresettableCategory Category => //TODO Insert PresettableCategory here
+    }
+}

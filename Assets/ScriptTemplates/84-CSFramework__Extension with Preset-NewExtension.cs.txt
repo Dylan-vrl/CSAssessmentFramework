@@ -1,0 +1,33 @@
+using UnityEngine;
+using CSFramework.Core;
+using CSFramework.Extensions;
+using CSFramework.Presets;
+
+namespace CSFramework.Extensions
+{
+    #NOTRIM#
+    // TODO replace TExtended by the type this extension extends
+    [RequireComponent(typeof(TExtended))]
+    public class #SCRIPTNAME# : Extension<TExtended, #SCRIPTNAME#Preset>
+    {
+        // TODO give a more meaningful name to _extended
+        private TExtended _extended;
+        #NOTRIM#
+        private void Awake()
+        {
+            _extended = GetComponent<TExtended>();
+        }
+        #NOTRIM#
+        public override PresettableCategory Category => //TODO Insert PresettableCategory here
+    }
+}
+
+namespace CSFramework.Presets
+{
+    public class #SCRIPTNAME#Preset: Preset<#SCRIPTNAME#>
+    {
+        [field: SerializeField]
+        public int Field { get; private set; }
+    	#NOTRIM#
+    }
+}
