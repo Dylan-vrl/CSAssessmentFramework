@@ -1,0 +1,26 @@
+using UnityEngine;
+using CSFramework.Core;
+using CSFramework.Extensions;
+using CSFramework.Presets;
+
+namespace CSFramework.Presettable
+{
+    public class #SCRIPTNAME# : PresettableMonoBehaviour<#SCRIPTNAME#Preset>
+    {
+        public override PresettableCategory GetCategory() => ; //TODO Insert the correct PresettableCategory here
+        #NOTRIM#
+        // You can access the Preset fields calling Preset.{fieldName}
+    }
+}
+
+namespace CSFramework.Presets
+{
+    [CreateAssetMenu(menuName = "CSFramework/Preset Instances/#SCRIPTNAME#Preset", fileName = "new #SCRIPTNAME#Preset")]
+    public class #SCRIPTNAME#Preset: Preset<#SCRIPTNAME#>
+    {
+        // TODO remove this field and create your own fields following the exact same format
+        [field: SerializeField]
+        public int Field { get; private set; }
+    	#NOTRIM#
+    }
+}
