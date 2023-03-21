@@ -15,31 +15,33 @@ namespace CSFramework.Editor
         /// Returns all subtypes of the given <paramref name="baseType"/> excluding
         /// interfaces and abstract classes.
         /// </summary>
-        public static IEnumerable<Type> AllConcreteSubtypesFor(Type baseType)
+        public static IEnumerable<Type> AllMonoBehaviourSubtypesFor(Type baseType)
         {
             return AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
-                .Where(t => t.IsConcreteSubtypeOf(baseType));
+                .Where(t => 
+                    t.IsMonoBehaviourSubtypeOf(baseType));
         }
 
-        private static bool IsConcreteSubtypeOf(this Type type, Type baseType)
+        private static bool IsMonoBehaviourSubtypeOf(this Type type, Type baseType)
         {
             return baseType.IsAssignableFrom(type) 
                    && type != baseType
                    && !type.IsAbstract
-                   && !type.IsInterface;
+                   && !type.IsInterface
+                   && typeof(MonoBehaviour).IsAssignableFrom(type);
         }
 
         public static IEnumerable<Type> AllExtensionSubtypes =>
-            AllConcreteSubtypesFor(typeof(IExtension));
+            AllMonoBehaviourSubtypesFor(typeof(IExtension));
 
         public static IEnumerable<IExtension> AllExtensions =>
             AllExtensionSubtypes
                 .Select(t => (IExtension)FormatterServices.GetUninitializedObject(t));
 
         public static IEnumerable<Type> AllNonExtensionsSubtypes =>
-            AllConcreteSubtypesFor(typeof(IPresettable))
-                .Where(t => !t.IsConcreteSubtypeOf(typeof(IExtension)));
+            AllMonoBehaviourSubtypesFor(typeof(IPresettable))
+                .Where(t => !t.IsMonoBehaviourSubtypeOf(typeof(IExtension)));
 
         public static IEnumerable<IPresettable> AllNonExtensions =>
             AllNonExtensionsSubtypes
@@ -55,7 +57,7 @@ namespace CSFramework.Editor
                 new Dictionary<GameObject, IEnumerable<(Type, IExtension)>>();
 
             var gameObjectsByExtension = AllExtensionSubtypes.Zip(AllExtensions, (type, extension) => (type, extension))
-                .Where(extensionInfo => extensionInfo.extension.Category == category)
+                .Where(extensionInfo => extensionInfo.extension.GetCategory() == category)
                 .Select(extensionInfo => (extensionInfo, extensionInfo.extension.ExtendedType))
                 .Select(triple => (triple.extensionInfo, GetGameObjectsWithComponentInScene(triple.ExtendedType)));
 
@@ -76,7 +78,7 @@ namespace CSFramework.Editor
         public static IEnumerable<(Type, IExtension)> NotInSceneExtensionsForCategory(PresettableCategory category)
         {
             return AllExtensionSubtypes.Zip(AllExtensions, (type, extension) => (type, extension))
-                .Where(extensionInfo => extensionInfo.extension.Category == category)
+                .Where(extensionInfo => extensionInfo.extension.GetCategory() == category)
                 .Where(extensionInfo =>
                     !GetGameObjectsWithComponentInScene(extensionInfo.extension.ExtendedType).Any());
         }
@@ -88,7 +90,7 @@ namespace CSFramework.Editor
                 new Dictionary<GameObject, IEnumerable<(Type, IPresettable)>>();
 
             var gameObjectsByExtension = AllNonExtensionsSubtypes.Zip(AllNonExtensions, (type, nonExt) => (type, nonExt))
-                .Where(nonExtInfo => nonExtInfo.nonExt.Category == category)
+                .Where(nonExtInfo => nonExtInfo.nonExt.GetCategory() == category)
                 .Select(nonExtInfo => (nonExtInfo, GetGameObjectsWithComponentInScene(nonExtInfo.type)));
 
             foreach (var triple in gameObjectsByExtension)
@@ -108,13 +110,14 @@ namespace CSFramework.Editor
         public static IEnumerable<(Type, IPresettable)> NotInSceneNonExtensionsForCategory(PresettableCategory category)
         {
             return AllNonExtensionsSubtypes.Zip(AllNonExtensions, (type, nonExt) => (type, nonExt))
-                .Where(nonExtInfo => nonExtInfo.nonExt.Category == category)
+                .Where(nonExtInfo => nonExtInfo.nonExt.GetCategory() == category)
                 .Where(nonExtInfo =>
                     !GetGameObjectsWithComponentInScene(nonExtInfo.type).Any());
         }
 
         public static List<GameObject> GetGameObjectsWithComponentInScene(Type type)
         {
+            Debug.Log("Type " + type.Name);
             List<GameObject> objectsInScene = new List<GameObject>();
             var allObjects = Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[];
             if (allObjects == null)

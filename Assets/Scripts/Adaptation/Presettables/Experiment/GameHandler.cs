@@ -165,6 +165,6 @@ namespace CSFramework.Temp
             }
         }
 
-        public override PresettableCategory Category => PresettableCategory.Experiment;
+        public override PresettableCategory GetCategory() => PresettableCategory.Experiment;
     }
 }

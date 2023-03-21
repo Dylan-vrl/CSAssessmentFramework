@@ -1,8 +1,8 @@
 namespace CSFramework.Core
 {
     public interface IPresettable
-    { 
-        public PresettableCategory Category { get; }
+    {
+        public PresettableCategory GetCategory();
     }
     public interface IPresettable<TPreset>: IPresettable
         where TPreset: IPreset

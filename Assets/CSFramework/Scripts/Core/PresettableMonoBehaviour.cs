@@ -8,7 +8,7 @@ namespace CSFramework.Core
         [SerializeField] 
         private TPreset preset;
         public TPreset Preset => preset;
-        
-        public abstract PresettableCategory Category { get; }
+
+        public abstract PresettableCategory GetCategory();
     }
 }

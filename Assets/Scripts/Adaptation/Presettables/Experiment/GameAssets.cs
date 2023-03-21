@@ -45,6 +45,6 @@ namespace CSFramework.Temp
             public AudioMixerGroup audioMixerGroup;
         }
 
-        public override PresettableCategory Category => PresettableCategory.Experiment;
+        public override PresettableCategory GetCategory() => PresettableCategory.Experiment;
     }
 }
