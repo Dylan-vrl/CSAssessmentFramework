@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace CSFramework.Presets
 {
+    [CreateAssetMenu(menuName = "CSFramework/Preset Instances/#SCRIPTNAME#", fileName = "new #SCRIPTNAME#")]
     public class #SCRIPTNAME#: Preset<TPresettable>
     {
         [field: SerializeField]

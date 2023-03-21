@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace CSFramework.Temp
 {
+    [CreateAssetMenu(menuName = "CSFramework/Preset Instances/GameAssetsPreset", fileName = "new GameAssetsPreset")]
     public class GameAssetsPreset: Preset<GameAssets>
     {
         [field: SerializeField]

@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace CSFramework.Temp
 {
+    [CreateAssetMenu(menuName = "CSFramework/Preset Instances/GameHandlerPreset", fileName = "new GameHandlerPreset")]
     public class GameHandlerPreset : Preset<GameHandler>
     {
         [field: SerializeField,
