@@ -14,10 +14,11 @@ namespace CSFramework.Extensions
         #NOTRIM#
         private void Awake()
         {
+            // TODO replace this with the actual way to fetch your component, it may or may not be `GetComponent`
             _extended = GetComponent<TExtended>();
         }
         #NOTRIM#
-        public override PresettableCategory Category => //TODO Insert PresettableCategory here
+        public override PresettableCategory GetCategory() => ; // TODO Insert PresettableCategory here
         #NOTRIM#
         // You can access the Preset fields calling Preset.{fieldName}
     }
