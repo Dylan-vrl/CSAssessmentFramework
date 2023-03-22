@@ -3,7 +3,7 @@ using CSFramework.Core;
 using CSFramework.Extensions;
 using CSFramework.Presets;
 
-namespace CSFramework.Presettable
+namespace CSFramework.Presettables
 {
     public class #SCRIPTNAME# : PresettableMonoBehaviour<#SCRIPTNAME#Preset>
     {

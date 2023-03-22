@@ -1,10 +1,12 @@
 using System;
 using CSFramework.Core;
+using CSFramework.Presets;
 using UnityEngine;
 using UnityEngine.Audio;
 using Utilities;
+using GameAssets = CSFramework.Presettables.GameAssets;
 
-namespace CSFramework.Temp
+namespace CSFramework.Presettables
 {
     /// <summary>
     /// Class serving as interface for referencing assets through code.
@@ -46,5 +48,15 @@ namespace CSFramework.Temp
         }
 
         public override PresettableCategory GetCategory() => PresettableCategory.Experiment;
+    }
+}
+
+namespace CSFramework.Presets
+{
+    [CreateAssetMenu(menuName = "CSFramework/Preset Instances/GameAssetsPreset", fileName = "new GameAssetsPreset")]
+    public class GameAssetsPreset: Preset<GameAssets>
+    {
+        [field: SerializeField]
+        public GameAssets.SoundAudioClip[] SoundAudioClips { get; private set; }
     }
 }
