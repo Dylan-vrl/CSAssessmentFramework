@@ -50,13 +50,3 @@ namespace CSFramework.Presettables
         public override PresettableCategory GetCategory() => PresettableCategory.Experiment;
     }
 }
-
-namespace CSFramework.Presets
-{
-    [CreateAssetMenu(menuName = "CSFramework/Preset Instances/GameAssetsPreset", fileName = "new GameAssetsPreset")]
-    public class GameAssetsPreset: Preset<GameAssets>
-    {
-        [field: SerializeField]
-        public GameAssets.SoundAudioClip[] SoundAudioClips { get; private set; }
-    }
-}

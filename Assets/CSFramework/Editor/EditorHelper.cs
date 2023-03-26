@@ -117,7 +117,6 @@ namespace CSFramework.Editor
 
         public static List<GameObject> GetGameObjectsWithComponentInScene(Type type)
         {
-            Debug.Log("Type " + type.Name);
             List<GameObject> objectsInScene = new List<GameObject>();
             var allObjects = Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[];
             if (allObjects == null)
