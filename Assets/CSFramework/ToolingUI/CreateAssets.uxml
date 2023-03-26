@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:GroupBox>
+        <ui:GroupBox style="flex-direction: row;">
+            <ui:TextField picking-mode="Ignore" value="Name" name="NameField" />
+            <ui:TextField picking-mode="Ignore" value="Extended Type" name="ExtendedField" />
+        </ui:GroupBox>
+        <ui:GroupBox style="flex-direction: row; justify-content: center;">
+            <ui:Button text="Create Extension" display-tooltip-when-elided="true" />
+            <ui:Button text="Create Presettable" display-tooltip-when-elided="true" />
+        </ui:GroupBox>
+    </ui:GroupBox>
+</ui:UXML>

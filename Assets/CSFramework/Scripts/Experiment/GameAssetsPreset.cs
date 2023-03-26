@@ -1,9 +1,5 @@
-using System;
 using CSFramework.Core;
-using CSFramework.Presets;
 using UnityEngine;
-using UnityEngine.Audio;
-using Utilities;
 using GameAssets = CSFramework.Presettables.GameAssets;
 
 namespace CSFramework.Presets

@@ -1,0 +1,14 @@
+using CSFramework.Core;
+using UnityEngine;
+using CSFramework.Presets;
+using static CSFramework.Core.PresettableCategory;
+
+namespace CSFramework.Presettables
+{
+	public class #NAME# : PresettableMonoBehaviour<#NAME#Preset>
+	{
+        public override PresettableCategory GetCategory() => #CATEGORY#;
+        
+        // You can access your Preset's fields: Preset.fieldName
+	}
+}

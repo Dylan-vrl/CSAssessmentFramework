@@ -1,12 +1,13 @@
 using CSFramework.Core;
 using UnityEngine;
 using CSFramework.Presets;
+using static CSFramework.Core.PresettableCategory;
 
 namespace CSFramework.Extensions
 {
     public class TerrainModifier : Extension<Terrain, TerrainModifierPreset>
     {
-        public override PresettableCategory GetCategory() => PresettableCategory.Environment;
+        public override PresettableCategory GetCategory() => Environment;
 
         [SerializeField] private Transform rotateWithTerrain;
 

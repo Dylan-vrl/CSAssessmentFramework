@@ -1,0 +1,15 @@
+using CSFramework.Core;
+using CSFramework.Extensions;
+using CSFramework.Presettables;
+using UnityEngine;
+
+namespace CSFramework.Presets
+{
+    [CreateAssetMenu(menuName = "CSFramework/Preset Instances/#CATEGORY#/#NAME#Preset", fileName = "new #NAME#Preset")]
+    public class #NAME#Preset: Preset<#NAME#>
+    {
+        // TODO replace with your own fields following this format
+        [field: SerializeField]
+        public int Field { get; private set; }
+    }
+}

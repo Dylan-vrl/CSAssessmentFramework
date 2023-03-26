@@ -1,0 +1,21 @@
+using CSFramework.Core;
+using UnityEngine;
+using CSFramework.Presets;
+using static CSFramework.Core.PresettableCategory;
+
+namespace CSFramework.Extensions
+{
+    [RequireComponent(typeof(#EXTENDED#))]
+	public class #NAME# : Extension<#EXTENDED#, #NAME#Preset>
+	{
+        private #EXTENDED# _#EXTENDED_LOWER#;
+
+        public override PresettableCategory GetCategory() => #CATEGORY#;
+
+        private void Awake()
+        {
+			// You might want to get your component in another way
+	        _#EXTENDED_LOWER# = GetComponent<#EXTENDED#>();
+		}
+	}
+}
