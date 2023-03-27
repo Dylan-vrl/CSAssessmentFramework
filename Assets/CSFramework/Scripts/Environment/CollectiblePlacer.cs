@@ -11,7 +11,6 @@ namespace CSFramework.Presettables
     public class CollectiblePlacer : Extension<PathCreator, CollectiblePlacerPreset>
     {
         [SerializeField] private PathCreator pathCreator;
-        [SerializeField] private Collectible collectible;
         [SerializeField] private GameObject holder;
 
         private const float MinSpacing = 1f;
@@ -53,13 +52,13 @@ namespace CSFramework.Presettables
             
             _spacing = Mathf.Max(MinSpacing, Preset.Spacing);
             //place the visible coins
-            if (pathCreator != null && collectible != null && holder != null)
+            if (pathCreator != null && Preset.Collectible != null && holder != null)
             {
                 for (var i = 0; i < Preset.NumberOfVisibleCollectibles; i++)
                 {
                     
                     Vector3 point = pathCreator.path.GetPointAtDistance(i*_spacing);
-                    Collectible instCol = Instantiate(collectible, point, Quaternion.identity, holder.transform);
+                    Collectible instCol = Instantiate(Preset.Collectible, point, Quaternion.identity, holder.transform);
                     if (i == 0)
                     {
                         instCol.SetInteractable(true);

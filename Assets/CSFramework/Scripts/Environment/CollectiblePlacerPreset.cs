@@ -1,6 +1,7 @@
 using UnityEngine;
 using CSFramework.Core;
 using CSFramework.Presettables;
+using Gameplay;
 
 namespace CSFramework.Presets
 {
@@ -11,5 +12,8 @@ namespace CSFramework.Presets
         public float Spacing { get; private set; } = 5;
         [field: SerializeField]
         public float NumberOfVisibleCollectibles { get; private set; } = 5;
+        [field: SerializeField] 
+        public Collectible Collectible { get; private set; }
+
     }
 }

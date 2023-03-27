@@ -1,12 +1,14 @@
 Button.category {
     font-size: 12px;
     flex-basis: 24%;
+    height: 50px;
     transition-duration: 0.5s;
 }
 
 Button.category.selected {
     font-size: 12px;
     flex-basis: 24%;
+    height: 50px;
     transition-duration: 0.5s;
     background-color: rgb(69, 96, 125);
 }
