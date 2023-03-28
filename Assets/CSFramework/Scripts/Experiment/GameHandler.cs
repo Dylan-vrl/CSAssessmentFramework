@@ -21,7 +21,23 @@ namespace CSFramework.Presettables
         public XROrigin XROrigin { get; set; }
         
         public float StartTime { get; private set; }
+        
+        public int NumberOfCollectiblesToPickUp
+        {
+            get => _numberOfCollectiblesToPickUp;
+            set => _numberOfCollectiblesToPickUp = Mathf.Max(value, 0);
+        }
+        
+        public int ExperimentLength
+        {
+            get => _experimentLength;
+            set => _experimentLength = Mathf.Max(value, 0);
+        }
+        
+        public int PickedUpCollectibles => _pickedUpCollectibles;
 
+        private int _numberOfCollectiblesToPickUp;
+        private int _experimentLength;
         private int _pickedUpCollectibles;
 
         private float _lastTimeFMSPlayed;
@@ -74,6 +90,9 @@ namespace CSFramework.Presettables
             }
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            _numberOfCollectiblesToPickUp = Preset.NumberOfCollectiblesToPickUp;
+            _experimentLength = Preset.ExperimentLength;
             
             XROrigin = FindObjectOfType<XROrigin>();
             SoundManager.Initialize();

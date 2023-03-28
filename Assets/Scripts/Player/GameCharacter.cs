@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections;
-using Options.Gameplay;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-
+using GameHandler = CSFramework.Presettables.GameHandler;
+    
 namespace Player
 {
     /// <summary>

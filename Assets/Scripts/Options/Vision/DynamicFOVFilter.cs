@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Options.Gameplay;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 

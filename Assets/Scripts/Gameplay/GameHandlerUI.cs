@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
 using DataSaving;
-using Options.Gameplay;
 using Options.Movement;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using GameHandler = CSFramework.Presettables.GameHandler;
 
 namespace Gameplay
 {
