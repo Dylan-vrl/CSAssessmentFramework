@@ -149,7 +149,7 @@ public class CreateAssetsElement : MonoBehaviour
 				{ "#NAME#", name },
 				{ "#CATEGORY#", category.ToString() }
 			},
-			filePath: $"{Application.dataPath}/CSFramework/Scripts/{category}/{name}.cs"
+			filePath: $"{Application.dataPath}/Scripts/CSFramework/{category}/{name}.cs"
 		);
 	}
 
@@ -164,7 +164,7 @@ public class CreateAssetsElement : MonoBehaviour
 				{ "#EXTENDED_LOWER#", extended.ToLower() },
 				{ "#CATEGORY#", category.ToString() }
 			},
-			filePath: $"{Application.dataPath}/CSFramework/Scripts/{category}/{name}.cs"
+			filePath: $"{Application.dataPath}/Scripts/CSFramework/{category}/{name}.cs"
 		);
 	}
 	
@@ -177,7 +177,7 @@ public class CreateAssetsElement : MonoBehaviour
 				{ "#NAME#", name },
 				{ "#CATEGORY#", category.ToString() }
 			},
-			filePath: $"{Application.dataPath}/CSFramework/Scripts/{category}/{name}Preset.cs"
+			filePath: $"{Application.dataPath}/Scripts/CSFramework/{category}/{name}Preset.cs"
 		);
 	}
 	
@@ -220,8 +220,8 @@ public class CreateAssetsElement : MonoBehaviour
 			}
 
 			//Refresh the Asset Database
-			AssetDatabase.Refresh();
 			Debug.Log($"File successfully created at path: {filePath}");
+			AssetDatabase.Refresh();
 		}
 	}
 }
