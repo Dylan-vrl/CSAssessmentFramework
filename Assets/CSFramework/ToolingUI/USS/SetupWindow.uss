@@ -34,6 +34,7 @@ Button.icon {
 ScrollView.categoryList {
     height: 65px;
     width: auto;
+    min-height: 65px;
 }
 
 .iconLabel {

@@ -27,9 +27,6 @@ namespace CSFramework.Editor
             PresettableCategory selectedCategory,
             Action<PresettableCategory> onClick)
         {
-            var root = new VisualElement();
-            root.AddToClassList(CategoryListClass);
-
             var scrollView = new ScrollView
             {
                 viewDataKey = "CategoryListScrollView",
@@ -50,10 +47,8 @@ namespace CSFramework.Editor
         
                 scrollView.Add(button);
             }       
-    
-            root.Add(scrollView);
-    
-            return root;
+            
+            return scrollView;
         }
     }
 }
