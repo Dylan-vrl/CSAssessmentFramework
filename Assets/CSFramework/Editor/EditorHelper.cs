@@ -72,7 +72,9 @@ namespace CSFramework.Editor
                 }
             }
 
-            return dict;
+            return dict
+                .OrderBy(triple => triple.Key.name)
+                .ToDictionary(triple => triple.Key, triple => triple.Value);
         }
 
         public static IEnumerable<(Type, IExtension)> NotInSceneExtensionsForCategory(PresettableCategory category)
@@ -80,7 +82,8 @@ namespace CSFramework.Editor
             return AllExtensionSubtypes.Zip(AllExtensions, (type, extension) => (type, extension))
                 .Where(extensionInfo => extensionInfo.extension.GetCategory() == category)
                 .Where(extensionInfo =>
-                    !GetGameObjectsWithComponentInScene(extensionInfo.extension.ExtendedType).Any());
+                    !GetGameObjectsWithComponentInScene(extensionInfo.extension.ExtendedType).Any())
+                .OrderBy(tuple => tuple.type.Name);
         }
 
         public static Dictionary<GameObject, IEnumerable<(Type, IPresettable)>> NonExtensionsByInSceneGameObjectForCategory(
@@ -89,10 +92,11 @@ namespace CSFramework.Editor
             Dictionary<GameObject, IEnumerable<(Type, IPresettable)>> dict =
                 new Dictionary<GameObject, IEnumerable<(Type, IPresettable)>>();
 
-            var gameObjectsByExtension = AllNonExtensionsSubtypes.Zip(AllNonExtensions, (type, nonExt) => (type, nonExt))
+            var gameObjectsByExtension = AllNonExtensionsSubtypes
+                .Zip(AllNonExtensions, (type, nonExt) => (type, nonExt))
                 .Where(nonExtInfo => nonExtInfo.nonExt.GetCategory() == category)
                 .Select(nonExtInfo => (nonExtInfo, GetGameObjectsWithComponentInScene(nonExtInfo.type)));
-
+            
             foreach (var triple in gameObjectsByExtension)
             {
                 var gameObjects = triple.Item2;
@@ -103,8 +107,10 @@ namespace CSFramework.Editor
                     dict.Add(gameObject, prevList.Append(triple.nonExtInfo));
                 }
             }
-
-            return dict;
+            
+            return dict
+                .OrderBy(triple => triple.Key.name)
+                .ToDictionary(triple => triple.Key, triple => triple.Value);
         }
         
         public static IEnumerable<(Type, IPresettable)> NotInSceneNonExtensionsForCategory(PresettableCategory category)
@@ -112,7 +118,8 @@ namespace CSFramework.Editor
             return AllNonExtensionsSubtypes.Zip(AllNonExtensions, (type, nonExt) => (type, nonExt))
                 .Where(nonExtInfo => nonExtInfo.nonExt.GetCategory() == category)
                 .Where(nonExtInfo =>
-                    !GetGameObjectsWithComponentInScene(nonExtInfo.type).Any());
+                    !GetGameObjectsWithComponentInScene(nonExtInfo.type).Any())
+                .OrderBy(tuple => tuple.type.Name);
         }
 
         public static List<GameObject> GetGameObjectsWithComponentInScene(Type type)
