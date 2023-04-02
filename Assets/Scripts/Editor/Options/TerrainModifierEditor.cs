@@ -1,21 +1,20 @@
-﻿using CSFramework.Extensions;
+﻿using CSFramework.Editor;
+using CSFramework.Extensions;
 using UnityEditor;
 using UnityEngine;
 
 namespace Options
 {
     [CustomEditor(typeof(TerrainModifier))]
-    public class TerrainModifierEditor : Editor
+    public class TerrainModifierEditor : PresettableEditor
     {
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
+            base.OnInspectorGUI();
 
             var myTerrainModifier = target as TerrainModifier;
             
-            base.OnInspectorGUI();
-
             if (GUILayout.Button("Apply"))
             {
                 if (myTerrainModifier != null)
