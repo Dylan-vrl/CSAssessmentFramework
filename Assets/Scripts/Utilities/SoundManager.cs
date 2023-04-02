@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CSFramework.Presettables;
 using UnityEngine;
 
 namespace Utilities
@@ -30,7 +31,7 @@ namespace Utilities
             _soundMinDelays = new Dictionary<Sound, List<float>>();
 
 
-            foreach (GameAssets.SoundAudioClip soundAudioClip in GameAssets.Instance.soundAudioClips)
+            foreach (GameAssets.SoundAudioClip soundAudioClip in GameAssets.Instance.SoundAudioClips)
             {
                 
                 _soundTimersAndId[soundAudioClip.sound] = (0f,0);
@@ -158,7 +159,7 @@ namespace Utilities
         private static GameAssets.SoundAudioClip GetSoundAudioClip(Sound sound, int idx = 0)
         {
             var matchingSounds = new List<GameAssets.SoundAudioClip>();
-            foreach (GameAssets.SoundAudioClip soundAudioClip in GameAssets.Instance.soundAudioClips)
+            foreach (GameAssets.SoundAudioClip soundAudioClip in GameAssets.Instance.SoundAudioClips)
             {
                 if (soundAudioClip.sound == sound)
                 {
