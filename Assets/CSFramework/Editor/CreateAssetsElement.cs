@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using CSFramework.Core;
 using UnityEditor;
 using UnityEngine;
@@ -22,6 +21,7 @@ public class CreateAssetsElement : MonoBehaviour
 			maskChar: '*',
 			label: "Name")
 		{
+			viewDataKey = "create_script_name",
 			value = "MyPresettable"
 		};
 
@@ -32,6 +32,7 @@ public class CreateAssetsElement : MonoBehaviour
 			maskChar: '*',
 			label: "Extended")
 		{
+			viewDataKey = "create_extended_name",
 			value = "MyExtended"
 		};
 

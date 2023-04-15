@@ -22,6 +22,7 @@ namespace CSFramework.Editor
         private Dictionary<PresettableCategory, VisualElement> _categoriesWindows;
 
         private PresettableCategory _selectedCategory;
+        private ScrollView _scrollView;
 
         [MenuItem("CSFramework/Setup")]
         private static void CreateMenu()
@@ -50,9 +51,16 @@ namespace CSFramework.Editor
                 category,
                 RebuildView)
             );
-            var scrollView = new ScrollView();
-            scrollView.Add(CategoryElement.Draw(category, () => RebuildView(category)));
-            rootVisualElement.Add(scrollView);
+            
+            _scrollView ??= new ScrollView
+            {
+                viewDataKey = "category_scroll_view"
+            };
+            
+            _scrollView.Clear();
+            
+            _scrollView.Add(CategoryElement.Draw(category, () => RebuildView(category)));
+            rootVisualElement.Add(_scrollView);
             _selectedCategory = category;
         }
     }
