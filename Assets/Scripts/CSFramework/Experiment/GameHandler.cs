@@ -1,8 +1,6 @@
 using System;
 using CSFramework.Core;
 using CSFramework.Presets;
-using Gameplay;
-using ScriptableObjects;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using Utilities;
@@ -15,36 +13,18 @@ namespace CSFramework.Presettables
     public class GameHandler : PresettableMonoBehaviour<GameHandlerPreset>
     {
         public static GameHandler Instance;
-        
-        [SerializeField] private CollectiblePickUpSO collectibleEventChannel;
+
+        private int _experimentLength;
+        private float _lastTimeFMSPlayed;
         
         public XROrigin XROrigin { get; set; }
-        
         public float StartTime { get; private set; }
-        
-        public int NumberOfCollectiblesToPickUp
-        {
-            get => _numberOfCollectiblesToPickUp;
-            set => _numberOfCollectiblesToPickUp = Mathf.Max(value, 0);
-        }
-        
+        public float PlayTime { get; private set; }
         public int ExperimentLength
         {
             get => _experimentLength;
             set => _experimentLength = Mathf.Max(value, 0);
         }
-        
-        public int PickedUpCollectibles => _pickedUpCollectibles;
-
-        private int _numberOfCollectiblesToPickUp;
-        private int _experimentLength;
-        private int _pickedUpCollectibles;
-
-        private float _lastTimeFMSPlayed;
-
-        private float _playTime;
-
-        public float PlayTime => _playTime;
 
         [Serializable]
         public enum StateType
@@ -56,27 +36,20 @@ namespace CSFramework.Presettables
 
         private static StateType _state;
 
-
         public static StateType State
         {
             get => _state;
             private set
             {
                 //This way when the event is called _state is still previous value
-                if (GameStateChanged != null) GameStateChanged(value);
+                GameStateChanged?.Invoke(value);
                 _state = value;
             }
         }
 
         public static event Action<StateType> GameStateChanged;
-
         public static event Action GameStarted;
-
         public static event Action GameEnded;
-
-
-        public Vector3 LastCollectiblePos { get; set; } = Vector3.zero;
-
 
         /// <summary>
         /// This Class executes its awake before others
@@ -91,7 +64,6 @@ namespace CSFramework.Presettables
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            _numberOfCollectiblesToPickUp = Preset.NumberOfCollectiblesToPickUp;
             _experimentLength = Preset.ExperimentLength;
             
             XROrigin = FindObjectOfType<XROrigin>();
@@ -100,56 +72,45 @@ namespace CSFramework.Presettables
 
         private void OnEnable()
         {
-            if (collectibleEventChannel)
-            {
-                collectibleEventChannel.OnCollectiblePickup += IncreaseCount;
-            }
-            
             State = StateType.Menu;
         }
-
-
+        
         private void Update()
         {
-            if (State == StateType.Playing)
+            if (State != StateType.Playing) return;
+            
+            PlayTime += Time.deltaTime;
+                
+                
+            if (Preset.PlayFMSPrompt)
             {
-                _playTime = PlayTime + Time.deltaTime;
-                
-                
-                if (Preset.PlayFMSPrompt)
+                if (_lastTimeFMSPlayed + Preset.PromptInterval < PlayTime)
                 {
-                    if (_lastTimeFMSPlayed + Preset.PromptInterval < PlayTime)
-                    {
-                        _lastTimeFMSPlayed = PlayTime;
-                        SoundManager.PlaySound(SoundManager.Sound.FMS);
-                    }
-                }
-
-                if (Preset.ExperimentLength > 0 && PlayTime > Preset.ExperimentLength)
-                {
-                    Debug.Log("Experiment Finished! (timeout)");
-                    EndExperiment();
+                    _lastTimeFMSPlayed = PlayTime;
+                    SoundManager.PlaySound(SoundManager.Sound.FMS);
                 }
             }
-            
-            
+
+            if (Preset.ExperimentLength > 0 && PlayTime > Preset.ExperimentLength)
+            {
+                Debug.Log("Experiment Finished! (timeout)");
+                EndExperiment();
+            }
         }
-        
         
         public void StartExperiment()
         {
-            _pickedUpCollectibles = 0;
-            _playTime = 0;
+            PlayTime = 0;
             StartTime = Time.time;
             State = StateType.Playing;
-            if (GameStarted != null) GameStarted();
+            GameStarted?.Invoke();
         }
 
         public void EndExperiment()
         {
             SoundManager.PlaySound(SoundManager.Sound.GameEnd);
             State = StateType.Menu;
-            if (GameEnded != null) GameEnded();
+            GameEnded?.Invoke();
         }
 
         // Not used yet
@@ -158,31 +119,9 @@ namespace CSFramework.Presettables
             State = pause ? StateType.Pause : StateType.Playing;
         }
 
-
-        private void IncreaseCount(Collectible collectible)
-        {
-            _pickedUpCollectibles++;
-            LastCollectiblePos = collectible.transform.position;
-
-            if (Preset.NumberOfCollectiblesToPickUp > 0 && _pickedUpCollectibles >= Preset.NumberOfCollectiblesToPickUp)
-            {
-                Debug.Log("Finished!");
-                EndExperiment();
-            }
-        }
-
         public static void ExitApplication()
         {
             Application.Quit();
-        }
-        
-
-        private void OnDisable()
-        {
-            if (collectibleEventChannel)
-            {
-                collectibleEventChannel.OnCollectiblePickup -= IncreaseCount;
-            }
         }
 
         public override PresettableCategory GetCategory() => PresettableCategory.Experiment;

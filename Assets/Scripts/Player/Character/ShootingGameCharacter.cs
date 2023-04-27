@@ -1,7 +1,5 @@
-﻿using System;
+using System;
 using System.Collections;
-using CSFramework.Presettables;
-using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -13,7 +11,7 @@ namespace Player
     /// Character manager, handling respawn, fade to black,
     /// and telling <see cref="GameHandler"/> who <see cref="GameHandler.XROrigin"/> is.
     /// </summary>
-    public class GameCharacter : MonoBehaviour
+    public class ShootingGameCharacter : MonoBehaviour
     {
         
         [SerializeField] private Volume darkVolume;
@@ -21,8 +19,7 @@ namespace Player
         public enum SpawnPoint
         {
             AtSpawn,
-            AtPosition,
-            AtPath
+            AtPosition
         }
 
         private Terrain _activeTerrain;
@@ -55,9 +52,6 @@ namespace Player
             _activeTerrain = Terrain.activeTerrain;
             Respawn(SpawnPoint.AtPosition);
             _spawnPos = transform.position;
-            CoinGameHandler.Instance.LastCollectiblePos = _spawnPos;
-            // When loading a new scene, this updates the reference correctly.
-            CoinGameHandler.Instance.XROrigin = GetComponent<XROrigin>();
         }
 
         private void OnGameStart()
@@ -83,9 +77,6 @@ namespace Player
                 Vector3 pos;
                 switch (spawnPoint)
                 {
-                    case SpawnPoint.AtPath:
-                        pos = CoinGameHandler.Instance.LastCollectiblePos;
-                        break;
                     case SpawnPoint.AtPosition:
                         pos = transform.position;
                         break;

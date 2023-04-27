@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using CSFramework.Presettables;
 using DataSaving;
 using Options.Movement;
 using TMPro;
@@ -35,7 +36,7 @@ namespace Gameplay
         [SerializeField] private TextMeshProUGUI fileNameLabel;
         [SerializeField] private TextMeshProUGUI savedNotificationLabel;
         
-        private GameHandler _gM;
+        private CoinGameHandler _gM;
         private LocomotionHandler _locomotionHandler;
 
 
@@ -50,7 +51,7 @@ namespace Gameplay
 
         private void Start()
         {
-            _gM = GameHandler.Instance;
+            _gM = CoinGameHandler.Instance;
             _locomotionHandler = _gM.XROrigin.GetComponent<LocomotionHandler>();
             endExperimentButton.gameObject.SetActive(false);
             savedNotificationLabel.gameObject.SetActive(false);
