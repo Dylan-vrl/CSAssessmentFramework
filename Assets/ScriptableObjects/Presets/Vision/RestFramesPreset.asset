@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f959308f30bf3c046bf28787e357dec8, type: 3}
+  m_Name: RestFramesPreset
+  m_EditorClassIdentifier: 
+  nose: 0
+  nosePrefab: {fileID: 7075714348455937041, guid: 0e3bd1d406187254394a5ef9f410dc0c,
+    type: 3}
+  yPosition: 0.259
+  zPosition: 0.075
+  noseWidth: 0.393
+  noseFlatness: 0.287
+  hat: 0
+  hatPrefab: {fileID: 100000, guid: 290f57b34312fbf448d3b8ca6b6bd41d, type: 3}
