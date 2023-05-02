@@ -1,10 +1,11 @@
 using CSFramework.Core;
-using UnityEngine;
 using CSFramework.Presets;
-using System.Collections;
 using CSFramework.Presettables;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.Rendering;
 using static CSFramework.Core.PresettableCategory;
+//using static System.Net.Mime.MediaTypeNames;
 
 namespace CSFramework.Extensions
 {
@@ -29,13 +30,18 @@ namespace CSFramework.Extensions
         {
 			// You might want to get your component in another way
 	        postProcessing = GetComponent<Volume>();
+		}
+
+        private void Start()
+        {
             if (!Application.isPlaying)
             {
                 return;
             }
+            
             _xrChara = GameHandler.Instance.XROrigin.GetComponent<CharacterController>();
             _lastRot = _xrChara.transform.rotation;
-		}
+        }
 
         private void OnEnable()
         {

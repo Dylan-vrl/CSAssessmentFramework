@@ -23,19 +23,19 @@ namespace CSFramework.Presettables
 		void Start()
         {
 			nose = Preset.nose;
-        	nosePrefab = Preset.nosePrefab;
+        	nosePrefab = GameObject.Find(Preset.nosePrefabName);
         	yPosition = Preset.yPosition;
         	zPosition = Preset.zPosition;
         	noseWidth = Preset.noseWidth;
         	noseFlatness = Preset.noseFlatness;
 
         	hat = Preset.hat;
-        	hatPrefab = Preset.hatPrefab;
+        	hatPrefab = GameObject.Find(Preset.hatPrefabName);
 
             // SINGLE NOSE --------------------------------------------
             if (nose && nosePrefab == null)
             {
-				Debug.Log("Single Nose Prefab is not found on the scene.");
+				Debug.Log("Nose Prefab is not found on the scene.");
 				nose = false;
             } else if ( nosePrefab != null) {
                 nosePrefab.SetActive(nose);

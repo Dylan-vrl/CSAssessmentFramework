@@ -11,7 +11,7 @@ namespace CSFramework.Presets
         // TODO replace with your own fields following this format
         [Header("Nose")]
         [SerializeField] public bool nose;
-        [SerializeField] public GameObject nosePrefab;
+        [SerializeField] public string nosePrefabName;
         [Range(0, 1)][SerializeField] public float yPosition = .5f;
         [Range(0, 1)][SerializeField] public float zPosition = .5f;
         [Range(0f, 1f)][SerializeField] public float noseWidth = 1;
@@ -19,6 +19,6 @@ namespace CSFramework.Presets
 
         [Header("Hat")]
         [SerializeField] public bool hat;
-        [SerializeField] public GameObject hatPrefab;
+        [SerializeField] public string hatPrefabName;
     }
 }

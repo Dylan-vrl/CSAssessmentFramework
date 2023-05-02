@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f959308f30bf3c046bf28787e357dec8, type: 3}
-  m_Name: RestFramesPreset
+  m_Name: default
   m_EditorClassIdentifier: 
-  nose: 0
-  nosePrefab: {fileID: 7075714348455937041, guid: 0e3bd1d406187254394a5ef9f410dc0c,
-    type: 3}
+  nose: 1
+  nosePrefabName: Nose
   yPosition: 0.259
   zPosition: 0.075
   noseWidth: 0.393
   noseFlatness: 0.287
   hat: 0
-  hatPrefab: {fileID: 100000, guid: 290f57b34312fbf448d3b8ca6b6bd41d, type: 3}
+  hatPrefabName: Sombrero
