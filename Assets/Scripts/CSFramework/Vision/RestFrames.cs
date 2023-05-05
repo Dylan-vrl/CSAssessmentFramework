@@ -19,11 +19,11 @@ namespace CSFramework.Presettables
 
         private bool hat;
         private GameObject hatPrefab;
-		
-		void Start()
-        {
-			nose = Preset.nose;
+
+        void Awake() {
+            nose = Preset.nose;
         	nosePrefab = GameObject.Find(Preset.nosePrefabName);
+            nosePrefab.SetActive(nose);
         	yPosition = Preset.yPosition;
         	zPosition = Preset.zPosition;
         	noseWidth = Preset.noseWidth;
@@ -31,7 +31,11 @@ namespace CSFramework.Presettables
 
         	hat = Preset.hat;
         	hatPrefab = GameObject.Find(Preset.hatPrefabName);
-
+            hatPrefab.SetActive(hat);
+        }
+		
+		void Start()
+        {
             // SINGLE NOSE --------------------------------------------
             if (nose && nosePrefab == null)
             {
