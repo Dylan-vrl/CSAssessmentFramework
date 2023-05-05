@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: calm
   m_EditorClassIdentifier: 
   musicStart: {fileID: 8300000, guid: 6207a37226705b14d855f7f3914e9ca5, type: 3}
+  musicLoop: {fileID: 8300000, guid: a0d001710c4d74f47b0420b26d88d93b, type: 3}
