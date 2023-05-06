@@ -1,13 +1,13 @@
+using System;
 using CSFramework.Core;
 using UnityEngine;
 using CSFramework.Presets;
-using static CSFramework.Core.PresettableCategory;
 
 namespace CSFramework.Extensions
 {
     public class TerrainModifier : Extension<Terrain, TerrainModifierPreset>
     {
-        public override PresettableCategory GetCategory() => Environment;
+        public override PresettableCategory GetCategory() => PresettableCategory.Environment;
 
         [SerializeField] private Transform rotateWithTerrain;
 
@@ -34,6 +34,7 @@ namespace CSFramework.Extensions
             position = new Vector3(position.x, -tMaxHeight/2, position.z);
             transformT.position = position;
             var arr = new float[_tRes, _tRes];
+            
             // At each point of the terrain.
             for (var k = 0; k < _tRes; k+=1)
             {
@@ -85,6 +86,12 @@ namespace CSFramework.Extensions
             {
                 rotateWithTerrain.eulerAngles = Preset.AngleApplyToZNotX ? new Vector3(0,0,Preset.Angle) : new Vector3(Preset.Angle,0,0);
             }
+        }
+
+        private void OnValidate()
+        {
+            _terrain = Terrain.activeTerrain;
+            _tRes = TargetTerrain.terrainData.heightmapResolution;
         }
     }
 }
