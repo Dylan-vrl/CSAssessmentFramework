@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8620813006980149808}
   - component: {fileID: 8620813006980149809}
-  - component: {fileID: 8620813006980149811}
+  - component: {fileID: 1498831097273005238}
   m_Layer: 0
   m_Name: CollectiblesPath
   m_TagString: Untagged
@@ -192,7 +192,7 @@ MonoBehaviour:
     showNormalsHelpInfo: 0
     tabIndex: 0
   initialized: 1
---- !u!114 &8620813006980149811
+--- !u!114 &1498831097273005238
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,12 +201,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8620813006980149806}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef5f09a8f46d44f893b523483dc25a52, type: 3}
+  m_Script: {fileID: 11500000, guid: f4e4cc5dea9884d83be82a320868a24f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preset: {fileID: 11400000, guid: 64f3419ab5b7c43ba8107801a0c8945d, type: 2}
   pathCreator: {fileID: 8620813006980149809}
-  collectible: {fileID: 3344826067158478766, guid: 7beed303fbfb09240a9edf1d7b0b24fa,
-    type: 3}
   holder: {fileID: 0}
-  spacing: 10
-  numberOfVisibleCollectibles: 5
