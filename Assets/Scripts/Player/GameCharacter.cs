@@ -13,10 +13,10 @@ namespace Player
     /// Character manager, handling respawn, fade to black,
     /// and telling <see cref="ExperimentController"/> who <see cref="ExperimentController.XROrigin"/> is.
     /// </summary>
-    public class GameCharacter : MonoBehaviour
+    public class GameCharacter: MonoBehaviour
     {
         
-        [SerializeField] private Volume darkVolume;
+        [SerializeField] protected Volume darkVolume;
 
         public enum SpawnPoint
         {
@@ -25,18 +25,18 @@ namespace Player
             AtPath
         }
 
-        private Terrain _activeTerrain;
-        private Vector3 _spawnPos = Vector3.zero;
-        private Vignette _vignette;
+        protected Terrain _activeTerrain;
+        protected Vector3 _spawnPos = Vector3.zero;
+        protected Vignette _vignette;
 
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             GameStateManager.GameStarted += OnGameStart;
             GameStateManager.GameEnded += OnGameEnd;
         }
 
-        private void Start()
+        protected virtual void Start()
         {
             if (darkVolume == null)
             {
@@ -55,22 +55,22 @@ namespace Player
             _activeTerrain = Terrain.activeTerrain;
             Respawn(SpawnPoint.AtPosition);
             _spawnPos = transform.position;
-            CoinGameHandler.Instance.LastCollectiblePos = _spawnPos;
+            CoinsController.Instance.LastCollectiblePos = _spawnPos;
             // When loading a new scene, this updates the reference correctly.
-            CoinGameHandler.Instance.XROrigin = GetComponent<XROrigin>();
+            ExperimentController.Instance.XROrigin = GetComponent<XROrigin>();
         }
 
-        private void OnGameStart()
+        protected virtual void OnGameStart()
         {
             Respawn();
         }
 
-        private void OnGameEnd()
+        protected virtual  void OnGameEnd()
         {
             StartCoroutine(ChangeVignette(true, 2));
         }
 
-        public void Respawn(SpawnPoint spawnPoint = SpawnPoint.AtSpawn)
+        public virtual void Respawn(SpawnPoint spawnPoint = SpawnPoint.AtSpawn)
         {
             if (GameStateManager.State == Playing)
             {
@@ -84,7 +84,7 @@ namespace Player
                 switch (spawnPoint)
                 {
                     case SpawnPoint.AtPath:
-                        pos = CoinGameHandler.Instance.LastCollectiblePos;
+                        pos = CoinsController.Instance.LastCollectiblePos;
                         break;
                     case SpawnPoint.AtPosition:
                         pos = transform.position;
@@ -138,7 +138,7 @@ namespace Player
         }
         
 
-        private void OnDisable()
+        protected virtual  void OnDisable()
         {
             GameStateManager.GameStarted -= OnGameStart;
             GameStateManager.GameEnded -= OnGameEnd;

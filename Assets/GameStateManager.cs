@@ -22,25 +22,27 @@ public static class GameStateManager
             _state = value;
         }
     }
+
+    public static bool IsPlaying => State == Playing;
     
     public static event Action<GameState> GameStateChanged;
     public static event Action GameStarted;
     public static event Action GameEnded;
     
-    public static void StartExperiment()
+    public static void StartGame()
     {
         State = Playing;
         GameStarted?.Invoke();
     }
 
-    public static void EndExperiment()
+    public static void EndGame()
     {
         State = Menu;
         GameEnded?.Invoke();
     }
 
     // Not used yet
-    public static void PauseExperiment(bool pause)
+    public static void PauseGame(bool pause)
     {
         State = pause ? Pause : Playing;
     }

@@ -10,7 +10,7 @@ namespace CSFramework.Presettables
     /// <summary>
     /// Game Handler responsible of controlling the experiment.
     /// </summary>
-    public class ExperimentController: PresettableMonoBehaviour<GameHandlerPreset>
+    public class ExperimentController: PresettableMonoBehaviour<ExperimentControllerPreset>
     {
         public static ExperimentController Instance;
 
@@ -71,19 +71,19 @@ namespace CSFramework.Presettables
         {
             PlayTime = 0;
             StartTime = Time.time;
-            GameStateManager.StartExperiment();
+            GameStateManager.StartGame();
         }
 
         public void EndExperiment()
         {
             SoundManager.PlaySound(SoundManager.Sound.GameEnd);
-            GameStateManager.EndExperiment();
+            GameStateManager.EndGame();
         }
 
         // Not used yet
         public void PauseExperiment(bool pause)
         {
-            GameStateManager.PauseExperiment(pause);
+            GameStateManager.PauseGame(pause);
         }
 
         public static void ExitApplication()

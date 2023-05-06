@@ -10,7 +10,7 @@ using static GameStateManager.GameState;
 
 namespace Gameplay
 {
-    public class GameHandlerUI : MonoBehaviour
+    public class ExperimentControllerUI : MonoBehaviour
     {
         [Header("Experiment Control options")] 
         [SerializeField] private Button startExperimentButton;
@@ -18,9 +18,6 @@ namespace Gameplay
         [SerializeField] private TextMeshProUGUI timeLabel;
 
         [SerializeField] private TMP_InputField timeInput;
-
-        [SerializeField] private TextMeshProUGUI collectiblesLabel;
-        [SerializeField] private TMP_InputField collectiblesInput;
 
         [Header("Locomotion options")] 
         [SerializeField] private GameObject locomotionHolder;
@@ -36,7 +33,7 @@ namespace Gameplay
         [SerializeField] private TextMeshProUGUI fileNameLabel;
         [SerializeField] private TextMeshProUGUI savedNotificationLabel;
         
-        private CoinGameHandler _gM;
+        private ExperimentController _experimentController;
         private LocomotionHandler _locomotionHandler;
 
 
@@ -51,19 +48,15 @@ namespace Gameplay
 
         private void Start()
         {
-            _gM = CoinGameHandler.Instance;
-            _locomotionHandler = _gM.XROrigin.GetComponent<LocomotionHandler>();
+            _experimentController = ExperimentController.Instance;
+            _locomotionHandler = _experimentController.XROrigin.GetComponent<LocomotionHandler>();
             endExperimentButton.gameObject.SetActive(false);
             savedNotificationLabel.gameObject.SetActive(false);
             if (timeLabel != null && timeInput != null)
             {
-                var t = _gM.ExperimentLength > 0 ? _gM.ExperimentLength.ToString() : "∞";
+                var t = _experimentController.ExperimentLength > 0 ? _experimentController.ExperimentLength.ToString() : "∞";
                 timeInput.text = t;
                 timeLabel.text = "0.0 / ";
-
-                var c = _gM.NumberOfCollectiblesToPickUp > 0 ? _gM.NumberOfCollectiblesToPickUp.ToString() : "∞";
-                collectiblesInput.text = c;
-                collectiblesLabel.text = "0 / ";
             }
 
             //Movement UI
@@ -96,24 +89,15 @@ namespace Gameplay
                 if (timeLabel != null)
                 {
                     
-                    timeLabel.text = _gM.PlayTime.ToString("0.0") + " / ";
-                }
-                if (collectiblesLabel != null)
-                {
-                    collectiblesLabel.text = _gM.PickedUpCollectibles.ToString() + " / ";
+                    timeLabel.text = _experimentController.PlayTime.ToString("0.0") + " / ";
                 }
             }
             
         }
 
-        public void CollectiblesInputChange(string input)
-        {
-            if (int.TryParse(input, out var i)) _gM.NumberOfCollectiblesToPickUp = i;
-        }
-        
         public void TimerInputChange(string input)
         {
-            if (int.TryParse(input, out var i)) _gM.ExperimentLength = i;
+            if (int.TryParse(input, out var i)) _experimentController.ExperimentLength = i;
         }
 
         private void OnGameStateChanged(GameStateManager.GameState state)
@@ -126,9 +110,7 @@ namespace Gameplay
                     startExperimentButton.gameObject.SetActive(true);
                     endExperimentButton.gameObject.SetActive(false);
                     timeInput.interactable = true;
-                    collectiblesInput.interactable = true;
-                    timeLabel.text = (_gM != null ? _gM.PlayTime.ToString("0.0") : 0) + " / ";
-                    collectiblesLabel.text = (_gM != null ? _gM.PickedUpCollectibles.ToString() : 0) + " / ";
+                    timeLabel.text = (_experimentController != null ? _experimentController.PlayTime.ToString("0.0") : 0) + " / ";
                     break;
                 
                 case Playing:
@@ -137,11 +119,8 @@ namespace Gameplay
                     startExperimentButton.gameObject.SetActive(false);
                     endExperimentButton.gameObject.SetActive(true);
                     timeInput.interactable = false;
-                    var t = _gM.ExperimentLength > 0 ? _gM.ExperimentLength.ToString() : "∞";
+                    var t = _experimentController.ExperimentLength > 0 ? _experimentController.ExperimentLength.ToString() : "∞";
                     timeInput.text = t;
-                    collectiblesInput.interactable = false;
-                    var c = _gM.NumberOfCollectiblesToPickUp > 0 ? _gM.NumberOfCollectiblesToPickUp.ToString() : "∞";
-                    collectiblesInput.text = c;
                     break;
             }
         }

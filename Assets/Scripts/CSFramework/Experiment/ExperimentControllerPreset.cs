@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace CSFramework.Presets
 {
-    [CreateAssetMenu(menuName = "CSFramework/Preset Instances/Experiment/CoinGameHandlerPreset", fileName = "new CoinGameHandlerPreset")]
-    public class CoinGameHandlerPreset : Preset<ExperimentController>
+    [CreateAssetMenu(menuName = "CSFramework/Preset Instances/Experiment/ExperimentControllerPreset", fileName = "new ExperimentControllerPreset")]
+    public class ExperimentControllerPreset : Preset<ExperimentController>
     {
         [field: SerializeField,
                 Tooltip("Number of Collectibles to pick up to finish Experiment, 0 means infinity")]
