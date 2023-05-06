@@ -19,25 +19,14 @@ namespace Gameplay
 
         [SerializeField] private TMP_InputField timeInput;
 
-        [Header("Locomotion options")] 
-        [SerializeField] private GameObject locomotionHolder;
-        [SerializeField] private TMP_Dropdown leftLocDropdown;
-        [SerializeField] private TMP_Dropdown rightLocDropdown;
-        [SerializeField] private TMP_Dropdown leftTurnDropdown;
-        [SerializeField] private TMP_Dropdown rightTurnDropdown;
-        [SerializeField] private Toggle leftHandGrabToggle;
-        [SerializeField] private Toggle rightHandGrabToggle;
-        
         [Header("Data Saving")]
         [SerializeField] private GameObject savingHolder;
         [SerializeField] private TextMeshProUGUI fileNameLabel;
         [SerializeField] private TextMeshProUGUI savedNotificationLabel;
         
         private ExperimentController _experimentController;
-        private LocomotionHandler _locomotionHandler;
 
-
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             
             GameStateManager.GameStateChanged += OnGameStateChanged;
@@ -49,7 +38,6 @@ namespace Gameplay
         private void Start()
         {
             _experimentController = ExperimentController.Instance;
-            _locomotionHandler = _experimentController.XROrigin.GetComponent<LocomotionHandler>();
             endExperimentButton.gameObject.SetActive(false);
             savedNotificationLabel.gameObject.SetActive(false);
             if (timeLabel != null && timeInput != null)
@@ -58,28 +46,6 @@ namespace Gameplay
                 timeInput.text = t;
                 timeLabel.text = "0.0 / ";
             }
-
-            //Movement UI
-            if (leftLocDropdown != null && rightLocDropdown != null && leftTurnDropdown != null && rightTurnDropdown != null)
-            {
-                var movementTypesNames = Enum.GetNames(typeof(LocomotionHandler.MovementType))
-                    .Select(i => new TMP_Dropdown.OptionData(i)).ToList();
-                leftLocDropdown.options = movementTypesNames;
-                leftLocDropdown.value = (int)_locomotionHandler.LeftHandLocomotionType;
-                rightLocDropdown.options = movementTypesNames;
-                rightLocDropdown.value = (int)_locomotionHandler.RightHandLocomotionType;
-                leftTurnDropdown.options = movementTypesNames;
-                leftTurnDropdown.value = (int)_locomotionHandler.LeftHandTurnType;
-                rightTurnDropdown.options = movementTypesNames;
-                rightTurnDropdown.value = (int)_locomotionHandler.RightHandTurnType;
-            }
-
-            if (leftHandGrabToggle != null && rightHandGrabToggle != null)
-            {
-                leftHandGrabToggle.isOn = _locomotionHandler.LeftHandGrabMove;
-                rightHandGrabToggle.isOn = _locomotionHandler.RightHandGrabMove;
-            }
-            
         }
 
         private void Update()
@@ -106,7 +72,6 @@ namespace Gameplay
             {
                 case Menu:
                     savingHolder.SetActive(true);
-                    locomotionHolder.SetActive(true);
                     startExperimentButton.gameObject.SetActive(true);
                     endExperimentButton.gameObject.SetActive(false);
                     timeInput.interactable = true;
@@ -115,7 +80,6 @@ namespace Gameplay
                 
                 case Playing:
                     savingHolder.SetActive(false);
-                    locomotionHolder.SetActive(false);
                     startExperimentButton.gameObject.SetActive(false);
                     endExperimentButton.gameObject.SetActive(true);
                     timeInput.interactable = false;

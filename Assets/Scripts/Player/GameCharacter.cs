@@ -55,7 +55,6 @@ namespace Player
             _activeTerrain = Terrain.activeTerrain;
             Respawn(SpawnPoint.AtPosition);
             _spawnPos = transform.position;
-            CoinsController.Instance.LastCollectiblePos = _spawnPos;
             // When loading a new scene, this updates the reference correctly.
             ExperimentController.Instance.XROrigin = GetComponent<XROrigin>();
         }
@@ -83,9 +82,6 @@ namespace Player
                 Vector3 pos;
                 switch (spawnPoint)
                 {
-                    case SpawnPoint.AtPath:
-                        pos = CoinsController.Instance.LastCollectiblePos;
-                        break;
                     case SpawnPoint.AtPosition:
                         pos = transform.position;
                         break;

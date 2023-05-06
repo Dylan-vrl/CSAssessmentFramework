@@ -5549,6 +5549,7 @@ GameObject:
   - component: {fileID: 1060432733}
   - component: {fileID: 1060432732}
   - component: {fileID: 1060432731}
+  - component: {fileID: 1060432737}
   - component: {fileID: 1060432736}
   - component: {fileID: 1060432735}
   m_Layer: 5
@@ -5672,10 +5673,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58fef2733dab4833876f8795198e12a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startExperimentButton: {fileID: 187328777}
-  endExperimentButton: {fileID: 1452591060}
-  timeLabel: {fileID: 1335781832}
-  timeInput: {fileID: 2138700180}
   locomotionHolder: {fileID: 546600874}
   leftLocDropdown: {fileID: 2058824805}
   rightLocDropdown: {fileID: 1430280854}
@@ -5683,6 +5680,22 @@ MonoBehaviour:
   rightTurnDropdown: {fileID: 1168773132}
   leftHandGrabToggle: {fileID: 855377314}
   rightHandGrabToggle: {fileID: 1083931194}
+--- !u!114 &1060432737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060432730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a43cd4893bb4f9889e0233513f5010b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startExperimentButton: {fileID: 187328777}
+  endExperimentButton: {fileID: 1452591060}
+  timeLabel: {fileID: 1335781832}
+  timeInput: {fileID: 2138700180}
   savingHolder: {fileID: 321605879}
   fileNameLabel: {fileID: 1932817196}
   savedNotificationLabel: {fileID: 1793882513}
