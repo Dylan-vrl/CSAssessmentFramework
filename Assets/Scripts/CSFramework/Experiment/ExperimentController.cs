@@ -1,18 +1,18 @@
-using System;
 using CSFramework.Core;
 using CSFramework.Presets;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using Utilities;
+using static GameStateManager.GameState;
 
 namespace CSFramework.Presettables
 {
     /// <summary>
     /// Game Handler responsible of controlling the experiment.
     /// </summary>
-    public class GameHandler : PresettableMonoBehaviour<GameHandlerPreset>
+    public class ExperimentController: PresettableMonoBehaviour<GameHandlerPreset>
     {
-        public static GameHandler Instance;
+        public static ExperimentController Instance;
 
         private int _experimentLength;
         private float _lastTimeFMSPlayed;
@@ -25,31 +25,6 @@ namespace CSFramework.Presettables
             get => _experimentLength;
             set => _experimentLength = Mathf.Max(value, 0);
         }
-
-        [Serializable]
-        public enum StateType
-        {
-            Playing,
-            Menu,
-            Pause
-        }
-
-        private static StateType _state;
-
-        public static StateType State
-        {
-            get => _state;
-            private set
-            {
-                //This way when the event is called _state is still previous value
-                GameStateChanged?.Invoke(value);
-                _state = value;
-            }
-        }
-
-        public static event Action<StateType> GameStateChanged;
-        public static event Action GameStarted;
-        public static event Action GameEnded;
 
         /// <summary>
         /// This Class executes its awake before others
@@ -65,23 +40,17 @@ namespace CSFramework.Presettables
             DontDestroyOnLoad(gameObject);
 
             _experimentLength = Preset.ExperimentLength;
+            XROrigin= FindObjectOfType<XROrigin>();
             
-            XROrigin = FindObjectOfType<XROrigin>();
             SoundManager.Initialize();
         }
 
-        private void OnEnable()
-        {
-            State = StateType.Menu;
-        }
-        
         private void Update()
         {
-            if (State != StateType.Playing) return;
+            if (GameStateManager.State != Playing) return;
             
             PlayTime += Time.deltaTime;
-                
-                
+
             if (Preset.PlayFMSPrompt)
             {
                 if (_lastTimeFMSPlayed + Preset.PromptInterval < PlayTime)
@@ -102,21 +71,19 @@ namespace CSFramework.Presettables
         {
             PlayTime = 0;
             StartTime = Time.time;
-            State = StateType.Playing;
-            GameStarted?.Invoke();
+            GameStateManager.StartExperiment();
         }
 
         public void EndExperiment()
         {
             SoundManager.PlaySound(SoundManager.Sound.GameEnd);
-            State = StateType.Menu;
-            GameEnded?.Invoke();
+            GameStateManager.EndExperiment();
         }
 
         // Not used yet
         public void PauseExperiment(bool pause)
         {
-            State = pause ? StateType.Pause : StateType.Playing;
+            GameStateManager.PauseExperiment(pause);
         }
 
         public static void ExitApplication()

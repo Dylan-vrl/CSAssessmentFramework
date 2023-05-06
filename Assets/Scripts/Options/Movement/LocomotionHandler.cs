@@ -4,6 +4,8 @@ using Player.Movement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
+using static GameStateManager.GameState;
+
 // ReSharper disable InconsistentNaming
 
 namespace Options.Movement
@@ -173,15 +175,15 @@ namespace Options.Movement
         
         private void OnEnable()
         {
-            GameHandler.GameStateChanged += GameStateChanged;
-            GameStateChanged(GameHandler.State);
+            GameStateManager.GameStateChanged += GameStateChanged;
+            GameStateChanged(GameStateManager.State);
         }
 
-        private void GameStateChanged(GameHandler.StateType state)
+        private void GameStateChanged(GameStateManager.GameState state)
         {
             switch (state)
             {
-                case GameHandler.StateType.Menu : case GameHandler.StateType.Pause:
+                case Menu : case Pause:
                     if (grabMoveProvider != null)
                     {
                         ChangeGrabMove(false, false);
@@ -195,7 +197,7 @@ namespace Options.Movement
                     rightHandControllerManager.TurnType = MovementType.Disabled;
                     break;
                 
-                case GameHandler.StateType.Playing:
+                case Playing:
                     if (grabMoveProvider != null)
                     {
                         ChangeGrabMove(false, LeftHandGrabMove);
@@ -263,7 +265,7 @@ namespace Options.Movement
 
         private void OnDisable()
         {
-            GameHandler.GameStateChanged -= GameStateChanged;
+            GameStateManager.GameStateChanged -= GameStateChanged;
         }
     }
 }

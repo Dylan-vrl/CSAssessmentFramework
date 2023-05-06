@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using GameHandler = CSFramework.Presettables.GameHandler;
+using CSFramework.Presettables;
 using UnityEngine;
 using SimpleFileBrowser;
+using static GameStateManager.GameState;
 
 namespace DataSaving
 {
@@ -67,7 +68,7 @@ namespace DataSaving
 
         private void OnEnable()
         {
-            GameHandler.GameEnded += WriteData;
+            GameStateManager.GameEnded += WriteData;
         }
 
         private void Start()
@@ -82,13 +83,13 @@ namespace DataSaving
 
         private void Update()
         {
-            if (GameHandler.State == GameHandler.StateType.Playing)
+            if (GameStateManager.State == Playing)
             {
-                var gameTime = Time.time - GameHandler.Instance.StartTime;
+                var gameTime = Time.time - ExperimentController.Instance.StartTime;
                 if (gameTime > _nextActionTime ) {
                     _nextActionTime += sampleFrequencyInSeconds;
                     // Adding position and rotation to list
-                    Transform cameraTr = GameHandler.Instance.XROrigin.Camera.transform;
+                    Transform cameraTr = ExperimentController.Instance.XROrigin.Camera.transform;
                     var data = new TransformData(gameTime, cameraTr.position, cameraTr.rotation.eulerAngles);
                     _transformDataList.Add(data);
                 }
@@ -161,7 +162,7 @@ namespace DataSaving
 
         private void OnDisable()
         {
-            GameHandler.GameEnded -= WriteData;
+            GameStateManager.GameEnded -= WriteData;
         }
     }
 }

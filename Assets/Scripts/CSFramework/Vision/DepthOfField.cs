@@ -4,6 +4,7 @@ using CSFramework.Presets;
 using CSFramework.Presettables;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static GameStateManager.GameState;
 
 namespace CSFramework.Extensions
 {
@@ -61,7 +62,7 @@ namespace CSFramework.Extensions
                 return;
             }
 
-            _xrChara = GameHandler.Instance.XROrigin.GetComponent<CharacterController>();
+            _xrChara = ExperimentController.Instance.XROrigin.GetComponent<CharacterController>();
         }
 
 
@@ -72,7 +73,7 @@ namespace CSFramework.Extensions
                 return;
             }
 
-            if (Preset.DynamicBlur && GameHandler.State == GameHandler.StateType.Playing)
+            if (Preset.DynamicBlur && GameStateManager.State == Playing)
             {
                 var m = false;
                 var t = false;
@@ -87,7 +88,7 @@ namespace CSFramework.Extensions
 
                 _lastPos = pos;
 
-                Quaternion rot = GameHandler.Instance.XROrigin.transform.rotation;
+                Quaternion rot = ExperimentController.Instance.XROrigin.transform.rotation;
                 Quaternion deltaRot = rot * Quaternion.Inverse(_lastRot);
                 var eulerRot = new Vector3(Mathf.DeltaAngle(0, deltaRot.eulerAngles.x),
                     Mathf.DeltaAngle(0, deltaRot.eulerAngles.y), Mathf.DeltaAngle(0, deltaRot.eulerAngles.z));

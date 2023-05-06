@@ -19,9 +19,9 @@ public class FollowPath : MonoBehaviour
 
     private void OnEnable()
     {
-        GameHandler.GameStarted += StartFollowing;
-        GameHandler.GameEnded += StopFollowing;
-        GameHandler.GameEnded += RestartFromBeginning;
+        GameStateManager.GameStarted += StartFollowing;
+        GameStateManager.GameEnded += StopFollowing;
+        GameStateManager.GameEnded += RestartFromBeginning;
         if (pathCreator != null)
         {
             // Subscribed to the pathUpdated event so that we're notified if the path changes during the game
@@ -31,9 +31,9 @@ public class FollowPath : MonoBehaviour
 
     private void OnDisable()
     {
-        GameHandler.GameStarted -= StartFollowing;
-        GameHandler.GameEnded -= StopFollowing;
-        GameHandler.GameEnded -= RestartFromBeginning;
+        GameStateManager.GameStarted -= StartFollowing;
+        GameStateManager.GameEnded -= StopFollowing;
+        GameStateManager.GameEnded -= RestartFromBeginning;
         if (pathCreator != null) pathCreator.pathUpdated -= OnPathChanged;
     }
 

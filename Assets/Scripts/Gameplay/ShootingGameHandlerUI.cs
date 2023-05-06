@@ -1,8 +1,9 @@
-﻿using DataSaving;
+﻿using CSFramework.Presettables;
+using DataSaving;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using GameHandler = CSFramework.Presettables.GameHandler;
+using static GameStateManager.GameState;
 
 namespace Gameplay
 {
@@ -20,12 +21,12 @@ namespace Gameplay
         [SerializeField] private TextMeshProUGUI fileNameLabel;
         [SerializeField] private TextMeshProUGUI savedNotificationLabel;
         
-        private GameHandler _gM;
+        private ExperimentController _gM;
 
         private void OnEnable()
         {
             
-            GameHandler.GameStateChanged += OnGameStateChanged;
+            GameStateManager.GameStateChanged += OnGameStateChanged;
             // no unsubscribing with anonymous functions
             DataSaver.FolderChanged += (v) => fileNameLabel.text = v;
             DataSaver.DataSaved += (v) => savedNotificationLabel.gameObject.SetActive(v);
@@ -33,7 +34,7 @@ namespace Gameplay
 
         private void Start()
         {
-            _gM = GameHandler.Instance;
+            _gM = ExperimentController.Instance;
             endExperimentButton.gameObject.SetActive(false);
             savedNotificationLabel.gameObject.SetActive(false);
             if (timeLabel != null && timeInput != null)
@@ -46,7 +47,7 @@ namespace Gameplay
 
         private void Update()
         {
-            if (GameHandler.State == GameHandler.StateType.Playing)
+            if (GameStateManager.State == Playing)
             {
                 if (timeLabel != null)
                 {
@@ -62,11 +63,11 @@ namespace Gameplay
             if (int.TryParse(input, out var i)) _gM.ExperimentLength = i;
         }
 
-        private void OnGameStateChanged(GameHandler.StateType state)
+        private void OnGameStateChanged(GameStateManager.GameState state)
         {
             switch (state)
             {
-                case GameHandler.StateType.Menu:
+                case Menu:
                     savingHolder.SetActive(true);
                     startExperimentButton.gameObject.SetActive(true);
                     endExperimentButton.gameObject.SetActive(false);
@@ -74,7 +75,7 @@ namespace Gameplay
                     timeLabel.text = (_gM != null ? _gM.PlayTime.ToString("0.0") : 0) + " / ";
                     break;
                 
-                case GameHandler.StateType.Playing:
+                case Playing:
                     savingHolder.SetActive(false);
                     startExperimentButton.gameObject.SetActive(false);
                     endExperimentButton.gameObject.SetActive(true);
@@ -88,7 +89,7 @@ namespace Gameplay
 
         private void OnDisable()
         {
-            GameHandler.GameStateChanged -= OnGameStateChanged;
+            GameStateManager.GameStateChanged -= OnGameStateChanged;
         }
     }
 }

@@ -1,15 +1,16 @@
 using System;
 using System.Collections;
+using CSFramework.Presettables;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using GameHandler = CSFramework.Presettables.GameHandler;
-    
+using static GameStateManager.GameState;
+
 namespace Player
 {
     /// <summary>
     /// Character manager, handling respawn, fade to black,
-    /// and telling <see cref="GameHandler"/> who <see cref="GameHandler.XROrigin"/> is.
+    /// and telling <see cref="ExperimentController"/> who <see cref="ExperimentController.XROrigin"/> is.
     /// </summary>
     public class ShootingGameCharacter : MonoBehaviour
     {
@@ -29,8 +30,8 @@ namespace Player
 
         private void OnEnable()
         {
-            GameHandler.GameStarted += OnGameStart;
-            GameHandler.GameEnded += OnGameEnd;
+            GameStateManager.GameStarted += OnGameStart;
+            GameStateManager.GameEnded += OnGameEnd;
         }
 
         private void Start()
@@ -66,7 +67,7 @@ namespace Player
 
         public void Respawn(SpawnPoint spawnPoint = SpawnPoint.AtSpawn)
         {
-            if (GameHandler.State == GameHandler.StateType.Playing)
+            if (GameStateManager.State == Playing)
             {
                 // doesn't work it seems
                 StartCoroutine(ChangeVignette(false,2));
@@ -131,8 +132,8 @@ namespace Player
 
         private void OnDisable()
         {
-            GameHandler.GameStarted -= OnGameStart;
-            GameHandler.GameEnded -= OnGameEnd;
+            GameStateManager.GameStarted -= OnGameStart;
+            GameStateManager.GameEnded -= OnGameEnd;
         }
     }
 }

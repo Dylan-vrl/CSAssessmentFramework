@@ -23,7 +23,7 @@ namespace CSFramework.Presettables
 
         private void OnEnable()
         {
-            GameHandler.GameStarted += OnGameStart;
+            GameStateManager.GameStarted += OnGameStart;
         }
 
         private void OnGameStart()
@@ -108,7 +108,7 @@ namespace CSFramework.Presettables
                 col.OnPickedUp -= OnCollectiblePickup;
             }
 
-            GameHandler.GameStarted -= OnGameStart;
+            GameStateManager.GameStarted -= OnGameStart;
         }
     }
 }
