@@ -29,8 +29,7 @@ namespace Player.Movement
             set => m_FixDownhill = value;
         }
 
-        protected CharacterController characterController;
-        private bool m_triedToGetCharCont;
+        private CharacterController characterController;
 
         private void Start()
         {
@@ -67,13 +66,7 @@ namespace Player.Movement
             if (xrOrigin == null)
                 return;
             
-            // Save a reference to the optional CharacterController on the rig GameObject
-            // that will be used to move instead of modifying the Transform directly.
-            if (characterController == null && !m_triedToGetCharCont)
-            {
-                characterController = xrOrigin.Origin.GetComponent<CharacterController>();
-                m_triedToGetCharCont = true;
-            }
+            characterController = xrOrigin.Origin.GetComponent<CharacterController>();
         }
     }
 }
