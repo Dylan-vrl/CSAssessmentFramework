@@ -9,7 +9,7 @@ namespace CSFramework.Presets
     public class BackgroundMusicPreset: Preset<BackgroundMusic>
     {
         // TODO replace with your own fields following this format
-        [field: SerializeField] public AudioClip musicStart;
-        [field: SerializeField] public AudioClip musicLoop;
+        [SerializeField] public Optional<AudioClip> musicStart;
+        [SerializeField] public AudioClip musicLoop;
     }
 }
