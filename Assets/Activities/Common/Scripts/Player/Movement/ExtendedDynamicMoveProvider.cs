@@ -1,7 +1,7 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using Unity.XR.CoreUtils;
 using UnityEngine;
-using UnityEngine.Assertions;
+using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
@@ -18,7 +18,7 @@ namespace Player.Movement
     /// determines the forward direction of movement based on user preference for each hand.
     /// For example, can configure to use head relative movement for the left hand and controller relative movement for the right hand.
     /// </summary>
-    public class ExtendedDynamicMoveProvider : DynamicMoveProvider
+    public class ExtendedDynamicMoveProvider : DynamicMoveProvider, ICustomLocomotionProvider
     {
         [SerializeField] [Tooltip("Whether to fix stair effect when going downhill.")]
         private bool m_FixDownhill;
@@ -68,5 +68,8 @@ namespace Player.Movement
             
             characterController = xrOrigin.Origin.GetComponent<CharacterController>();
         }
+
+        public List<InputActionReference> LeftInputReferences => new() { leftHandMoveAction.reference };
+        public List<InputActionReference> RightInputReferences => new() { rightHandMoveAction.reference };
     }
 }
