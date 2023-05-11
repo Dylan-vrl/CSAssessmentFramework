@@ -22,8 +22,8 @@ namespace CSFramework.Extensions
 
         private void Start()
         {
-			animator.clip = Preset.rotateX;
-            animator.Play();
+			//animator.clip = Preset.rotateX;
+            animator.Play("RotateX");
 		}
 	}
 }
