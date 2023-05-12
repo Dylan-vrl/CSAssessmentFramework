@@ -2799,10 +2799,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca750cb2ed235423baf1c643ad51bb09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preset: {fileID: 11400000, guid: d6597367b8cbd4bac86e34b4b78fa52a, type: 2}
   pathCreator: {fileID: 8620813008073106252}
   endOfPathInstruction: 0
-  <Speed>k__BackingField: 1
-  <YOffset>k__BackingField: 1
+  yOffset: 1
 --- !u!4 &873864523
 Transform:
   m_ObjectHideFlags: 0
@@ -4871,12 +4871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 529e8f345da9643d79421a6445b5feaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minOffsets: {x: -5, y: 3, z: 10}
-  maxOffsets: {x: 5, y: 6, z: 20}
-  minMaxBatchSize: {x: 1, y: 3}
-  minMaxStep: {x: 10, y: 10}
-  targetPrefab: {fileID: 7070951107697449651, guid: cf44faad6693c433ba69755407579c62,
-    type: 3}
+  preset: {fileID: 11400000, guid: 957ada1e3cf7845d0ab1f73430e43dd2, type: 2}
   followPath: {fileID: 873864522}
 --- !u!135 &1637153225
 SphereCollider:

@@ -1,16 +1,17 @@
-using System;
-using CSFramework.Presettables;
+using CSFramework.Core;
+using CSFramework.Presets;
 using PathCreation;
 using UnityEngine;
 
 // Moves along a path at constant speed.
 // Depending on the end of path instruction, will either loop, reverse, or stop at the end of the path.
-public class FollowPath : MonoBehaviour
+public class FollowPath : PresettableMonoBehaviour<FollowPathPreset>
 {
     [SerializeField] private PathCreator pathCreator;
     [SerializeField] private EndOfPathInstruction endOfPathInstruction;
-    [field: SerializeField] public float Speed { get; set; } = 5f;
-    [field: SerializeField] public float YOffset { get; set; } = 1f;
+    [SerializeField] private float yOffset = 1f;
+
+    private float Speed => Preset.Speed;
     
     public float DistanceTravelled { get; private set; }
     public VertexPath Path => pathCreator.path;
@@ -48,7 +49,7 @@ public class FollowPath : MonoBehaviour
         {
             DistanceTravelled += Speed * Time.deltaTime;
             var XZPos = pathCreator.path.GetPointAtDistance(DistanceTravelled, endOfPathInstruction);
-            var height = _activeTerrain.SampleHeight(XZPos) + _activeTerrain.transform.position.y + YOffset;
+            var height = _activeTerrain.SampleHeight(XZPos) + _activeTerrain.transform.position.y + yOffset;
             transform.position = new Vector3(XZPos.x, height, XZPos.z);
             transform.rotation = pathCreator.path.GetRotationAtDistance(DistanceTravelled, endOfPathInstruction);
         }
@@ -64,4 +65,5 @@ public class FollowPath : MonoBehaviour
     private void StopFollowing() => _isFollowing = false;
 
     public void RestartFromBeginning() => DistanceTravelled = 0;
+    public override PresettableCategory GetCategory() => PresettableCategory.Locomotion;
 }
