@@ -44,13 +44,24 @@ ScrollView.categoryList {
 }
 
 .extension {
-    flex-direction: row;
+    flex-direction: column;
     align-items: flex-start;
     background-color: var(--unity-colors-box-background);
     margin-left: 35px;
     margin-right: 10px;
     margin-top: 5px;
     margin-bottom: 10px;
+    align-self: auto;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    -unity-text-align: middle-left;
+}
+
+.extensionLabel {
+    flex-direction: row;
+    align-items: flex-start;
     align-self: auto;
     padding-left: 5px;
     padding-right: 5px;

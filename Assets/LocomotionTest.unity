@@ -521,7 +521,7 @@ MonoBehaviour:
   m_RightControllerTransform: {fileID: 4411121338845806404}
   m_LeftHandMovementDirection: 0
   m_RightHandMovementDirection: 0
-  m_FixDownhill: 1
+  preset: {fileID: 11400000, guid: d2f73a806bf3f4a2cb0f031d29cb3c2d, type: 2}
 --- !u!1 &1187346219
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,6 +817,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -8525429354371678379, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
+  preset: {fileID: 11400000, guid: cd1c8e66ebadd479391d547768c4512f, type: 2}
 --- !u!1 &1372550561
 GameObject:
   m_ObjectHideFlags: 0
@@ -1044,6 +1045,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2057399193}
   - component: {fileID: 2057399194}
+  - component: {fileID: 2057399195}
   m_Layer: 0
   m_Name: Teleportation provider
   m_TagString: Untagged
@@ -1080,6 +1082,73 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_System: {fileID: 0}
   m_DelayTime: 0
+--- !u!114 &2057399195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057399192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8e3f854a9ed40ab80e8fedad7bced74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_System: {fileID: 0}
+  m_DelayTime: 0
+  preset: {fileID: 11400000, guid: 68f1189a7c2724221b9a347d7743c03d, type: 2}
+  leftTeleportModeActivate:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Left Teleport Mode Activate
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 8211ec91-9d1d-4ed6-a9f5-56b1a8e99acf
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 1263111715868034790, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  leftTeleportModeCancel:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Left Teleport Mode Cancel
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: bb1dde82-66bb-4996-9c5b-16e38c70feee
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 737890489006591557, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  rightTeleportModeActivate:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Right Teleport Mode Activate
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 06875aa3-f4a7-49a9-98a8-b1fbb632b74a
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -8061240218431744966, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  rightTeleportModeCancel:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Right Teleport Mode Cancel
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 42ffc4a3-a421-4dec-8f28-5f21705e486d
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 2307464322626738743, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
 --- !u!1 &2081984301
 GameObject:
   m_ObjectHideFlags: 0
@@ -1233,6 +1302,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
+  preset: {fileID: 11400000, guid: 7ee6166f29ab543a791e3ce4ddfff609, type: 2}
 --- !u!1 &78785200240335915
 GameObject:
   m_ObjectHideFlags: 0
@@ -5878,7 +5948,7 @@ MonoBehaviour:
   teleportationProvider: {fileID: 0}
   grabMoveProvider: {fileID: 0}
   snapTurnProvider: {fileID: 0}
-  continuousTurnProvider: {fileID: 0}
+  continuousTurnProvider: {fileID: 2124213812}
   leftHandControllerManager: {fileID: 4936060876333173577}
   rightHandControllerManager: {fileID: 5066737414651685334}
   leftHandLocomotionType: 0

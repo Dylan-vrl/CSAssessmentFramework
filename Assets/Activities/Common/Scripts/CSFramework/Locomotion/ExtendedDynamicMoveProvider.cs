@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using CSFramework.Core;
+using CSFramework.Presets;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,7 +9,7 @@ using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 // ReSharper disable InconsistentNaming
 
-namespace Player.Movement
+namespace CSFramework.Presettables
 {
     /// <summary>
     /// This class Is an extended Copy of <c>DynamicMoveProvider</c>. <br/>
@@ -18,18 +20,25 @@ namespace Player.Movement
     /// determines the forward direction of movement based on user preference for each hand.
     /// For example, can configure to use head relative movement for the left hand and controller relative movement for the right hand.
     /// </summary>
-    public class ExtendedDynamicMoveProvider : DynamicMoveProvider, ICustomLocomotionProvider
+    public class ExtendedDynamicMoveProvider : DynamicMoveProvider, ICustomLocomotionProvider, IPresettable<ExtendedDynamicMoveProviderPreset>
     {
-        [SerializeField] [Tooltip("Whether to fix stair effect when going downhill.")]
-        private bool m_FixDownhill;
+        [SerializeField] private ExtendedDynamicMoveProviderPreset preset;
 
-        public bool fixDownhill
-        {
-            get => m_FixDownhill;
-            set => m_FixDownhill = value;
-        }
+        private bool fixDownHill;
 
         private CharacterController characterController;
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            if (preset == null) return;
+            leftHandMovementDirection = Preset.LeftHandMovementDirection;
+            rightHandMovementDirection = Preset.RightHandMovementDirection;
+            moveSpeed = Preset.MoveSpeed;
+            fixDownHill = Preset.FixDownHill;
+            enableStrafe = Preset.EnableStrafe;
+        }
 
         private void Start()
         {
@@ -42,7 +51,7 @@ namespace Player.Movement
             const float maxDistance = 3;
             var rayDown = new Ray(Quaternion.Euler(0, transform.eulerAngles.y, 0) *characterController.center + transform.position, Vector3.down * maxDistance);
             Physics.Raycast(rayDown, out var hitDownInfo, maxDistance);
-            if (fixDownhill)
+            if (fixDownHill)
             {
                 if (characterController.velocity.y < 0)
                 {
@@ -71,5 +80,7 @@ namespace Player.Movement
 
         public List<InputActionReference> LeftInputReferences => new() { leftHandMoveAction.reference };
         public List<InputActionReference> RightInputReferences => new() { rightHandMoveAction.reference };
+        public PresettableCategory GetCategory() => PresettableCategory.Locomotion;
+        public ExtendedDynamicMoveProviderPreset Preset => preset;
     }
 }
