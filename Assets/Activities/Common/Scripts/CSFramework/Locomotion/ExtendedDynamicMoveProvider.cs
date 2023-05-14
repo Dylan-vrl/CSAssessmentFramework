@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CSFramework.Core;
+using CSFramework.Editor;
 using CSFramework.Presets;
 using Unity.XR.CoreUtils;
 using UnityEngine;
@@ -20,6 +21,7 @@ namespace CSFramework.Presettables
     /// determines the forward direction of movement based on user preference for each hand.
     /// For example, can configure to use head relative movement for the left hand and controller relative movement for the right hand.
     /// </summary>
+    [HideInSetupWindow]
     public class ExtendedDynamicMoveProvider : DynamicMoveProvider, ICustomLocomotionProvider, IPresettable<ExtendedDynamicMoveProviderPreset>
     {
         [SerializeField] private ExtendedDynamicMoveProviderPreset preset;

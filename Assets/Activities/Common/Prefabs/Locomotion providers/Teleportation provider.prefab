@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1717706487529308311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 812204754463539586}
+  - component: {fileID: 193681739374813912}
+  - component: {fileID: 1511662367991727345}
+  m_Layer: 0
+  m_Name: Teleportation provider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &812204754463539586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717706487529308311}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &193681739374813912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717706487529308311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01f69dc1cb084aa42b2f2f8cd87bc770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_System: {fileID: 0}
+  m_DelayTime: 0
+--- !u!114 &1511662367991727345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717706487529308311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8e3f854a9ed40ab80e8fedad7bced74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_System: {fileID: 0}
+  m_DelayTime: 0
+  preset: {fileID: 11400000, guid: 68f1189a7c2724221b9a347d7743c03d, type: 2}
+  leftTeleportModeActivate:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Left Teleport Mode Activate
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 8211ec91-9d1d-4ed6-a9f5-56b1a8e99acf
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 1263111715868034790, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  leftTeleportModeCancel:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Left Teleport Mode Cancel
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: bb1dde82-66bb-4996-9c5b-16e38c70feee
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 737890489006591557, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  rightTeleportModeActivate:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Right Teleport Mode Activate
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 06875aa3-f4a7-49a9-98a8-b1fbb632b74a
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -8061240218431744966, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  rightTeleportModeCancel:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Right Teleport Mode Cancel
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 42ffc4a3-a421-4dec-8f28-5f21705e486d
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 2307464322626738743, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}

@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8141772578516348503
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1386807241579497216}
+  - component: {fileID: 8300925354783625497}
+  m_Layer: 0
+  m_Name: Extended dynamic move provider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1386807241579497216
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8141772578516348503}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8300925354783625497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8141772578516348503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a5334fcf5eb4ed88ad9c5b9aa07f33a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_System: {fileID: 0}
+  m_MoveSpeed: 3
+  m_EnableStrafe: 1
+  m_EnableFly: 0
+  m_UseGravity: 1
+  m_GravityApplicationMode: 0
+  m_ForwardSource: {fileID: 0}
+  m_LeftHandMoveAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Left Hand Move
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: dd2af56a-eceb-495b-9f89-c02abfb3372e
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  m_RightHandMoveAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Right Hand Move
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: fdf6d5d1-2f85-47db-ba49-47af929c1ee9
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -8198699208435500284, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  m_HeadTransform: {fileID: 0}
+  m_LeftControllerTransform: {fileID: 0}
+  m_RightControllerTransform: {fileID: 0}
+  m_LeftHandMovementDirection: 0
+  m_RightHandMovementDirection: 0
+  preset: {fileID: 11400000, guid: d2f73a806bf3f4a2cb0f031d29cb3c2d, type: 2}

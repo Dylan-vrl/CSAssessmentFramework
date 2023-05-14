@@ -1,24 +1,53 @@
 using System.Collections.Generic;
 using System.Linq;
+using CSFramework.Core;
+using CSFramework.Presets;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class LocomotionHandler2 : MonoBehaviour
+public class LocomotionHandler2 : PresettableMonoBehaviour<LocomotionHandlerPreset>
 {
-    [SerializeField] private List<LocomotionProvider> leftActiveLocomotionProviders = new();
-    [SerializeField] private List<LocomotionProvider> rightActiveLocomotionProviders = new();
+    private List<LocomotionProvider> leftActiveLocomotionProviders = new();
+    private List<LocomotionProvider> rightActiveLocomotionProviders = new();
 
     private List<ICustomLocomotionProvider> leftCustomLocomotionProviders = new();
     private List<ICustomLocomotionProvider> rightCustomLocomotionProviders = new();
 
     private void Start()
     {
-        ValidateProviders();
+        leftActiveLocomotionProviders = Preset.LeftActiveLocomotionProviders;
+        rightActiveLocomotionProviders = Preset.RightActiveLocomotionProviders;
+
+        CleanAllProviders();
+        ValidateActiveProviders();
+        SpawnAllActiveProviders();
+        
         InitCustomProviders();
         UpdateActionRefs();
     }
 
-    private void ValidateProviders()
+    private static void CleanAllProviders()
+    {
+        foreach (var provider in FindObjectsOfType<LocomotionProvider>())
+        {
+            Destroy(provider.gameObject);
+        }
+    }
+    
+    private void SpawnAllActiveProviders()
+    {
+        foreach (var leftProvider in leftActiveLocomotionProviders)
+        {
+            Instantiate(leftProvider, transform);
+        }
+        
+        foreach (var rightProvider in rightActiveLocomotionProviders)
+        {
+            Instantiate(rightProvider, transform);
+        }
+    }
+
+    private void ValidateActiveProviders()
     {
         leftActiveLocomotionProviders = leftActiveLocomotionProviders.Where(provider =>
             {
@@ -68,4 +97,6 @@ public class LocomotionHandler2 : MonoBehaviour
         leftCustomLocomotionProviders.ForEach(provider => provider.EnableLeftActions());
         rightCustomLocomotionProviders.ForEach(provider => provider.EnableRightActions());
     }
+
+    public override PresettableCategory GetCategory() => PresettableCategory.Locomotion;
 }

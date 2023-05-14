@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using CSFramework.Core;
+using CSFramework.Editor;
 using CSFramework.Presets;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,6 +8,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 namespace CSFramework.Presettables
 {
+    [HideInSetupWindow]
     public class CustomTeleportationProvider : 
         TeleportationProvider, 
         ICustomLocomotionProvider, 

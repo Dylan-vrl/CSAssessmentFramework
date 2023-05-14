@@ -1,0 +1,226 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2455326279909623446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8937011307899198355}
+  - component: {fileID: 2008996309635759474}
+  m_Layer: 0
+  m_Name: Two-handed grab move provider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8937011307899198355
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2455326279909623446}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 256263396779936343}
+  - {fileID: 2758143335231011168}
+  m_Father: {fileID: 0}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2008996309635759474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2455326279909623446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49874a348b7b4cb095e769da6db3a3a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_System: {fileID: 0}
+  m_EnableFreeXMovement: 1
+  m_EnableFreeYMovement: 0
+  m_EnableFreeZMovement: 1
+  m_UseGravity: 1
+  m_GravityApplicationMode: 0
+  m_LeftGrabMoveProvider: {fileID: 1889528243865287196}
+  m_RightGrabMoveProvider: {fileID: 2559198062739516548}
+  m_OverrideSharedSettingsOnInit: 1
+  m_MoveFactor: 1
+  m_RequireTwoHandsForTranslation: 0
+  m_EnableRotation: 1
+  m_EnableScaling: 0
+  m_MinimumScale: 0.2
+  m_MaximumScale: 3
+  preset: {fileID: 11400000, guid: b3cf126dd5fea424f89a78a16b50e98d, type: 2}
+--- !u!1 &4089851040974501731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2758143335231011168}
+  - component: {fileID: 7856015254917199196}
+  - component: {fileID: 2559198062739516548}
+  m_Layer: 0
+  m_Name: Right hand grab move provider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2758143335231011168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4089851040974501731}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8937011307899198355}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7856015254917199196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4089851040974501731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01f69dc1cb084aa42b2f2f8cd87bc770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_System: {fileID: 0}
+  m_DelayTime: 0
+--- !u!114 &2559198062739516548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4089851040974501731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b94c4c83dec6a94fbaebf543478259e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_System: {fileID: 0}
+  m_EnableFreeXMovement: 1
+  m_EnableFreeYMovement: 0
+  m_EnableFreeZMovement: 1
+  m_UseGravity: 1
+  m_GravityApplicationMode: 0
+  m_ControllerTransform: {fileID: 0}
+  m_EnableMoveWhileSelecting: 0
+  m_MoveFactor: 1
+  m_GrabMoveAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Grab Move
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: de56d195-bf90-4347-9982-6bf8ffa3420c
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 15759602096507913, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+--- !u!1 &5357274710050132436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 256263396779936343}
+  - component: {fileID: 2727071838615705851}
+  - component: {fileID: 1889528243865287196}
+  m_Layer: 0
+  m_Name: Left hand grab move provider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &256263396779936343
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5357274710050132436}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8937011307899198355}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2727071838615705851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5357274710050132436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01f69dc1cb084aa42b2f2f8cd87bc770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_System: {fileID: 0}
+  m_DelayTime: 0
+--- !u!114 &1889528243865287196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5357274710050132436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b94c4c83dec6a94fbaebf543478259e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_System: {fileID: 0}
+  m_EnableFreeXMovement: 1
+  m_EnableFreeYMovement: 0
+  m_EnableFreeZMovement: 1
+  m_UseGravity: 1
+  m_GravityApplicationMode: 0
+  m_ControllerTransform: {fileID: 0}
+  m_EnableMoveWhileSelecting: 0
+  m_MoveFactor: 1
+  m_GrabMoveAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Grab Move
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 3d33edcf-0043-45cb-95a7-008204badf83
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -3742484312079769484, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
