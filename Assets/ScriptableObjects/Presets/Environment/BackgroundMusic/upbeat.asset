@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 513a627d9756d9a46b499091ec6b2ab0, type: 3}
   m_Name: upbeat
   m_EditorClassIdentifier: 
-  musicStart: {fileID: 8300000, guid: c819460960ce8034ca5aeaec3dde88c2, type: 3}
+  musicStart:
+    enabled: 1
+    value: {fileID: 8300000, guid: c819460960ce8034ca5aeaec3dde88c2, type: 3}
   musicLoop: {fileID: 8300000, guid: 3a0ec5f56feac5443bf480f1d9438b2f, type: 3}
