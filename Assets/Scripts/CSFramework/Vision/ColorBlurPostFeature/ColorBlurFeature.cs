@@ -8,10 +8,11 @@ using UnityEngine.Rendering.Universal;
 public class ColorBlurFeature : ScriptableRendererFeature
 {
     private BlurPass blurPass;
+    public Material _mat;
 
     public override void Create()
     {
-        blurPass = new BlurPass();
+        blurPass = new BlurPass(_mat);
     }
     
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
@@ -26,11 +27,14 @@ public class ColorBlurFeature : ScriptableRendererFeature
         private int blurID = Shader.PropertyToID("_Temp");
         private RenderTargetIdentifier src, blur;
 
-        public void TintPass()
+        public BlurPass(Material mat)
         {
-            if(!_mat)
+            if(!mat)
             {
                 _mat = CoreUtils.CreateEngineMaterial("Custom/SaliencyBlur");
+            } else
+            {
+                _mat = mat;
             }
             renderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
         }

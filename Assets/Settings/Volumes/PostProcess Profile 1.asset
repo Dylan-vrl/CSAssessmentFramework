@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7354536363752636288
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3151b5f1c3f364fa10717e9856f964, type: 3}
+  m_Name: CustomColourBlur
+  m_EditorClassIdentifier: 
+  active: 1
+  blurStrength:
+    m_OverrideState: 1
+    m_Value: 1.26
+  brightnessThreshold:
+    m_OverrideState: 1
+    m_Value: 4
+  redThreshold:
+    m_OverrideState: 1
+    m_Value: 0.5
+  greenThreshold:
+    m_OverrideState: 1
+    m_Value: 0.5
+  blueThreshold:
+    m_OverrideState: 1
+    m_Value: 0.5
 --- !u!114 &-5041311878543632869
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -119,6 +147,7 @@ MonoBehaviour:
   - {fileID: -5041311878543632869}
   - {fileID: -3979952948793402172}
   - {fileID: 4892265953163881170}
+  - {fileID: -7354536363752636288}
 --- !u!114 &4892265953163881170
 MonoBehaviour:
   m_ObjectHideFlags: 3
