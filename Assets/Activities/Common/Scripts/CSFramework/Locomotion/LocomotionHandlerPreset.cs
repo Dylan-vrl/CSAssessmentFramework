@@ -16,7 +16,9 @@ namespace CSFramework.Presets
         public List<LocomotionProvider> LeftActiveLocomotionProviders => leftActiveLocomotionProviders.ToList();
         public List<LocomotionProvider> RightActiveLocomotionProviders => rightActiveLocomotionProviders.ToList();
 
-        public UnityEvent OnListChange = new UnityEvent();
+        // Used for custom inspector
+        [HideInInspector]
+        public UnityEvent OnListChange = new();
 
         private void OnValidate()
         {

@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using CSFramework.Editor;
 using CSFramework.Presets;
 using UnityEditor;
 using UnityEditor.UIElements;
@@ -8,33 +8,45 @@ using UnityEngine.UIElements;
 using UnityEngine.XR.Interaction.Toolkit;
 
 [CustomEditor(typeof(LocomotionHandlerPreset))]
-public class CustomLocomotionHandlerPresetEditor: Editor
+public class LocomotionHandlerPresetEditor: Editor
 {
+    private LocomotionHandlerPreset preset;
     private VisualElement root;
-    private List<VisualElement> historyInspectors = new();
-    
+    private PropertyField leftProvidersPropertyField;
+    private PropertyField rightProvidersPropertyField;
+    private SerializedProperty leftProvidersProperty;
+    private SerializedProperty rightProvidersProperty;
+
+    private void OnEnable()
+    {
+        preset = (LocomotionHandlerPreset)serializedObject.targetObject;
+        preset.OnListChange.AddListener(RebuildGUI);
+    }
+
+    private void OnDisable()
+    {
+        preset.OnListChange.RemoveListener(RebuildGUI);
+    }
+
     public override VisualElement CreateInspectorGUI()
     {
         root = new VisualElement();
-        RebuildGUI();
+        leftProvidersProperty = serializedObject.FindProperty("leftActiveLocomotionProviders");
+        rightProvidersProperty = serializedObject.FindProperty("rightActiveLocomotionProviders");
+
+        leftProvidersPropertyField = new PropertyField(leftProvidersProperty);
+        rightProvidersPropertyField = new PropertyField(rightProvidersProperty);
         
-        var preset = (LocomotionHandlerPreset)serializedObject.targetObject;
-        preset.OnListChange.AddListener(RebuildGUI);        
+        root.Add(leftProvidersPropertyField);
+        root.Add(rightProvidersPropertyField);
+
+        RebuildGUI();
         
         return root;
     }
-
+    
     private void RebuildGUI()
     {
-        var leftProvidersProperty = serializedObject.FindProperty("leftActiveLocomotionProviders");
-        var rightProvidersProperty = serializedObject.FindProperty("rightActiveLocomotionProviders");
-
-        var leftProvidersPropertyField = new PropertyField(leftProvidersProperty);
-        var rightProvidersPropertyField = new PropertyField(rightProvidersProperty);
-
-        root.Add(leftProvidersPropertyField);
-        root.Add(rightProvidersPropertyField);
-        
         RemoveHistory();
 
         AddProviderPropertyInspector(leftProvidersProperty, "Left");
@@ -43,20 +55,23 @@ public class CustomLocomotionHandlerPresetEditor: Editor
 
     private void RemoveHistory()
     {
-        foreach (var toRemove in historyInspectors)
-        {
-            root.Remove(toRemove);
-        }
-        
-        historyInspectors.Clear();
+        if (root == null) return;
+        root.Clear();
+
+        root.Add(leftProvidersPropertyField);
+        root.Add(rightProvidersPropertyField);
+        root.Bind(serializedObject);
     }
     
     private void AddProviderPropertyInspector(SerializedProperty property, string labelPrefix)
     {
+        if (root == null) return;
+        
         for (var i = 0; i < property.arraySize; i++)
         {
             var provider = (LocomotionProvider)property.GetArrayElementAtIndex(i).boxedValue;
             if (provider == null) break;
+            
             var inspectorTitle = new Label($"{labelPrefix}: {provider.name}")
             {
                 style =
@@ -82,13 +97,10 @@ public class CustomLocomotionHandlerPresetEditor: Editor
                 }
             };
 
-            historyInspectors.Add(inspectorTitle);
-            historyInspectors.Add(inspector);
-            historyInspectors.Add(line);
-
             root.Add(inspectorTitle);
             root.Add(inspector);
             root.Add(line);
+            root.Bind(serializedObject);
         }
     }
 }

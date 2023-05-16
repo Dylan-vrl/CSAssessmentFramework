@@ -59,7 +59,9 @@ namespace CSFramework.Editor
             };
             _lastFoldout = foldout;
 
-            // Draw all internal fields of the preset
+            var inspector = new InspectorElement(newProperty.objectReferenceValue);
+            foldout.Add(inspector);
+            /*// Draw all internal fields of the preset
             SerializedObject targetObject = new SerializedObject(newProperty?.objectReferenceValue);
             SerializedProperty field = targetObject.GetIterator();
             field.NextVisible(true); // Skip script name
@@ -70,7 +72,7 @@ namespace CSFramework.Editor
                 fieldField.RegisterValueChangeCallback(_ => targetObject.ApplyModifiedProperties());
                 fieldField.Bind(field.serializedObject);
                 foldout.Add(fieldField);
-            }
+            }*/
 
             if (foldoutIndex != -1)
             {
