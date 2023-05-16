@@ -11,5 +11,7 @@ namespace CSFramework.Presets
         // TODO replace with your own fields following this format
         //[field: SerializeField]
         //public int Field { get; private set; }
+        [SerializeField] public int lapCount;
+        [SerializeField] public float lapDuration;
     }
 }
