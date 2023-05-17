@@ -83,7 +83,7 @@ namespace CSFramework.Extensions
             {
                 return;
             }
-            _xrChara = GameHandler.Instance.XROrigin.GetComponent<CharacterController>();
+            _xrChara = ExperimentController.Instance.XROrigin.GetComponent<CharacterController>();
             _lastRot = _xrChara.transform.rotation;
             _lastPos = _xrChara.transform.position;
 
@@ -102,7 +102,7 @@ namespace CSFramework.Extensions
         // Update is called once per frame
         void Update()
         {
-            if (_xrChara != null && GameHandler.State == GameHandler.StateType.Playing)
+            if (_xrChara != null && GameStateManager.State == GameStateManager.GameState.Playing)
             {
                 var t = false;
                 var m = false;
