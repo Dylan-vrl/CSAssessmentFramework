@@ -28,7 +28,7 @@ namespace CSFramework.Presettables
 
         void Update()
         {
-            if (GameHandler.State != GameHandler.StateType.Playing)
+            if (GameStateManager.State != GameStateManager.GameState.Playing)
             {
                 return;
             } 
