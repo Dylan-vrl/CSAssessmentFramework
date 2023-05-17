@@ -1437,6 +1437,7 @@ GameObject:
   - component: {fileID: 5362022688233437226}
   - component: {fileID: 512477776948123746}
   - component: {fileID: 7482576894329600096}
+  - component: {fileID: 7482576894329600097}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Player
@@ -1712,7 +1713,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1803383418895194617
 Transform:
   m_ObjectHideFlags: 0
@@ -2220,7 +2221,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2022394109892835293
 Transform:
   m_ObjectHideFlags: 0
@@ -3956,38 +3957,6 @@ MonoBehaviour:
   m_BlockedReticle: {fileID: 0}
   m_StopLineAtFirstRaycastHit: 1
   m_StopLineAtSelection: 0
---- !u!114 &4936060876333173577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7105209909130102146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0062bbe024a04173bbcfa7ce9aaba5fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  directInteractor: {fileID: 0}
-  m_RayInteractor: {fileID: 7489375921909998878}
-  canRayInteract: 0
-  m_TeleportInteractor: {fileID: 1803383418895194612}
-  m_Select: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  m_AnchorTranslate: {fileID: 7779212132400271959, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  m_AnchorRotate: {fileID: -7363382999065477798, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  teleportModeActivate: {fileID: 1263111715868034790, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  teleportModeCancel: {fileID: 737890489006591557, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  turn: {fileID: 1010738217276881514, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  snapTurn: {fileID: -7374733323251553461, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  move: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  motionType: 0
-  turnType: 2
 --- !u!1 &4966267019688250388
 GameObject:
   m_ObjectHideFlags: 0
@@ -5188,8 +5157,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5298885171653294914}
-  - component: {fileID: 4936060876333173577}
   - component: {fileID: 3747138378342119941}
+  - component: {fileID: 7105209909130102147}
   m_Layer: 0
   m_Name: LeftHand Controller
   m_TagString: LeftGameController
@@ -5197,6 +5166,38 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7105209909130102147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7105209909130102146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0062bbe024a04173bbcfa7ce9aaba5fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  directInteractor: {fileID: 0}
+  m_RayInteractor: {fileID: 7489375921909998878}
+  canRayInteract: 0
+  m_TeleportInteractor: {fileID: 1803383418895194612}
+  m_Select: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  m_AnchorTranslate: {fileID: 7779212132400271959, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  m_AnchorRotate: {fileID: -7363382999065477798, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  teleportModeActivate: {fileID: 1263111715868034790, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  teleportModeCancel: {fileID: 737890489006591557, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  turn: {fileID: 1010738217276881514, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  snapTurn: {fileID: -7374733323251553461, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  move: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  motionType: 1
+  turnType: 1
 --- !u!4 &7136415988695296168
 Transform:
   m_ObjectHideFlags: 0
@@ -5303,6 +5304,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preset: {fileID: 11400000, guid: 5400bef81c8ab4b428244f3e4c5f7214, type: 2}
+--- !u!114 &7482576894329600097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611590700885444663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49b34534154b4e69901d9099dd9d2fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  continuousMoveProviderEnableChannelSO: {fileID: 11400000, guid: ff89577599c804193a7aced8d7335ccb,
+    type: 2}
 --- !u!114 &7489375921909998878
 MonoBehaviour:
   m_ObjectHideFlags: 0

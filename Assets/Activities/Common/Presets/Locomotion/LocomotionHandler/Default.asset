@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f3b24e7e594c98859149aee50a080d, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: 
-  leftActiveLocomotionProviders:
-  - {fileID: 6341396779400365748, guid: 05c227c45791d4207b704de4999a7a5e, type: 3}
+  leftActiveLocomotionProviders: []
   rightActiveLocomotionProviders:
   - {fileID: 8300925354783625497, guid: c0f68462568e449c8958e7a268a00e47, type: 3}
   OnListChange:

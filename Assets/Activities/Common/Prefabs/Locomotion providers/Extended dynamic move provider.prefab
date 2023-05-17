@@ -83,3 +83,5 @@ MonoBehaviour:
   m_LeftHandMovementDirection: 0
   m_RightHandMovementDirection: 0
   preset: {fileID: 11400000, guid: d2f73a806bf3f4a2cb0f031d29cb3c2d, type: 2}
+  moveProviderEnableChannelSO: {fileID: 11400000, guid: ff89577599c804193a7aced8d7335ccb,
+    type: 2}

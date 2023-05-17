@@ -62,6 +62,10 @@ MonoBehaviour:
   m_System: {fileID: 0}
   m_DelayTime: 0
   preset: {fileID: 11400000, guid: 68f1189a7c2724221b9a347d7743c03d, type: 2}
+  leftTeleportationProviderEnableChannelSO: {fileID: 11400000, guid: c8d9d3e26fb054bdb9df7918633c6fd8,
+    type: 2}
+  rightTeleportationProviderEnableChannelSO: {fileID: 11400000, guid: f43d196bf68d84d808633166670cb411,
+    type: 2}
   leftTeleportModeActivate:
     m_UseReference: 1
     m_Action:

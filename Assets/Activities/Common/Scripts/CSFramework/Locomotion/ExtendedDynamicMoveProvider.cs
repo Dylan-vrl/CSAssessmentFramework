@@ -25,7 +25,10 @@ namespace CSFramework.Presettables
     public class ExtendedDynamicMoveProvider : DynamicMoveProvider, ICustomLocomotionProvider, IPresettable<ExtendedDynamicMoveProviderPreset>
     {
         [SerializeField] private ExtendedDynamicMoveProviderPreset preset;
-
+        
+        [Header("Events")]
+        [SerializeField] private ContinuousMoveProviderEventChannelSO moveProviderEnableChannelSO;
+        
         private bool fixDownHill;
 
         private CharacterController characterController;
@@ -40,11 +43,18 @@ namespace CSFramework.Presettables
             moveSpeed = Preset.MoveSpeed;
             fixDownHill = Preset.FixDownHill;
             enableStrafe = Preset.EnableStrafe;
+            
+            moveProviderEnableChannelSO.RaiseEvent(this);
         }
-
+        
         private void Start()
         {
             FindCharacterController();
+        }
+
+        private void OnDestroy()
+        {
+            moveProviderEnableChannelSO.RaiseEvent(null);
         }
 
         protected override void MoveRig(Vector3 translationInWorldSpace)
@@ -79,7 +89,7 @@ namespace CSFramework.Presettables
             
             characterController = xrOrigin.Origin.GetComponent<CharacterController>();
         }
-
+        
         public List<InputActionReference> LeftInputReferences => new() { leftHandMoveAction.reference };
         public List<InputActionReference> RightInputReferences => new() { rightHandMoveAction.reference };
         public PresettableCategory GetCategory() => PresettableCategory.Locomotion;

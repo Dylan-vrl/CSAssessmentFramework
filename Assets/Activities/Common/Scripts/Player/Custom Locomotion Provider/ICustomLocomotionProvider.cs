@@ -6,12 +6,6 @@ public interface ICustomLocomotionProvider
     public List<InputActionReference> LeftInputReferences { get; }
     public List<InputActionReference> RightInputReferences { get; }
 
-    public void EnableActions()
-    {
-        EnableLeftActions();
-        EnableRightActions();
-    }
-    
     public void EnableLeftActions() => LeftInputReferences.ForEach(EnableAction);
 
     public void EnableRightActions() => RightInputReferences.ForEach(EnableAction);
