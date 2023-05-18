@@ -1,4 +1,5 @@
-﻿using CSFramework.Presettables;
+﻿using System;
+using CSFramework.Presettables;
 using TMPro;
 using UnityEngine;
 using static GameStateManager.GameState;
@@ -16,6 +17,7 @@ namespace Gameplay
         private void OnEnable()
         {
             GameStateManager.GameStateChanged += OnGameStateChanged;
+            collectiblesInput.onSubmit.AddListener(CollectiblesInputChange);
         }
 
         private void Start()
@@ -41,7 +43,7 @@ namespace Gameplay
             
         }
 
-        public void CollectiblesInputChange(string input)
+        private void CollectiblesInputChange(string input)
         {
             if (int.TryParse(input, out var i)) _coinsController.NumberOfCollectiblesToPickUp = i;
         }
@@ -66,6 +68,7 @@ namespace Gameplay
         private void OnDisable()
         {
             GameStateManager.GameStateChanged -= OnGameStateChanged;
+            collectiblesInput.onSubmit.RemoveListener(CollectiblesInputChange);
         }
     }
 }
