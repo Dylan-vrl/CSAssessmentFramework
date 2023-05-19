@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: default
   m_EditorClassIdentifier: 
   lapCount: 1
-  lapDuration: 5
+  lapDuration: 3
+  waitDuration: 5

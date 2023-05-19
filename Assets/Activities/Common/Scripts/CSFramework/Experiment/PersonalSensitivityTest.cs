@@ -13,7 +13,9 @@ namespace CSFramework.Extensions
         public override PresettableCategory GetCategory() => Experiment;
 
         // You can access your Preset's fields: Preset.fieldName
+
         private float lerpDuration;
+        private float waitDuration;
         private int lapCount;
         private bool rotating = false;
 
@@ -23,6 +25,8 @@ namespace CSFramework.Extensions
         {
             lerpDuration = Preset.lapDuration;
             lapCount = Preset.lapCount;
+            waitDuration = Preset.waitDuration;
+
             axises = new Quaternion[3];
             axises[0] = Quaternion.Euler(180, 0, 0);
             axises[1] = Quaternion.Euler(0, 180, 0);
@@ -31,8 +35,9 @@ namespace CSFramework.Extensions
 
         private void Update()
         {
-            if (!rotating)
+            if ( GameStateManager.IsPlaying && !rotating)
             {
+                GameStateManager.PauseGame(true);
                 Begin();
             }
         }
@@ -40,12 +45,15 @@ namespace CSFramework.Extensions
         private async void Begin()
         {
             rotating = true;
-            await Task.Delay(5000);
-            for (int j = 0; j < axises.Length; j++)
-            {
-                for (int i = 0; i < lapCount; i++)
+            int [,] rotationTurns = {{0,1,2}, {1,0,2}, {2,1,0}};
+            for (int k = 0; k < rotationTurns.Length; k++) {
+                await Task.Delay((int) (waitDuration*1000));
+                for(int j=0; j < 3; j++)
                 {
-                    await Rotate360(axises[j]);
+                    for (int i = 0; i < lapCount; i++)
+                    {
+                        await Rotate360(axises[rotationTurns[k, j]]);
+                    }
                 }
             }
         }

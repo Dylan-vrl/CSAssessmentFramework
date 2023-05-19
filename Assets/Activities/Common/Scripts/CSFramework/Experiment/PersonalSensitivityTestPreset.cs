@@ -13,5 +13,6 @@ namespace CSFramework.Presets
         //public int Field { get; private set; }
         [SerializeField] public int lapCount;
         [SerializeField] public float lapDuration;
+        [SerializeField] public float waitDuration;
     }
 }
