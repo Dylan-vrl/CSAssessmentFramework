@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using CSFramework.Presets;
 using UnityEditor;
 using UnityEditor.UIElements;
@@ -14,6 +12,8 @@ public class LocomotionHandlerPresetEditor: Editor
     private VisualElement root;
     private PropertyField leftProvidersPropertyField;
     private PropertyField rightProvidersPropertyField;
+    private PropertyField leftControllerPropertyField;
+    private PropertyField rightControllerPropertyField;
     private SerializedProperty leftProvidersProperty;
     private SerializedProperty rightProvidersProperty;
 
@@ -31,6 +31,14 @@ public class LocomotionHandlerPresetEditor: Editor
     public override VisualElement CreateInspectorGUI()
     {
         root = new VisualElement();
+        var leftControllerProperty = serializedObject.FindProperty("leftControllerPrefab");
+        var rightControllerProperty = serializedObject.FindProperty("rightControllerPrefab");
+
+        leftControllerPropertyField = new PropertyField(leftControllerProperty);
+        rightControllerPropertyField = new PropertyField(rightControllerProperty);
+        root.Add(leftControllerPropertyField);
+        root.Add(rightControllerPropertyField);
+        
         leftProvidersProperty = serializedObject.FindProperty("leftActiveLocomotionProviders");
         rightProvidersProperty = serializedObject.FindProperty("rightActiveLocomotionProviders");
 
@@ -58,6 +66,8 @@ public class LocomotionHandlerPresetEditor: Editor
         if (root == null) return;
         root.Clear();
 
+        root.Add(leftControllerPropertyField);
+        root.Add(rightControllerPropertyField);
         root.Add(leftProvidersPropertyField);
         root.Add(rightProvidersPropertyField);
         root.Bind(serializedObject);

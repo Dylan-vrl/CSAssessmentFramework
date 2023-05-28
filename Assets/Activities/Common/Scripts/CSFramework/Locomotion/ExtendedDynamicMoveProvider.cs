@@ -22,7 +22,7 @@ namespace CSFramework.Presettables
     /// For example, can configure to use head relative movement for the left hand and controller relative movement for the right hand.
     /// </summary>
     [HideInSetupWindow]
-    public class ExtendedDynamicMoveProvider : DynamicMoveProvider, ICustomLocomotionProvider, IPresettable<ExtendedDynamicMoveProviderPreset>
+    public class ExtendedDynamicMoveProvider : DynamicMoveProvider, ICustomMovementLocomotionProvider, IPresettable<ExtendedDynamicMoveProviderPreset>
     {
         [SerializeField] private ExtendedDynamicMoveProviderPreset preset;
         
@@ -92,7 +92,10 @@ namespace CSFramework.Presettables
         
         public List<InputActionReference> LeftInputReferences => new() { leftHandMoveAction.reference };
         public List<InputActionReference> RightInputReferences => new() { rightHandMoveAction.reference };
+        public LocomotionType LocomotionType => LocomotionType.Movement;
+        public string DisplayName => "Continuous";
         public PresettableCategory GetCategory() => PresettableCategory.Locomotion;
         public ExtendedDynamicMoveProviderPreset Preset => preset;
+        public MovementType MovementType => MovementType.Continuous;
     }
 }

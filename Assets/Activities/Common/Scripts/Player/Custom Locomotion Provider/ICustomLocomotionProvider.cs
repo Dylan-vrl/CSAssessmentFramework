@@ -1,10 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 
+public enum LocomotionType
+{
+    Movement,
+    Rotation
+}
+
 public interface ICustomLocomotionProvider
 {
     public List<InputActionReference> LeftInputReferences { get; }
     public List<InputActionReference> RightInputReferences { get; }
+    public string DisplayName { get; }
 
     public void EnableLeftActions() => LeftInputReferences.ForEach(EnableAction);
 
@@ -23,15 +30,17 @@ public interface ICustomLocomotionProvider
     private static void EnableAction(InputActionReference actionReference)
     {
         var action = GetInputAction(actionReference);
-        if (action != null && !action.enabled)
+        if (action is { enabled: false })
             action.Enable();
+        LocomotionHandler.ActionRefStates[actionReference] = true;
     }
 
     private static void DisableAction(InputActionReference actionReference)
     {
         var action = GetInputAction(actionReference);
-        if (action != null && action.enabled)
+        if (action is { enabled: true })
             action.Disable();
+        LocomotionHandler.ActionRefStates[actionReference] = false;
     }
 
     private static InputAction GetInputAction(InputActionReference actionReference)

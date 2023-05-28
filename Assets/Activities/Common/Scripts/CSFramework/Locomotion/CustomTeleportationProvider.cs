@@ -11,7 +11,7 @@ namespace CSFramework.Presettables
     [HideInSetupWindow]
     public class CustomTeleportationProvider : 
         TeleportationProvider, 
-        ICustomLocomotionProvider, 
+        ICustomMovementLocomotionProvider, 
         IPresettable<CustomTeleportationProviderPreset>
     {
         [SerializeField] private CustomTeleportationProviderPreset preset;
@@ -38,11 +38,21 @@ namespace CSFramework.Presettables
 
             if (Preset == null) return;
             delayTime = Preset.DelayTime;
+
+            // Notify teleportation surfaces that this is their teleportation provider
+            var tpInteractables = FindObjectsOfType<BaseTeleportationInteractable>();
+            foreach (var tpInteractable in tpInteractables)
+            {
+                tpInteractable.teleportationProvider = this;
+            }
         }
 
-        public List<InputActionReference> LeftInputReferences => new(1) { leftTeleportModeActivate.reference, leftTeleportModeCancel.reference };
-        public List<InputActionReference> RightInputReferences => new(1) { rightTeleportModeActivate.reference, rightTeleportModeCancel.reference };
+        public List<InputActionReference> LeftInputReferences => new() { leftTeleportModeActivate.reference, leftTeleportModeCancel.reference };
+        public List<InputActionReference> RightInputReferences => new() { rightTeleportModeActivate.reference, rightTeleportModeCancel.reference };
+        public LocomotionType LocomotionType => LocomotionType.Movement;
+        public string DisplayName => "Teleportation";
         public PresettableCategory GetCategory() => PresettableCategory.Locomotion;
         public CustomTeleportationProviderPreset Preset => preset;
+        public MovementType MovementType => MovementType.Teleportation;
     }
 }

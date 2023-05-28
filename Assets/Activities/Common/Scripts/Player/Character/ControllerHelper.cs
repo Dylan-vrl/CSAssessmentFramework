@@ -52,16 +52,7 @@ namespace Player.Character
         private void Start()
         {
             _animator = GetComponent<Animator>();
-        }
-
-        private void OnEnable()
-        {
-            ExtendedControllerManager.ActionsModified += OnActionsModified;
-        }
-
-        private void OnDisable()
-        {
-            ExtendedControllerManager.ActionsModified -= OnActionsModified;
+            OnActionsModified();
         }
 
         private void OnActionsModified()

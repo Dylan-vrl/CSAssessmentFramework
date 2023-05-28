@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LeftHand
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 437d5982ecaee244f9e0a71b0ebdf037,
+      type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: triggerValue
+    value: 
+    objectReference: {fileID: -2119002694758190702, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: gripValue
+    value: 
+    objectReference: {fileID: -1707091331463662166, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: primaryButton
+    value: 
+    objectReference: {fileID: 2091044204708530693, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: secondaryButton
+    value: 
+    objectReference: {fileID: 3576502354019625485, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: joystickValue
+    value: 
+    objectReference: {fileID: 4613619346418574047, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: triggerRelatedActions.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: gripRelatedActions.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: gripRelatedActions.Array.data[0]
+    value: 
+    objectReference: {fileID: -3742484312079769484, guid: 777319c6e78c14cf3869659af9525160,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: primaryBRelatedActions.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondaryBRelatedActions.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: joystickRelatedActions.Array.size
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: joystickRelatedActions.Array.data[0]
+    value: 
+    objectReference: {fileID: 6972639530819350904, guid: 777319c6e78c14cf3869659af9525160,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: joystickRelatedActions.Array.data[1]
+    value: 
+    objectReference: {fileID: -7374733323251553461, guid: 777319c6e78c14cf3869659af9525160,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: joystickRelatedActions.Array.data[2]
+    value: 
+    objectReference: {fileID: 1010738217276881514, guid: 777319c6e78c14cf3869659af9525160,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: joystickRelatedActions.Array.data[3]
+    value: 
+    objectReference: {fileID: 1263111715868034790, guid: 777319c6e78c14cf3869659af9525160,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: enabledMaterial
+    value: 
+    objectReference: {fileID: 2100000, guid: 0e6af354a89f5994298052955990b514, type: 2}
+  - target: {fileID: 0}
+    propertyPath: disabledMaterial
+    value: 
+    objectReference: {fileID: 2100000, guid: f6e32b22eca20204db222e6d1f3a6bc4, type: 2}
+  - target: {fileID: 0}
+    propertyPath: triggerRenderer
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: gripRenderer
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: primaryBRenderer
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondaryBRenderer
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: joystickRenderer
+    value: 
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []

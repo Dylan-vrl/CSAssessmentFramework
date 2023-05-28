@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 812204754463539586}
-  - component: {fileID: 193681739374813912}
   - component: {fileID: 1511662367991727345}
   m_Layer: 0
   m_Name: Teleportation provider
@@ -33,20 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &193681739374813912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1717706487529308311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01f69dc1cb084aa42b2f2f8cd87bc770, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_System: {fileID: 0}
-  m_DelayTime: 0
 --- !u!114 &1511662367991727345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,10 +47,6 @@ MonoBehaviour:
   m_System: {fileID: 0}
   m_DelayTime: 0
   preset: {fileID: 11400000, guid: 68f1189a7c2724221b9a347d7743c03d, type: 2}
-  leftTeleportationProviderEnableChannelSO: {fileID: 11400000, guid: c8d9d3e26fb054bdb9df7918633c6fd8,
-    type: 2}
-  rightTeleportationProviderEnableChannelSO: {fileID: 11400000, guid: f43d196bf68d84d808633166670cb411,
-    type: 2}
   leftTeleportModeActivate:
     m_UseReference: 1
     m_Action:
@@ -77,7 +58,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 1263111715868034790, guid: c348712bda248c246b8c49b3db54643f,
+    m_Reference: {fileID: 1263111715868034790, guid: 777319c6e78c14cf3869659af9525160,
       type: 3}
   leftTeleportModeCancel:
     m_UseReference: 1
@@ -90,7 +71,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 737890489006591557, guid: c348712bda248c246b8c49b3db54643f,
+    m_Reference: {fileID: 737890489006591557, guid: 777319c6e78c14cf3869659af9525160,
       type: 3}
   rightTeleportModeActivate:
     m_UseReference: 1
@@ -103,7 +84,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -8061240218431744966, guid: c348712bda248c246b8c49b3db54643f,
+    m_Reference: {fileID: -8061240218431744966, guid: 777319c6e78c14cf3869659af9525160,
       type: 3}
   rightTeleportModeCancel:
     m_UseReference: 1
@@ -116,5 +97,5 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 2307464322626738743, guid: c348712bda248c246b8c49b3db54643f,
+    m_Reference: {fileID: 2307464322626738743, guid: 777319c6e78c14cf3869659af9525160,
       type: 3}

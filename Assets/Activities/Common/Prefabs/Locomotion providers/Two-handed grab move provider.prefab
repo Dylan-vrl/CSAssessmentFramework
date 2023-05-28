@@ -32,7 +32,7 @@ Transform:
   - {fileID: 256263396779936343}
   - {fileID: 2758143335231011168}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2008996309635759474
 MonoBehaviour:
@@ -71,11 +71,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2758143335231011168}
-  - component: {fileID: 7856015254917199196}
   - component: {fileID: 2559198062739516548}
   m_Layer: 0
   m_Name: Right hand grab move provider
-  m_TagString: Untagged
+  m_TagString: RightGameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,20 +94,6 @@ Transform:
   m_Father: {fileID: 8937011307899198355}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7856015254917199196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4089851040974501731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01f69dc1cb084aa42b2f2f8cd87bc770, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_System: {fileID: 0}
-  m_DelayTime: 0
 --- !u!114 &2559198062739516548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +126,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 15759602096507913, guid: c348712bda248c246b8c49b3db54643f,
+    m_Reference: {fileID: 15759602096507913, guid: 777319c6e78c14cf3869659af9525160,
       type: 3}
 --- !u!1 &5357274710050132436
 GameObject:
@@ -152,11 +137,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 256263396779936343}
-  - component: {fileID: 2727071838615705851}
   - component: {fileID: 1889528243865287196}
   m_Layer: 0
   m_Name: Left hand grab move provider
-  m_TagString: Untagged
+  m_TagString: LeftGameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -176,20 +160,6 @@ Transform:
   m_Father: {fileID: 8937011307899198355}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2727071838615705851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5357274710050132436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01f69dc1cb084aa42b2f2f8cd87bc770, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_System: {fileID: 0}
-  m_DelayTime: 0
 --- !u!114 &1889528243865287196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,5 +192,5 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -3742484312079769484, guid: c348712bda248c246b8c49b3db54643f,
+    m_Reference: {fileID: -3742484312079769484, guid: 777319c6e78c14cf3869659af9525160,
       type: 3}

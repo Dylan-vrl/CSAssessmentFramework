@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using Options.Movement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -27,9 +26,6 @@ namespace Player.Movement
         /// values of the input actions.
         /// </remarks>
         public const int KUpdateOrder = XRInteractionUpdateOrder.k_Controllers - 1;
-
-        
-        public static event Action ActionsModified;
         
         [Space]
         [Header("Interactors")]
@@ -61,18 +57,6 @@ namespace Player.Movement
         [Header("Controller Actions")]
 
         [SerializeField]
-        [Tooltip("The reference to the action of selecting with this controller.")]
-        private InputActionReference m_Select;
-
-        [SerializeField]
-        [Tooltip("The reference to the action of moving an object closer or further away with the ray interactor")]
-        private InputActionReference m_AnchorTranslate;
-
-        [SerializeField]
-        [Tooltip("The reference to the action of rotating an object with the ray interactor")]
-        private InputActionReference m_AnchorRotate;
-
-        [SerializeField]
         [Tooltip("The reference to the action to start the teleport aiming mode for this controller.")]
         private InputActionReference teleportModeActivate;
         
@@ -97,41 +81,6 @@ namespace Player.Movement
         private bool m_DirectSelect;
         private bool m_Teleporting;
 
-        [Space]
-        [Header("Locomotion Settings")]
-
-        [SerializeField]
-        [Tooltip("If Continuous, continuous movement will be enabled. If Discrete, teleport will enabled.")]
-        private LocomotionHandler.MovementType motionType;
-
-        [SerializeField]
-        [Tooltip("If Continuous, smooth turn will be enabled. If Discrete, snap turn will be enabled. Note: If smooth motion is enabled and enable strafe is enabled on the continuous move provider, turn will be overriden in favor of strafe.")]
-        private LocomotionHandler.MovementType turnType;
-
-        public LocomotionHandler.MovementType MotionType
-        {
-            get => motionType;
-            set
-            {
-                motionType = value;
-                UpdateLocomotionActions();
-            }
-        }
-        
-
-        public LocomotionHandler.MovementType TurnType
-        {
-            get => turnType;
-            set
-            {
-                turnType = value;
-                UpdateTurnActions();
-            }
-        }
-        
-        
-
-
         public InputActionReference TeleportModeActivate => teleportModeActivate;
         
         public InputActionReference TeleportModeCancel => teleportModeCancel;
@@ -141,19 +90,13 @@ namespace Player.Movement
         public InputActionReference SnapTurn => snapTurn;
 
         public InputActionReference Move => move;
-
         
-
-
         // For our input mediation, we are enforcing a few rules between direct, ray, and teleportation interaction:
         // 1. If the Teleportation Ray is engaged, the Direct and Ray interactors are disabled
         // 2. If the Direct interactor is not idle (hovering or select), the ray interactor is disabled
         // 3. If the Ray interactor is selecting, all locomotion controls are disabled (teleport ray and snap controls) to prevent input collision
         void SetupInteractorEvents()
         {
-            UpdateLocomotionActions();
-            UpdateTurnActions();
-
             if (directInteractor != null)
             {
                 directInteractor.hoverEntered.AddListener(DirectHoverEntered);
@@ -272,13 +215,10 @@ namespace Player.Movement
             // Enable direct selection
             if (directInteractor != null)
                 directInteractor.gameObject.SetActive(true);
-            
-            // Re-enable the locomotion and turn actions
-            UpdateLocomotionActions();
-            UpdateTurnActions();
+            EnableLocomotionAndTurnActions();
         }
 
-        protected void Awake()
+        protected virtual void Awake()
         {
             // Start the coroutine that executes code after the Update phase (during yield null).
             // This routine is started during Awake to ensure the code after
@@ -286,16 +226,11 @@ namespace Player.Movement
             // If started in Start, Unity would not resume execution until the second frame.
             // See https://docs.unity3d.com/Manual/ExecutionOrder.html
             StartCoroutine(OnAfterInteractionEvents());
+            DirectInteractorUpdate();
+            RayInteractorUpdate();
         }
 
-        protected void Start()
-        {
-            // Ensure actions are properly setup
-            UpdateLocomotionActions();
-            UpdateTurnActions();
-        }
-
-        protected void OnEnable()
+        protected virtual void OnEnable()
         {
             if (m_TeleportInteractor != null)
                 m_TeleportInteractor.gameObject.SetActive(false);
@@ -325,78 +260,6 @@ namespace Player.Movement
             }
         }
 
-        private void UpdateLocomotionActions()
-        {
-            
-            switch (motionType)
-            {
-                case LocomotionHandler.MovementType.Continuous:
-                {
-                    EnableAction(move);
-
-                    // Disable Teleport and Turn when Move is enabled.
-                    DisableAction(teleportModeActivate);
-                    DisableAction(teleportModeCancel);
-                    DisableAction(snapTurn);
-                    DisableAction(turn);
-                    break;
-                }
-                case LocomotionHandler.MovementType.Discrete:
-                {
-                    DisableAction(move);
-
-                    // Enable Teleport and Turn when Move is disabled.
-                    EnableAction(teleportModeActivate);
-                    EnableAction(teleportModeCancel);
-                    UpdateTurnActions();
-                    break;
-                }
-                case LocomotionHandler.MovementType.Disabled:
-                {
-                    DisableAction(move);
-                    DisableAction(teleportModeActivate);
-                    DisableAction(teleportModeCancel);
-                    UpdateTurnActions();
-                    break;
-                }
-            }
-            OnActionsModified();
-        }
-
-        private void UpdateTurnActions()
-        {
-            
-            if (motionType == LocomotionHandler.MovementType.Continuous)
-            {
-                DisableAction(turn);
-                DisableAction(snapTurn);
-                OnActionsModified();
-                return;
-            }
-            switch (turnType)
-            {
-                case LocomotionHandler.MovementType.Continuous:
-                {
-                    EnableAction(turn);
-                    DisableAction(snapTurn);
-                    break;
-                }
-                case LocomotionHandler.MovementType.Discrete:
-                {
-                    DisableAction(turn);
-                    EnableAction(snapTurn);
-                    break;
-                }
-                case LocomotionHandler.MovementType.Disabled:
-                {
-                    DisableAction(turn);
-                    DisableAction(snapTurn);
-                    break;
-                }
-            }
-            OnActionsModified();
-        }
-
         private void DisableLocomotionAndTurnActions()
         {
             DisableAction(teleportModeActivate);
@@ -405,7 +268,30 @@ namespace Player.Movement
             DisableAction(snapTurn);
             DisableAction(turn);
         }
+        
+        private void EnableLocomotionAndTurnActions()
+        {
+            var en = false;
+            if (LocomotionHandler.ActionRefStates.TryGetValue(teleportModeActivate, out en))
+                EnableAction(teleportModeActivate, en);
+            if (LocomotionHandler.ActionRefStates.TryGetValue(teleportModeCancel, out en))
+                EnableAction(teleportModeCancel, en);
+            if (LocomotionHandler.ActionRefStates.TryGetValue(move, out en))
+                EnableAction(move, en);
+            if (LocomotionHandler.ActionRefStates.TryGetValue(snapTurn, out en))
+                EnableAction(snapTurn, en);
+            if (LocomotionHandler.ActionRefStates.TryGetValue(turn, out en))
+                EnableAction(turn, en);
+        }
 
+        private static void EnableAction(InputActionReference actionReference, bool enabled)
+        {
+            if (enabled)
+                EnableAction(actionReference);
+            else 
+                DisableAction(actionReference);
+        }
+        
         private static void EnableAction(InputActionReference actionReference)
         {
             InputAction action = GetInputAction(actionReference);
@@ -425,11 +311,6 @@ namespace Player.Movement
 #pragma warning disable IDE0031 // Use null propagation -- Do not use for UnityEngine.Object types
             return actionReference != null ? actionReference.action : null;
 #pragma warning restore IDE0031
-        }
-
-        public static void OnActionsModified()
-        {
-            ActionsModified?.Invoke();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace CSFramework.Presettables
     [HideInSetupWindow]
     public class CustomActionBasedSnapTurnProvider : 
         ActionBasedSnapTurnProvider, 
-        ICustomLocomotionProvider, 
+        ICustomRotationLocomotionProvider, 
         IPresettable<CustomActionBasedSnapTurnProviderPreset>
     {
         [SerializeField] private CustomActionBasedSnapTurnProviderPreset preset;
@@ -29,7 +29,10 @@ namespace CSFramework.Presettables
 
         public List<InputActionReference> LeftInputReferences => new(1) { leftHandSnapTurnAction.reference };
         public List<InputActionReference> RightInputReferences => new(1) { rightHandSnapTurnAction.reference };
+        public LocomotionType LocomotionType => LocomotionType.Rotation;
+        public string DisplayName => "Snap";
         public PresettableCategory GetCategory() => PresettableCategory.Locomotion;
         public CustomActionBasedSnapTurnProviderPreset Preset => preset;
+        public RotationType RotationType => RotationType.Snap;
     }
 }

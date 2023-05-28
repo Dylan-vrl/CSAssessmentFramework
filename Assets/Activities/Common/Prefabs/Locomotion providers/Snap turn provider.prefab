@@ -61,7 +61,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -7374733323251553461, guid: c348712bda248c246b8c49b3db54643f,
+    m_Reference: {fileID: -7374733323251553461, guid: 777319c6e78c14cf3869659af9525160,
       type: 3}
   m_RightHandSnapTurnAction:
     m_UseReference: 1
@@ -74,6 +74,6 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -8525429354371678379, guid: c348712bda248c246b8c49b3db54643f,
+    m_Reference: {fileID: -8525429354371678379, guid: 777319c6e78c14cf3869659af9525160,
       type: 3}
   preset: {fileID: 11400000, guid: cd1c8e66ebadd479391d547768c4512f, type: 2}

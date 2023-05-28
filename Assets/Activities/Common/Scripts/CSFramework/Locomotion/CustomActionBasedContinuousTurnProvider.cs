@@ -11,7 +11,7 @@ namespace CSFramework.Presettables
     [HideInSetupWindow]
     public class CustomActionBasedContinuousTurnProvider : 
         ActionBasedContinuousTurnProvider, 
-        ICustomLocomotionProvider, 
+        ICustomRotationLocomotionProvider, 
         IPresettable<CustomActionBasedContinuousTurnProviderPreset>
     {
         [SerializeField] private CustomActionBasedContinuousTurnProviderPreset preset;
@@ -26,7 +26,10 @@ namespace CSFramework.Presettables
 
         public List<InputActionReference> LeftInputReferences => new(1) { leftHandTurnAction.reference };
         public List<InputActionReference> RightInputReferences => new(1) { rightHandTurnAction.reference };
+        public LocomotionType LocomotionType => LocomotionType.Rotation;
+        public string DisplayName => "Continuous";
         public PresettableCategory GetCategory() => PresettableCategory.Locomotion;
         public CustomActionBasedContinuousTurnProviderPreset Preset => preset;
+        public RotationType RotationType => RotationType.Continuous;
     }
 }
