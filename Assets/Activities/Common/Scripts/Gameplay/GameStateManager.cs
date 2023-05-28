@@ -9,7 +9,8 @@ public static class GameStateManager
     {
         Playing,
         Menu,
-        Pause
+        Pause,
+        Testing
     }
     
     private static GameState _state = Menu;
@@ -46,5 +47,10 @@ public static class GameStateManager
     public static void PauseGame(bool pause)
     {
         State = pause ? Pause : Playing;
+    }
+
+    public static void TestingGame(bool testing)
+    {
+        State = testing ? Testing : Playing;
     }
 }

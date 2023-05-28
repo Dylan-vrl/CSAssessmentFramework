@@ -50,7 +50,7 @@ namespace Gameplay
 
         private void Update()
         {
-            if (GameStateManager.State == Playing)
+            if (GameStateManager.State == Playing || GameStateManager.State == Testing)
             {
                 if (timeLabel != null)
                 {

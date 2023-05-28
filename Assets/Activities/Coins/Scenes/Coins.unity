@@ -808,8 +808,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84cb37d578a94d4a9d98e7e135d0c03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preset: {fileID: 11400000, guid: 38f646e49197940898bf770c179c3dcf, type: 2}
-  rotateWithTerrain: {fileID: 1177105058}
 --- !u!1 &91999537
 GameObject:
   m_ObjectHideFlags: 0
@@ -7579,7 +7577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e54b96e21e44e884587f5c31b9d49a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sampleFrequencyInSeconds: 1
 --- !u!114 &1272189272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12970,6 +12967,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Coins Game character
+      objectReference: {fileID: 0}
+    - target: {fileID: 6019256466100154638, guid: 654de5cb59b964c6c90c999a946e1064,
+        type: 3}
+      propertyPath: m_TrackingStateInput.m_Action.m_Id
+      value: d1b1127b-0ce5-473e-bb05-682fb1f1bc13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6019256466100154638, guid: 654de5cb59b964c6c90c999a946e1064,
+        type: 3}
+      propertyPath: m_TrackingStateInput.m_Action.m_Name
+      value: Tracking State Input
       objectReference: {fileID: 0}
     - target: {fileID: 8173856594036281643, guid: 654de5cb59b964c6c90c999a946e1064,
         type: 3}

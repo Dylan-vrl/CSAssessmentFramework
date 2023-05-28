@@ -47,11 +47,11 @@ namespace CSFramework.Presettables
 
         private void Update()
         {
-            if (GameStateManager.State != Playing) return;
+            if (GameStateManager.State != Playing && GameStateManager.State != Testing) return;
             
             PlayTime += Time.deltaTime;
 
-            if (Preset.PlayFMSPrompt)
+            if (Preset.PlayFMSPrompt && GameStateManager.State == Playing)
             {
                 if (_lastTimeFMSPlayed + Preset.PromptInterval < PlayTime)
                 {

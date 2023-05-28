@@ -183,7 +183,7 @@ namespace Options.Movement
         {
             switch (state)
             {
-                case Menu : case Pause:
+                case Menu : case Pause: case Testing:
                     if (grabMoveProvider != null)
                     {
                         ChangeGrabMove(false, false);
