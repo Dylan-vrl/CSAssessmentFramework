@@ -1350,6 +1350,12 @@ Transform:
   m_Father: {fileID: 381829712}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &243087555 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9037252431198756493, guid: 80e252db3d3284397a0c40f2ee9203d4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1300700436}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &263792394
 GameObject:
   m_ObjectHideFlags: 0
@@ -7619,7 +7625,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1536841016}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9037252431198756493, guid: 80e252db3d3284397a0c40f2ee9203d4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1319314956}
   m_SourcePrefab: {fileID: 100100000, guid: 80e252db3d3284397a0c40f2ee9203d4, type: 3}
 --- !u!4 &1300700437 stripped
 Transform:
@@ -7945,12 +7955,25 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1300700436}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 243087555}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0de67bdbeaab4134b483e06daba9311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1319314956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243087555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c2862440e5a40479244c0a9032be899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  darkVolume: {fileID: 1536841017}
 --- !u!1 &1335781831
 GameObject:
   m_ObjectHideFlags: 0
@@ -9282,7 +9305,7 @@ GameObject:
   - component: {fileID: 1536841016}
   - component: {fileID: 1536841017}
   m_Layer: 0
-  m_Name: Global Volume
+  m_Name: Player Dark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
