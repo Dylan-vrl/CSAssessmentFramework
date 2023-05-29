@@ -1,8 +1,5 @@
-﻿using System;
-using System.Linq;
-using CSFramework.Presettables;
+﻿using CSFramework.Presettables;
 using DataSaving;
-using Options.Movement;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

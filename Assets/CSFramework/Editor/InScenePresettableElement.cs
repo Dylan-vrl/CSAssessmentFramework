@@ -5,11 +5,10 @@ using UnityEngine.UIElements;
 
 namespace CSFramework.Editor
 {
-    using Object = UnityEngine.Object;
-
     public static class InScenePresettableElement
     {
         private const string ExtensionClass = "extension";
+        private const string ExtensionLabelClass = "extensionLabel";
 
         public static VisualElement Draw(
             GameObject gameObject, 
@@ -18,6 +17,8 @@ namespace CSFramework.Editor
         {
             var root = new Box();
             root.AddToClassList(ExtensionClass);
+            var extensionLabel = new Box();
+            extensionLabel.AddToClassList(ExtensionLabelClass);
             
             try
             {
@@ -25,9 +26,11 @@ namespace CSFramework.Editor
                 {
                     value = gameObject.GetComponent(extensionType) != null
                 };
-                root.Add(toggle);
-                root.Add(new Label(extensionType.Name));
+                extensionLabel.Add(toggle);
+                extensionLabel.Add(new Label(extensionType.Name));
 
+                root.Add(extensionLabel);
+                
                 if (toggle.value)
                 {
                     var extensionInspector = new InspectorElement(gameObject.GetComponent(extensionType));

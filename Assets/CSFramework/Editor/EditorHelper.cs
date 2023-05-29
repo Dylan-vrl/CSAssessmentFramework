@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using UnityEditor;
 using UnityEngine;
@@ -32,8 +33,15 @@ namespace CSFramework.Editor
                    && typeof(MonoBehaviour).IsAssignableFrom(type);
         }
 
+        public static bool IsNotHiddenInSetupWindow(Type type)
+        {
+            var attribute = type.GetCustomAttribute<HideInSetupWindowAttribute>();
+            return attribute == null;
+        }
+
         public static IEnumerable<Type> AllExtensionSubtypes =>
-            AllMonoBehaviourSubtypesFor(typeof(IExtension));
+            AllMonoBehaviourSubtypesFor(typeof(IExtension))
+                .Where(IsNotHiddenInSetupWindow);
 
         public static IEnumerable<IExtension> AllExtensions =>
             AllExtensionSubtypes
@@ -41,7 +49,8 @@ namespace CSFramework.Editor
 
         public static IEnumerable<Type> AllNonExtensionsSubtypes =>
             AllMonoBehaviourSubtypesFor(typeof(IPresettable))
-                .Where(t => !t.IsMonoBehaviourSubtypeOf(typeof(IExtension)));
+                .Where(t => !t.IsMonoBehaviourSubtypeOf(typeof(IExtension)))
+                .Where(IsNotHiddenInSetupWindow);
 
         public static IEnumerable<IPresettable> AllNonExtensions =>
             AllNonExtensionsSubtypes
