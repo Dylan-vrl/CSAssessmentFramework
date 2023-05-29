@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 270e76b6b2b340b98e4d94c2b762ec32, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: 
-  <MinOffsets>k__BackingField: {x: -3, y: 5, z: 3}
-  <MaxOffsets>k__BackingField: {x: -6, y: 10, z: 6}
+  <MinOffsets>k__BackingField: {x: -3, y: 3, z: 6}
+  <MaxOffsets>k__BackingField: {x: -6, y: 7, z: 12}
   <MinMaxBatchSize>k__BackingField: {x: 1, y: 3}
-  <MinMaxStep>k__BackingField: {x: 15, y: 25}
+  <MinMaxStep>k__BackingField: {x: 10, y: 20}
   <TargetPrefab>k__BackingField: {fileID: 7070951107697449651, guid: cf44faad6693c433ba69755407579c62,
     type: 3}
