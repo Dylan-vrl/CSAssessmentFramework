@@ -11,8 +11,8 @@ public class FollowPath : PresettableMonoBehaviour<FollowPathPreset>
     [SerializeField] private EndOfPathInstruction endOfPathInstruction;
     [SerializeField] private float yOffset = 1f;
 
-    private float Speed => Preset.Speed;
-    
+    public float Speed { get; set; }
+
     public float DistanceTravelled { get; private set; }
     public VertexPath Path => pathCreator.path;
     private bool _isFollowing = false;
@@ -41,6 +41,7 @@ public class FollowPath : PresettableMonoBehaviour<FollowPathPreset>
     private void Start()
     {
         _activeTerrain = Terrain.activeTerrain;
+        Speed = Preset.Speed;
     }
 
     void Update()
