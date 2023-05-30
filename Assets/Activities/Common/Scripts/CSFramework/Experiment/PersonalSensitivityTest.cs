@@ -42,9 +42,15 @@ namespace CSFramework.Extensions
             axises[2] = Quaternion.Euler(0, 0, 180);
 
             indicatorRotation = Quaternion.Euler(0, 180, 0);
-            indicatorPosition = new Vector3(0.489f, 0.132f, 1.281f);
+            indicatorPosition = new Vector3(0.059f, 0.103f, 1.281f);
             indicator = (GameObject) Instantiate(Resources.Load("PitchRollYaw"), indicatorPosition, indicatorRotation);
+            // instantiate as a child
+            indicator.transform.parent = transform;
+            indicator.transform.localPosition = indicatorPosition;
+            indicator.transform.rotation = indicatorRotation;
+
             indicatorText = indicator.transform.GetChild(3).gameObject.GetComponent<TextMeshPro>();
+            // disactive all axis
             indicatorAxises = new GameObject[3];
             indicatorAxises[0] = indicator.transform.GetChild(0).gameObject;
             indicatorAxises[1] = indicator.transform.GetChild(2).gameObject;
