@@ -5753,12 +5753,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locomotionHolder: {fileID: 546600874}
-  leftLocDropdown: {fileID: 0}
-  rightLocDropdown: {fileID: 0}
-  leftTurnDropdown: {fileID: 0}
-  rightTurnDropdown: {fileID: 0}
-  leftHandGrabToggle: {fileID: 0}
-  rightHandGrabToggle: {fileID: 0}
+  locomotionHandler: {fileID: 1319314959}
+  locomotionProviderPrefabs:
+  - {fileID: 6341396779400365748, guid: 05c227c45791d4207b704de4999a7a5e, type: 3}
+  - {fileID: 8300925354783625497, guid: c0f68462568e449c8958e7a268a00e47, type: 3}
+  - {fileID: 5335108511922073805, guid: a8ad7e932d32a4038a0266b4dc104978, type: 3}
+  - {fileID: 1511662367991727345, guid: ebac2457d8f174cbc880ad71a3121df1, type: 3}
+  - {fileID: 2008996309635759474, guid: e8d59dccddf8043bb95b23f2a66cfea1, type: 3}
+  leftMovDropdown: {fileID: 2058824805}
+  rightMovDropdown: {fileID: 1430280854}
+  leftRotDropdown: {fileID: 710133114}
+  rightRotDropdown: {fileID: 1168773132}
 --- !u!114 &1060432737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7957,6 +7962,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   darkVolume: {fileID: 1536841017}
+--- !u!114 &1319314959 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8167696751386711846, guid: 80e252db3d3284397a0c40f2ee9203d4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1300700436}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243087555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0de67bdbeaab4134b483e06daba9311, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1335781831
 GameObject:
   m_ObjectHideFlags: 0
