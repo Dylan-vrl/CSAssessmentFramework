@@ -5,6 +5,7 @@ using static CSFramework.Core.PresettableCategory;
 using System.Collections;
 using System.Threading.Tasks;
 using TMPro;
+using UnityEngine.InputSystem.XR;
 
 namespace CSFramework.Extensions
 {
@@ -35,6 +36,10 @@ namespace CSFramework.Extensions
             lapCount = Preset.lapCount;
             waitDuration = Preset.waitDuration;
             waitBtwnAxisTime = 3;
+
+            // disable tracked pose driver
+            TrackedPoseDriver trackedPoseDriver = GetComponent(typeof(TrackedPoseDriver)) as TrackedPoseDriver;
+            trackedPoseDriver.enabled = false;
 
             axises = new Quaternion[3];
             axises[0] = Quaternion.Euler(180, 0, 0);
@@ -70,10 +75,9 @@ namespace CSFramework.Extensions
         {
             if ( GameStateManager.IsPlaying && !rotating)
             {
-                GameStateManager.TestingGame(true);
+                GameStateManager.PauseGame(true);
                 Begin();
             }
-            //GameStateManager.TestingGame(false);
         }
 
         private async void Begin()
