@@ -57,9 +57,18 @@ namespace CSFramework.Editor
                 viewDataKey = $"{_serializedObject.targetObject.name}{newProperty?.boxedValue}InspectorFoldout",
                 text = "Modify preset"
             };
+            
+            foldout.AddToClassList("foldout");
             _lastFoldout = foldout;
 
-            var inspector = new InspectorElement(newProperty.objectReferenceValue);
+            var inspector = new InspectorElement(newProperty.objectReferenceValue)
+            {
+                style =
+                {
+                    minWidth = 500
+                }
+            };
+            
             foldout.Add(inspector);
             /*// Draw all internal fields of the preset
             SerializedObject targetObject = new SerializedObject(newProperty?.objectReferenceValue);
