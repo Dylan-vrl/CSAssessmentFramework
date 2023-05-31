@@ -5,6 +5,7 @@ using static CSFramework.Core.PresettableCategory;
 using System.Collections;
 using System.Threading.Tasks;
 using TMPro;
+using UnityEngine.InputSystem.XR;
 
 namespace CSFramework.Extensions
 {
@@ -36,15 +37,25 @@ namespace CSFramework.Extensions
             waitDuration = Preset.waitDuration;
             waitBtwnAxisTime = 3;
 
+            // disable tracked pose driver
+            TrackedPoseDriver trackedPoseDriver = GetComponent(typeof(TrackedPoseDriver)) as TrackedPoseDriver;
+            trackedPoseDriver.enabled = false;
+
             axises = new Quaternion[3];
             axises[0] = Quaternion.Euler(180, 0, 0);
             axises[1] = Quaternion.Euler(0, 180, 0);
             axises[2] = Quaternion.Euler(0, 0, 180);
 
             indicatorRotation = Quaternion.Euler(0, 180, 0);
-            indicatorPosition = new Vector3(0.489f, 0.132f, 1.281f);
+            indicatorPosition = new Vector3(0.059f, 0.103f, 1.281f);
             indicator = (GameObject) Instantiate(Resources.Load("PitchRollYaw"), indicatorPosition, indicatorRotation);
+            // instantiate as a child
+            indicator.transform.parent = transform;
+            indicator.transform.localPosition = indicatorPosition;
+            indicator.transform.rotation = indicatorRotation;
+
             indicatorText = indicator.transform.GetChild(3).gameObject.GetComponent<TextMeshPro>();
+            // disactive all axis
             indicatorAxises = new GameObject[3];
             indicatorAxises[0] = indicator.transform.GetChild(0).gameObject;
             indicatorAxises[1] = indicator.transform.GetChild(2).gameObject;
@@ -64,10 +75,9 @@ namespace CSFramework.Extensions
         {
             if ( GameStateManager.IsPlaying && !rotating)
             {
-                GameStateManager.TestingGame(true);
+                GameStateManager.PauseGame(true);
                 Begin();
             }
-            //GameStateManager.TestingGame(false);
         }
 
         private async void Begin()

@@ -40,7 +40,13 @@ namespace CSFramework.Presettables
             if (nose && nosePrefab == null)
             {
 				Debug.Log("Nose Prefab is not found on the scene.");
-				nose = false;
+                Quaternion indicatorRotation = Quaternion.Euler(60, 0, 0);
+                Vector3 indicatorPosition = new Vector3(0f, -0.24f, 0.57f);
+                var indicator = (GameObject)Instantiate(Resources.Load(Preset.nosePrefabName), indicatorPosition, indicatorRotation);
+                // instantiate as a child
+                indicator.transform.parent = transform;
+                indicator.transform.localPosition = indicatorPosition;
+                indicator.transform.rotation = indicatorRotation;
             } else if ( nosePrefab != null) {
                 nosePrefab.SetActive(nose);
                 var noseScript = nosePrefab.GetComponent<SingleNose>();
@@ -55,7 +61,13 @@ namespace CSFramework.Presettables
             if (hat && hatPrefab == null)
             {
                 Debug.Log("Hat Prefab is not found on the scene.");
-                hat = false;
+                Quaternion indicatorRotation = Quaternion.Euler(0, 0, 0);
+                Vector3 indicatorPosition = new Vector3(0f, 0.12f, 0f);
+                var indicator = (GameObject)Instantiate(Resources.Load(Preset.hatPrefabName), indicatorPosition, indicatorRotation);
+                // instantiate as a child
+                indicator.transform.parent = transform;
+                indicator.transform.localPosition = indicatorPosition;
+                indicator.transform.rotation = indicatorRotation;
             }
             else if (hatPrefab != null)
             {

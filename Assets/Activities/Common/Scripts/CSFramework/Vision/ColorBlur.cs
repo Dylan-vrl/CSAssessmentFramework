@@ -40,7 +40,7 @@ namespace CSFramework.Extensions
             }
             if (!_volume.profile.TryGet<CustomColourBlur>(out _customColourBlur))
             {
-                //Debug.Log("No Custom Color Blur found");
+                Debug.Log("No Custom Color Blur found");
                 return;
             }
 
@@ -92,7 +92,14 @@ namespace CSFramework.Extensions
                 if (_changing != (m || t ? 1 : -1))
                 {
                     _changing = (m || t) ? 1 : -1;
-                    // toggle color blur
+                    if (m || t)
+                    {
+                        _customColourBlur.active = true;
+                    }
+                    else
+                    {
+                        _customColourBlur.active = false;
+                    }
                 }
             }
         }
