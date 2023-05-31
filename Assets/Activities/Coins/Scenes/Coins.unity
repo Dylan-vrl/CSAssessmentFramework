@@ -3776,7 +3776,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -290, y: 50}
-  m_SizeDelta: {x: 100, y: 35}
+  m_SizeDelta: {x: 150, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &616432743
 MonoBehaviour:
@@ -3825,7 +3825,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1272189273}
         m_TargetAssemblyTypeName: CSFramework.Presettables.ExperimentController,
           Assembly-CSharp
-        m_MethodName: ExitApplication
+        m_MethodName: GoBackToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

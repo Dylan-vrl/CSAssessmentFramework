@@ -38,7 +38,6 @@ namespace CSFramework.Presettables
                 return;
             }
             Instance = this;
-            DontDestroyOnLoad(gameObject);
 
             _experimentLength = Preset.ExperimentLength;
             XROrigin= FindObjectOfType<XROrigin>();
@@ -89,6 +88,7 @@ namespace CSFramework.Presettables
 
         public static void GoBackToMenu()
         {
+            GameStateManager.EndGame();
             SceneManager.LoadScene("Menu");
         }
 

@@ -40,7 +40,6 @@ namespace CSFramework.Presettables
                 return;
             }
             Instance = this;
-            DontDestroyOnLoad(gameObject);
 
             _numberOfCollectiblesToPickUp = Preset.NumberOfCollectiblesToPickUp;
         }
