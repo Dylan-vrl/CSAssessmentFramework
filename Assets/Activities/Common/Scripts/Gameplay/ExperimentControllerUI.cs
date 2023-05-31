@@ -28,8 +28,8 @@ namespace Gameplay
             
             GameStateManager.GameStateChanged += OnGameStateChanged;
             // no unsubscribing with anonymous functions
-            DataSaver.FolderChanged += (v) => fileNameLabel.text = v;
-            DataSaver.DataSaved += (v) => savedNotificationLabel.gameObject.SetActive(v);
+            DataSaver.FolderChanged += OnFolderChanged;
+            DataSaver.DataSaved += OnDataSaved;
             
             timeInput.onSubmit.AddListener(TimeInputChange);
         }
@@ -95,8 +95,23 @@ namespace Gameplay
 
         private void OnDisable()
         {
+            DataSaver.FolderChanged -= OnFolderChanged;
+            DataSaver.DataSaved -= OnDataSaved;
             GameStateManager.GameStateChanged -= OnGameStateChanged;
             timeInput.onSubmit.RemoveListener(TimeInputChange);
+        }
+
+        private void OnFolderChanged(string s)
+        {
+            if (fileNameLabel != null)
+            {
+                fileNameLabel.text = s;
+            }
+        }
+
+        private void OnDataSaved(bool b)
+        {
+            savedNotificationLabel.gameObject.SetActive(b);
         }
     }
 }
