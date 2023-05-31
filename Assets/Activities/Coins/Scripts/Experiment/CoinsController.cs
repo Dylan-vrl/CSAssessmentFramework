@@ -65,7 +65,7 @@ namespace CSFramework.Presettables
             _pickedUpCollectibles++;
             LastCollectiblePos = collectible.transform.position;
 
-            if (Preset.NumberOfCollectiblesToPickUp > 0 && _pickedUpCollectibles >= Preset.NumberOfCollectiblesToPickUp)
+            if (NumberOfCollectiblesToPickUp > 0 && _pickedUpCollectibles >= NumberOfCollectiblesToPickUp)
             {
                 Debug.Log("Finished!");
                 ExperimentController.Instance.EndExperiment();
