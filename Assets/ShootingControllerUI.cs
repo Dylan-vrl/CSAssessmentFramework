@@ -7,6 +7,7 @@ public class ShootingControllerUI : MonoBehaviour
 {
     [SerializeField] private FollowPath followPath;
     [SerializeField] private TMP_InputField speedInput;
+    [SerializeField] private TextMeshProUGUI speedText;
 
     private void OnEnable()
     {
@@ -18,13 +19,17 @@ public class ShootingControllerUI : MonoBehaviour
         speedInput.onSubmit.AddListener(SpeedInputChange);
     }
 
-    private void Awake()
+    private void Start()
     {
-        speedInput.text = followPath.Speed.ToString(CultureInfo.InvariantCulture);
+        speedText.text = followPath.Speed.ToString(CultureInfo.InvariantCulture);
     }
 
     private void SpeedInputChange(string input)
     {
-        if (int.TryParse(input, out var i)) followPath.Speed = i;
+        if (int.TryParse(input, out var i))
+        {
+            followPath.Speed = i;
+            speedText.text = followPath.Speed.ToString(CultureInfo.InvariantCulture);
+        }
     }
 }

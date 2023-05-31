@@ -1,3 +1,4 @@
+using System;
 using CSFramework.Core;
 using CSFramework.Presets;
 using Unity.XR.CoreUtils;
@@ -60,7 +61,7 @@ namespace CSFramework.Presettables
                 }
             }
 
-            if (Preset.ExperimentLength > 0 && PlayTime > Preset.ExperimentLength)
+            if (ExperimentLength > 0 && PlayTime > ExperimentLength)
             {
                 Debug.Log("Experiment Finished! (timeout)");
                 EndExperiment();

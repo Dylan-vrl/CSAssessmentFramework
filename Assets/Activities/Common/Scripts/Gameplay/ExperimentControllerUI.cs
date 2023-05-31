@@ -30,8 +30,10 @@ namespace Gameplay
             // no unsubscribing with anonymous functions
             DataSaver.FolderChanged += (v) => fileNameLabel.text = v;
             DataSaver.DataSaved += (v) => savedNotificationLabel.gameObject.SetActive(v);
+            
+            timeInput.onSubmit.AddListener(TimeInputChange);
         }
-
+        
         private void Start()
         {
             _experimentController = ExperimentController.Instance;
@@ -58,9 +60,13 @@ namespace Gameplay
             
         }
 
-        public void TimerInputChange(string input)
+        private void TimeInputChange(string length)
         {
-            if (int.TryParse(input, out var i)) _experimentController.ExperimentLength = i;
+            if (int.TryParse(length, out int value))
+            {
+                Debug.Log("SENDING EXP LENGTH " + value);
+                ExperimentController.Instance.ExperimentLength = value;
+            }
         }
 
         private void OnGameStateChanged(GameStateManager.GameState state)
@@ -90,6 +96,7 @@ namespace Gameplay
         private void OnDisable()
         {
             GameStateManager.GameStateChanged -= OnGameStateChanged;
+            timeInput.onSubmit.RemoveListener(TimeInputChange);
         }
     }
 }

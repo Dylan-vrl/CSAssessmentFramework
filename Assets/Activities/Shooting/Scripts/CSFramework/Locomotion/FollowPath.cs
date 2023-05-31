@@ -1,3 +1,4 @@
+using System;
 using CSFramework.Core;
 using CSFramework.Presets;
 using PathCreation;
@@ -17,6 +18,11 @@ public class FollowPath : PresettableMonoBehaviour<FollowPathPreset>
     public VertexPath Path => pathCreator.path;
     private bool _isFollowing = false;
     private Terrain _activeTerrain;
+
+    private void Awake()
+    {
+        Speed = Preset.Speed;
+    }
 
     private void OnEnable()
     {
@@ -41,7 +47,6 @@ public class FollowPath : PresettableMonoBehaviour<FollowPathPreset>
     private void Start()
     {
         _activeTerrain = Terrain.activeTerrain;
-        Speed = Preset.Speed;
     }
 
     void Update()
