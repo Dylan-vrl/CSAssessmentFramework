@@ -2,6 +2,7 @@ using CSFramework.Core;
 using CSFramework.Presets;
 using Unity.XR.CoreUtils;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Utilities;
 using static GameStateManager.GameState;
 
@@ -86,9 +87,9 @@ namespace CSFramework.Presettables
             GameStateManager.PauseGame(pause);
         }
 
-        public static void ExitApplication()
+        public static void GoBackToMenu()
         {
-            Application.Quit();
+            SceneManager.LoadScene("Menu");
         }
 
         public override PresettableCategory GetCategory() => PresettableCategory.Experiment;
