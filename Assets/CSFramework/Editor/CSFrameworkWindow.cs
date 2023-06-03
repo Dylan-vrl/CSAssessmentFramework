@@ -38,6 +38,7 @@ namespace CSFramework.Editor
 
         private void OnHierarchyChange()
         {
+            if (Application.isPlaying && rootVisualElement.childCount != 0) return;
             RebuildView(_selectedCategory);
         }
 
