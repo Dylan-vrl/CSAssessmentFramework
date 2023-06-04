@@ -150,7 +150,7 @@ public class CreateAssetsElement : MonoBehaviour
 				{ "#NAME#", name },
 				{ "#CATEGORY#", category.ToString() }
 			},
-			filePath: $"{Application.dataPath}/Scripts/CSFramework/{category}/{name}.cs"
+			filePath: $"{Application.dataPath}/{name}.cs"
 		);
 	}
 
@@ -165,7 +165,7 @@ public class CreateAssetsElement : MonoBehaviour
 				{ "#EXTENDED_LOWER#", extended.ToLower() },
 				{ "#CATEGORY#", category.ToString() }
 			},
-			filePath: $"{Application.dataPath}/Scripts/CSFramework/{category}/{name}.cs"
+			filePath: $"{Application.dataPath}/{name}.cs"
 		);
 	}
 	

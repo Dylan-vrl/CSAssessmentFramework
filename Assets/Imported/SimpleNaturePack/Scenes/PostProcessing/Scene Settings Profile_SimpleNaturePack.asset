@@ -13,10 +13,7 @@ MonoBehaviour:
   m_Name: Scene Settings Profile_SimpleNaturePack
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 114419383790821408}
-  - {fileID: 114636031392424992}
-  - {fileID: 114676324298085600}
-  - {fileID: 114243394074882346}
+  - {fileID: 8190138496007984983}
 --- !u!114 &114243394074882346
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -234,3 +231,19 @@ MonoBehaviour:
   enableSunDisk:
     m_OverrideState: 1
     m_Value: 1
+--- !u!114 &8190138496007984983
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8545b756044634ce2a28ee5fde291014, type: 3}
+  m_Name: Pixelize
+  m_EditorClassIdentifier: 
+  active: 1
+  screenHeight:
+    m_OverrideState: 1
+    m_Value: 168
