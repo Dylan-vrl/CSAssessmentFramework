@@ -28,7 +28,7 @@ public class PixelizePass : ScriptableRenderPass
         RenderTextureDescriptor descriptor = renderingData.cameraData.cameraTargetDescriptor;
 
         VolumeStack stack = VolumeManager.instance.stack;
-        var pixelizeEffect = stack.GetComponent<Pixelize>();
+        var pixelizeEffect = stack.GetComponent<PixelizeComponent>();
 
         // If inactive (height <= 0) => do not apply effect (screen height = current resolution)
         if (!pixelizeEffect.IsActive()) 

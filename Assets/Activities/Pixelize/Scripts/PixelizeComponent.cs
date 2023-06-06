@@ -3,7 +3,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
 [VolumeComponentMenuForRenderPipeline("Custom/Pixelize", typeof(UniversalRenderPipeline))]
-public class Pixelize : VolumeComponent, IPostProcessComponent
+public class PixelizeComponent : VolumeComponent, IPostProcessComponent
 {
     public ClampedIntParameter screenHeight = new(0, 0, 2160);
 

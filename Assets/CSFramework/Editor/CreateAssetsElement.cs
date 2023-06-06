@@ -178,7 +178,7 @@ public class CreateAssetsElement : MonoBehaviour
 				{ "#NAME#", name },
 				{ "#CATEGORY#", category.ToString() }
 			},
-			filePath: $"{Application.dataPath}/Scripts/CSFramework/{category}/{name}Preset.cs"
+			filePath: $"{Application.dataPath}/{name}Preset.cs"
 		);
 	}
 	
