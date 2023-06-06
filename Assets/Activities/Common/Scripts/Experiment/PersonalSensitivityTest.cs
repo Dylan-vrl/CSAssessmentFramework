@@ -6,6 +6,7 @@ using System.Collections;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.SceneManagement;
 
 namespace CSFramework.Extensions
 {
@@ -19,7 +20,7 @@ namespace CSFramework.Extensions
         private float lerpDuration;
         private float waitDuration;
         private int lapCount;
-        private int waitBtwnAxisTime;
+        private float waitBtwnAxisTime;
         private bool rotating = false;
 
         private Quaternion[] axises;
@@ -32,14 +33,16 @@ namespace CSFramework.Extensions
 
         private void Start()
         {
-            lerpDuration = Preset.lapDuration;
-            lapCount = Preset.lapCount;
-            waitDuration = Preset.waitDuration;
-            waitBtwnAxisTime = 3;
+            lerpDuration = Preset.turnDurationPerAxis;
+            lapCount = Preset.turnPerAxis;
+            waitDuration = Preset.waitDurationBtw3AxisTurns;
+            waitBtwnAxisTime = Preset.waitDurationBtwEachTurn;
 
             // disable tracked pose driver
             TrackedPoseDriver trackedPoseDriver = GetComponent(typeof(TrackedPoseDriver)) as TrackedPoseDriver;
-            trackedPoseDriver.enabled = false;
+            if(trackedPoseDriver != null) {
+                trackedPoseDriver.enabled = false;
+            }
 
             axises = new Quaternion[3];
             axises[0] = Quaternion.Euler(180, 0, 0);
@@ -47,7 +50,7 @@ namespace CSFramework.Extensions
             axises[2] = Quaternion.Euler(0, 0, 180);
 
             indicatorRotation = Quaternion.Euler(0, 180, 0);
-            indicatorPosition = new Vector3(0.059f, 0.103f, 1.281f);
+            indicatorPosition = new Vector3(0.008f, 0.052f, 1.281f);
             indicator = (GameObject) Instantiate(Resources.Load("PitchRollYaw"), indicatorPosition, indicatorRotation);
             // instantiate as a child
             indicator.transform.parent = transform;
@@ -78,13 +81,16 @@ namespace CSFramework.Extensions
                 GameStateManager.PauseGame(true);
                 Begin();
             }
+            if(!Preset.insideGameScene && !rotating) {
+                Begin();
+            }
         }
 
         private async void Begin()
         {
             rotating = true;
             int [,] rotationTurns = {{0,1,2}, {1,0,2}, {2,1,0}};
-            for (int k = 0; k < rotationTurns.Length; k++) {
+            for (int k = 0; k < 3; k++) {
                 await Task.Delay((int) (waitDuration*1000));
                 for(int j=0; j < 3; j++)
                 {
@@ -95,7 +101,7 @@ namespace CSFramework.Extensions
                         indicatorText.text = axisNames[axisNo];
                         indicatorAxises[axisNo].SetActive(true);
                         
-                        await Task.Delay(waitBtwnAxisTime*1000);
+                        await Task.Delay((int) (waitBtwnAxisTime*1000));
                         // remove axis direction
                         indicatorAxises[axisNo].SetActive(false);
                         indicatorText.text = "";
@@ -104,6 +110,7 @@ namespace CSFramework.Extensions
                     }
                 }
             }
+            SceneManager.LoadScene("Menu");
         }
 
         async Task Rotate360(Quaternion turnAxis)

@@ -11,8 +11,10 @@ namespace CSFramework.Presets
         // TODO replace with your own fields following this format
         //[field: SerializeField]
         //public int Field { get; private set; }
-        [SerializeField] public int lapCount;
-        [SerializeField] public float lapDuration;
-        [SerializeField] public float waitDuration;
+        [SerializeField] public bool insideGameScene;
+        [SerializeField] public int turnPerAxis;
+        [SerializeField] public float turnDurationPerAxis;
+        [SerializeField] public float waitDurationBtwEachTurn;
+        [SerializeField] public float waitDurationBtw3AxisTurns;
     }
 }
