@@ -74,8 +74,10 @@ namespace CSFramework.Extensions
                 var eulerRot = deltaRot.eulerAngles;
                 Vector3 angularVelocity = eulerRot / Time.fixedDeltaTime;
 
-                // If snap turning
-                t = angularVelocity.magnitude > 0;
+                // If not already turning
+                if(!t) {
+                    t = angularVelocity.magnitude > 0;
+                }
 
                 _lastRot = rot;
                 if (_changing != (t ? 1 : -1))
@@ -89,15 +91,23 @@ namespace CSFramework.Extensions
 
         private IEnumerator ChangeColour(bool turning)
         {
-            _changing = turning ? 1 : -1;
+            float initialTime = Time.time;
             if (turning)
             {
+                float f = 0f;
+                Color fadingColor = new Color(0,0,0,0); //black transparent
+                while(f > 1f){
+                    f = Mathf.Clamp01((Time.time - initialTime) + 0.2f);
+                    fadingColor.a = f;
+                    colorFilter.value = fadingColor;
+                }
                 colorFilter.value = Color.black;
             }
             else
             {
                 colorFilter.value = Color.white;
             }
+            _changing = turning ? 1 : -1;
             yield return null;
         }
 

@@ -22,16 +22,18 @@ namespace CSFramework.Presettables
 
         void Awake() {
             nose = Preset.nose;
-        	nosePrefab = GameObject.Find(Preset.nosePrefabName);
-            nosePrefab.SetActive(nose);
-        	yPosition = Preset.yPosition;
-        	zPosition = Preset.zPosition;
         	noseWidth = Preset.noseWidth;
         	noseFlatness = Preset.noseFlatness;
-
+        	nosePrefab = GameObject.Find(Preset.nosePrefabName);
+            if(nosePrefab != null) {
+                nosePrefab.SetActive(nose);
+            }
+        
         	hat = Preset.hat;
         	hatPrefab = GameObject.Find(Preset.hatPrefabName);
-            hatPrefab.SetActive(hat);
+            if(hatPrefab != null) {
+                hatPrefab.SetActive(hat);
+            }
         }
 		
 		void Start()
@@ -39,19 +41,19 @@ namespace CSFramework.Presettables
             // SINGLE NOSE --------------------------------------------
             if (nose && nosePrefab == null)
             {
-				Debug.Log("Nose Prefab is not found on the scene.");
+				Debug.Log("Nose Prefab is not found on the scene. It will be generated.");
                 Quaternion indicatorRotation = Quaternion.Euler(60, 0, 0);
-                Vector3 indicatorPosition = new Vector3(0f, -0.24f, 0.57f);
-                var indicator = (GameObject)Instantiate(Resources.Load(Preset.nosePrefabName), indicatorPosition, indicatorRotation);
-                // instantiate as a child
-                indicator.transform.parent = transform;
-                indicator.transform.localPosition = indicatorPosition;
-                indicator.transform.rotation = indicatorRotation;
-            } else if ( nosePrefab != null) {
+                Vector3 indicatorPosition = new Vector3(0f, -0.196f, 0.483f);
+                nosePrefab = (GameObject) Instantiate(Resources.Load(Preset.nosePrefabName), indicatorPosition, indicatorRotation);
+                // instantiate as a child of the main camera
+                GameObject mainCamera = Object.FindObjectOfType<Camera>().gameObject;
+                nosePrefab.transform.parent = mainCamera.transform;
+                nosePrefab.transform.localPosition = indicatorPosition;
+                nosePrefab.transform.rotation = indicatorRotation;
+            }
+            if ( nosePrefab != null) {
                 nosePrefab.SetActive(nose);
                 var noseScript = nosePrefab.GetComponent<SingleNose>();
-                noseScript.YPosition = yPosition;
-                noseScript.ZPosition = zPosition;
                 noseScript.NoseWidth = noseWidth;
                 noseScript.NoseFlatness = noseFlatness;
             }
@@ -63,11 +65,12 @@ namespace CSFramework.Presettables
                 Debug.Log("Hat Prefab is not found on the scene.");
                 Quaternion indicatorRotation = Quaternion.Euler(0, 0, 0);
                 Vector3 indicatorPosition = new Vector3(0f, 0.12f, 0f);
-                var indicator = (GameObject)Instantiate(Resources.Load(Preset.hatPrefabName), indicatorPosition, indicatorRotation);
+                hatPrefab = (GameObject) Instantiate(Resources.Load(Preset.hatPrefabName), indicatorPosition, indicatorRotation);
                 // instantiate as a child
-                indicator.transform.parent = transform;
-                indicator.transform.localPosition = indicatorPosition;
-                indicator.transform.rotation = indicatorRotation;
+                GameObject mainCamera = Object.FindObjectOfType<Camera>().gameObject;
+                hatPrefab.transform.parent = mainCamera.transform;
+                hatPrefab.transform.localPosition = indicatorPosition;
+                hatPrefab.transform.rotation = indicatorRotation;
             }
             else if (hatPrefab != null)
             {

@@ -12,8 +12,6 @@ namespace CSFramework.Presets
         [Header("Nose")]
         [SerializeField] public bool nose;
         [SerializeField] public string nosePrefabName;
-        [Range(0, 1)][SerializeField] public float yPosition = .5f;
-        [Range(0, 1)][SerializeField] public float zPosition = .5f;
         [Range(0f, 1f)][SerializeField] public float noseWidth = 1;
         [Range(0f, 1f)][SerializeField] public float noseFlatness = 1;
 

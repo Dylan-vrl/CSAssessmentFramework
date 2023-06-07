@@ -12,10 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f959308f30bf3c046bf28787e357dec8, type: 3}
   m_Name: default
   m_EditorClassIdentifier: 
-  nose: 1
+  nose: 0
   nosePrefabName: Nose
-  yPosition: 0.259
-  zPosition: 0.075
   noseWidth: 0.393
   noseFlatness: 0.287
   hat: 0

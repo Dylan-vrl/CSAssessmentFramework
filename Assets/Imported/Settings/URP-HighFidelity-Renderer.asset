@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f9707f06515714cab20a4bffbd8725, type: 3}
   m_Name: ColorBlurFeature
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   _mat: {fileID: 2100000, guid: d13d1b400a347a34e8e6c12e12ccfd7a, type: 2}
 --- !u!114 &11400000
 MonoBehaviour:

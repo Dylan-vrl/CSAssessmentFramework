@@ -808,8 +808,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84cb37d578a94d4a9d98e7e135d0c03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preset: {fileID: 11400000, guid: 38f646e49197940898bf770c179c3dcf, type: 2}
-  rotateWithTerrain: {fileID: 1177105058}
 --- !u!1 &91999537
 GameObject:
   m_ObjectHideFlags: 0
@@ -7043,7 +7041,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e54b96e21e44e884587f5c31b9d49a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sampleFrequencyInSeconds: 1
 --- !u!114 &1272189272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8846,8 +8843,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1536841016}
   - component: {fileID: 1536841017}
+  - component: {fileID: 1536841018}
   m_Layer: 0
-  m_Name: Player Dark
+  m_Name: PostProcess
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8885,6 +8883,19 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 19cc02610c1c6634e9c9af7b4ea5f499, type: 2}
+--- !u!114 &1536841018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536841015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fdca4f65c9fa2e4885256a232b8d998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preset: {fileID: 11400000, guid: 66db4c8ca0dbd454ba65c1b6924a7ead, type: 2}
 --- !u!1 &1537904126
 GameObject:
   m_ObjectHideFlags: 0

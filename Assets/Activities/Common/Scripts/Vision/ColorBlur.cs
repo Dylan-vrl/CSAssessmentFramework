@@ -6,7 +6,7 @@ using static CSFramework.Core.PresettableCategory;
 using UnityEngine.Rendering;
 using CSFramework.Presettables;
 using System.Collections;
-
+/*
 namespace CSFramework.Extensions
 {
     [RequireComponent(typeof(Volume))]
@@ -113,3 +113,4 @@ namespace CSFramework.Extensions
         }
     }
 }
+*/
