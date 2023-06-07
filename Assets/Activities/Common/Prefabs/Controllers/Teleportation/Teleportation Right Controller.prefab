@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 2323070907955372432}
   m_Layer: 0
   m_Name: Teleportation Right Controller
-  m_TagString: Untagged
+  m_TagString: RightGameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

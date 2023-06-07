@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 2559198062739516548}
   m_Layer: 0
   m_Name: Right hand grab move provider
-  m_TagString: RightGameController
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 1889528243865287196}
   m_Layer: 0
   m_Name: Left hand grab move provider
-  m_TagString: LeftGameController
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

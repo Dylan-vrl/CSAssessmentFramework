@@ -852,7 +852,7 @@ GameObject:
   - component: {fileID: 7646311560445247033}
   m_Layer: 0
   m_Name: Mixed Ray Right Controller
-  m_TagString: Untagged
+  m_TagString: RightGameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

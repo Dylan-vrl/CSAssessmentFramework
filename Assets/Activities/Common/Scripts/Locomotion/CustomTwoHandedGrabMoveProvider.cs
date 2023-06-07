@@ -19,10 +19,8 @@ namespace CSFramework.Presettables
         
         [SerializeField] private CustomTwoHandedGrabMoveProviderPreset preset;
 
-        protected override void Awake()
+        protected void Start()
         {
-            base.Awake();
-
             if (Preset == null) return;
             moveFactor = Preset.MoveFactor;
             requireTwoHandsForTranslation = Preset.RequireTwoHandsForTranslation;
