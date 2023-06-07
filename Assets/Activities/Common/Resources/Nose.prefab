@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7075714348456237105}
   - component: {fileID: 7075714348457007121}
   - component: {fileID: 7075714348458138321}
+  - component: {fileID: 9035940027836388844}
   m_Layer: 0
   m_Name: Nose
   m_TagString: Untagged
@@ -83,3 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &9035940027836388844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7075714348455937041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b4511c7ff3eaa54899a7ed6bb276c9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yPosition: 0
+  zPosition: 0
+  noseWidth: 0
+  noseFlatness: 0
