@@ -19,6 +19,8 @@ namespace CSFramework.Presettables
 		{
 			audioSource = GetComponent<AudioSource>();
 			audioSource.clip = Preset.musicLoop;
+            audioSource.volume = .2f;
+            audioSource.priority = 200;
 		}
 
 		void Start()
@@ -41,10 +43,9 @@ namespace CSFramework.Presettables
                     audioSource.PlayScheduled(AudioSettings.dspTime + Preset.musicStart.Value.length);
                 } else
                 {
-                    audioSource.loop = true;
                     audioSource.Play();
                 }
-                
+                audioSource.loop = true;
             }
             
         }
