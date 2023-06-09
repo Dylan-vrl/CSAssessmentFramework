@@ -11,12 +11,12 @@ public class ShootingControllerUI : MonoBehaviour
 
     private void OnEnable()
     {
-        speedInput.onSubmit.AddListener(SpeedInputChange);
+        speedInput.onEndEdit.AddListener(SpeedInputChange);
     }
 
     private void OnDisable()
     {
-        speedInput.onSubmit.AddListener(SpeedInputChange);
+        speedInput.onEndEdit.AddListener(SpeedInputChange);
     }
 
     private void Start()
