@@ -17,7 +17,7 @@ namespace Gameplay
         private void OnEnable()
         {
             GameStateManager.GameStateChanged += OnGameStateChanged;
-            collectiblesInput.onSubmit.AddListener(CollectiblesInputChange);
+            collectiblesInput.onEndEdit.AddListener(CollectiblesInputChange);
         }
 
         private void Start()
@@ -68,7 +68,7 @@ namespace Gameplay
         private void OnDisable()
         {
             GameStateManager.GameStateChanged -= OnGameStateChanged;
-            collectiblesInput.onSubmit.RemoveListener(CollectiblesInputChange);
+            collectiblesInput.onEndEdit.RemoveListener(CollectiblesInputChange);
         }
     }
 }

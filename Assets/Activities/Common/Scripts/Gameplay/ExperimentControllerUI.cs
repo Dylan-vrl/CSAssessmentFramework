@@ -31,7 +31,7 @@ namespace Gameplay
             DataSaver.FolderChanged += OnFolderChanged;
             DataSaver.DataSaved += OnDataSaved;
             
-            timeInput.onSubmit.AddListener(TimeInputChange);
+            timeInput.onEndEdit.AddListener(TimeInputChange);
         }
         
         private void Start()
@@ -98,7 +98,7 @@ namespace Gameplay
             DataSaver.FolderChanged -= OnFolderChanged;
             DataSaver.DataSaved -= OnDataSaved;
             GameStateManager.GameStateChanged -= OnGameStateChanged;
-            timeInput.onSubmit.RemoveListener(TimeInputChange);
+            timeInput.onEndEdit.RemoveListener(TimeInputChange);
         }
 
         private void OnFolderChanged(string s)
