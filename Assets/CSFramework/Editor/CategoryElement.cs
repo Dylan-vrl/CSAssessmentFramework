@@ -101,13 +101,13 @@ namespace CSFramework.Editor
 
                     if (root.childCount >= 2)
                         root.RemoveAt(root.childCount - 1);
-                    Undo.DestroyObjectImmediate(gameObject);
+                    Undo.DestroyObjectImmediate(component);
                 }
                 else
                 {
                     if (gameObject == null) return;
 
-                    gameObject.AddComponent(extensionType);
+                    Undo.AddComponent(gameObject, extensionType);
                     var extensionInspector = new InspectorElement(gameObject.GetComponent(extensionType));
                     root.Add(extensionInspector);
                 }
@@ -205,10 +205,11 @@ namespace CSFramework.Editor
 
         private static void CreateGameObjectWithComponent(Type type)
         {
-            new GameObject(
+            var obj = new GameObject(
                 name: type.Name, 
                 components: type
             );
+            Undo.RegisterCreatedObjectUndo(obj, $"Object {obj.name} created");
         }
     }
 }
