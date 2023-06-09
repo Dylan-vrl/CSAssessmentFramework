@@ -25,6 +25,8 @@ namespace CSFramework.Extensions
         private Quaternion _lastRot;
         private int _changing;
         private Coroutine _changeColourRoutine;
+
+        private bool t;
         
         private void Awake()
         {
@@ -41,6 +43,7 @@ namespace CSFramework.Extensions
             
             _xrChara = ExperimentController.Instance.XROrigin.GetComponent<CharacterController>();
             _lastRot = _xrChara.transform.rotation;
+            
         }
 
         private void OnEnable()
@@ -67,15 +70,15 @@ namespace CSFramework.Extensions
         {
             if (_xrChara != null && GameStateManager.State == GameStateManager.GameState.Playing)
             {
-                var t = false;
-
+                t = false;
                 Quaternion rot = _xrChara.transform.rotation;
                 Quaternion deltaRot = rot * Quaternion.Inverse(_lastRot);
                 var eulerRot = deltaRot.eulerAngles;
                 Vector3 angularVelocity = eulerRot / Time.fixedDeltaTime;
 
                 // If not already turning
-                if(!t) {
+                if(!t)
+                {
                     t = angularVelocity.magnitude > 0;
                 }
 
@@ -92,6 +95,7 @@ namespace CSFramework.Extensions
         private IEnumerator ChangeColour(bool turning)
         {
             float initialTime = Time.time;
+            _changing = turning ? 1 : -1;
             if (turning)
             {
                 float f = 0f;
@@ -107,7 +111,6 @@ namespace CSFramework.Extensions
             {
                 colorFilter.value = Color.white;
             }
-            _changing = turning ? 1 : -1;
             yield return null;
         }
 
