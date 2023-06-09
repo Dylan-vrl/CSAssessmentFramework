@@ -1,23 +1,34 @@
 # Cybersickness Assessment Framework
-Cybersickness Assessment framework is a Unity project developed by Adriano Viegas Milani under the supervision of Nana Tian for the Immersive Interaction Research Group at EPFL. The main idea behind this project is to assist and standardize Cyber Sickness research.
-Our solution is a complete Unity Project containing the necessary tools to set up an experiment: a customizable environment, organization for scripts, and an easily shareable preset system for component parameters. 
+Cybersickness Assessment Framework is a Unity project initialized by Adriano Viegas Milani under the supervision of Nana Tian for the Immersive Interaction Research Group at EPFL. The main idea behind this project is to assist and standardize cybersickness research.
+Our solution is a complete Unity Project containing the necessary tools to set up an experiment: a customizable environment, organization for scripts, and an easily shareable preset system for component parameters. This project includes the new version of the framework.
 
  [**Video Explaining Version 1 of the project**](https://youtu.be/3boUl46NIeg)
 
-## Sources:
+### Table of Content
+- [Installation Guide](#installation-guide)
+   - [Requirements](#requirements)
+   - [Installation](#installation)
+ 
+## Installation Guide
+### Requirements
+- Unity Editor 2022.2.11f+
+- Unity Universal Render Pipeline
+- Git LFS support  
 
-Environment (trees, bushes, ...) from SimpleNaturePack by JustCreate  
-PathCreator Tool by Sebastian Lague  
-Coin Sound from Zapsplat.com
+We highly recommend and only officially support the latest LTS version of Unity starting from the given version.
 
-## Presettable
-A presettable is simply a script that has a `Preset` attached to it. The goal is to facilitate the communication of experiment parameter values for researchers.
-## Extensions
-An extension is a special kind of `Presettable` used to provide new functionalites (extensions) to an existing `Monobehaviour`. It is itself a `Monobehaviour` so it should be added as a component to some `GameObject`. 
-It is a generic type that takes the `Monobehaviour` it extends as type parameter. We chose to bound it to a unique, specific `Monobehaviour` to be able to display all extensions available for the `GameObject`s in our scene. If they weren't linked to a `Monobehaviour`, every `GameObject` of our Scene would show up in the window we created.
+### Installation
+- Open a console (or Git bash) in the folder where you wish to install the project and install [Git LFS](https://git-lfs.com/):  
+    `git lfs install`
+- Clone the project:  
+    `git clone [insert SSH code]`
+- Open the folder with Unity Editor or by using Unity Hub (using the same or future versions is advised)
+- Open the setup window (CSFramework>Setup)
+- Open one of the scenes in the folders:
+  - Assets>Activities>Coins>Scenes>Coin
+  - Assets>Activities>Shooting>Scenes>Shooting
+  - Assets>Activities>Common>Scenes>Menu
 
-## Presets
-Each `Presettable` is inherently linked to a `Preset`, given as a type parameter. The goal of the preset is to provide every parameter that we potentially want to share / save to the associated presettable. The `Preset`s are simply `ScriptableObject`s which makes it easy to create different variants of them.
 
 # How to integrate your own scripts into the framework
 
@@ -167,3 +178,19 @@ public class CustomActionBasedContinuousTurnProvider :
 }
 ```
 Doing this is sufficient to use it as a part of the `LocomotionHandler`.
+
+## Glossary for the Framework
+#### Presettable
+A presettable is simply a script that has a `Preset` attached to it. The goal is to facilitate the communication of experiment parameter values for researchers.
+#### Extensions
+An extension is a special kind of `Presettable` used to provide new functionalites (extensions) to an existing `Monobehaviour`. It is itself a `Monobehaviour` so it should be added as a component to some `GameObject`. 
+It is a generic type that takes the `Monobehaviour` it extends as type parameter. We chose to bound it to a unique, specific `Monobehaviour` to be able to display all extensions available for the `GameObject`s in our scene. If they weren't linked to a `Monobehaviour`, every `GameObject` of our Scene would show up in the window we created.
+#### Presets  
+Each `Presettable` is inherently linked to a `Preset`, given as a type parameter. The goal of the preset is to provide every parameter that we potentially want to share / save to the associated presettable. The `Preset`s are simply `ScriptableObject`s which makes it easy to create different variants of them.
+
+---
+## Sources
+Environment (trees, bushes, ...) from SimpleNaturePack by JustCreate  
+PathCreator Tool by Sebastian Lague  
+Coin Sound from Zapsplat.com  
+Background music from Jac Cooper's [Game Music Starter Pack](https://www.jaccoopermusic.co.uk/games)
