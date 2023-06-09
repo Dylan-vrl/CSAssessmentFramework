@@ -22,16 +22,16 @@ namespace CSFramework.Extensions
 		private void OnEnable()
 		{
 			// If no PixelizeComponent found, create a new one
-			if (!_volume.profile. TryGet<PixelizeComponent>(out var pixelizeComponent))
+			if (!_volume.profile.TryGet<PixelizeComponent>(out var pixelizeComponent))
 				pixelizeComponent = _volume.profile.Add<PixelizeComponent>();
 			
 			// Set the PixelizeComponent active
 			pixelizeComponent.active = true;
 			foreach (var param in pixelizeComponent.parameters)
-				param. overrideState = true;
+				param.overrideState = true;
 			
 			// Set the height to the preset one
-			pixelizeComponent.screenHeight.value = Preset. ScreenHeight;
+			pixelizeComponent.screenHeight.value = Preset.ScreenHeight;
 		}
 	}
 }

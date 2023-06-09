@@ -808,6 +808,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84cb37d578a94d4a9d98e7e135d0c03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preset: {fileID: 0}
+  rotateWithTerrain: {fileID: 0}
 --- !u!1 &91999537
 GameObject:
   m_ObjectHideFlags: 0
@@ -4590,51 +4592,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f5a24a380916d14db9775daab4fe333, type: 3}
---- !u!1 &831043722
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 831043724}
-  - component: {fileID: 831043723}
-  m_Layer: 0
-  m_Name: RestFrames
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &831043723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 831043722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ede12284a19204b449b2da33f0be0076, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  preset: {fileID: 11400000, guid: bbf197b14b8432044a3db0b7a56cdf85, type: 2}
---- !u!4 &831043724
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 831043722}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &869144677
 GameObject:
   m_ObjectHideFlags: 0
@@ -7041,6 +6998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e54b96e21e44e884587f5c31b9d49a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sampleFrequencyInSeconds: 1
 --- !u!114 &1272189272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8892,10 +8850,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1536841015}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fdca4f65c9fa2e4885256a232b8d998, type: 3}
+  m_Script: {fileID: 11500000, guid: bfb280dc50bef4c6199980e85089601c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preset: {fileID: 11400000, guid: 66db4c8ca0dbd454ba65c1b6924a7ead, type: 2}
+  preset: {fileID: 11400000, guid: eb194ab17873844ff8ce1cfc2b172eb2, type: 2}
 --- !u!1 &1537904126
 GameObject:
   m_ObjectHideFlags: 0
