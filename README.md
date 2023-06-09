@@ -8,6 +8,15 @@ Our solution is a complete Unity Project containing the necessary tools to set u
 - [Installation Guide](#installation-guide)
    - [Requirements](#requirements)
    - [Installation](#installation)
+- [Available Features](#features)
+- [Creating a preset](#creating-a-preset)
+- [Integrating a new script](#how-to-integrate-your-own-scripts-into-the-framework)
+   - [Creating files](#create-the-files)
+   - [Defining Preset Fields](#define-the-fields-exposed-in-the-preset)
+   - [Writing the behaviour of the presettable](#write-the-behaviour-of-the-presettable)
+- [Integrating a custom LocomotionProvider](#how-to-integrate-a-custom-locomotionprovider)
+- [Glossary](#glossary-for-the-framework)
+- [Sources](#sources)
  
 ## Installation Guide
 ### Requirements
@@ -29,10 +38,35 @@ We highly recommend and only officially support the latest LTS version of Unity 
   - Assets>Activities>Shooting>Scenes>Shooting
   - Assets>Activities>Common>Scenes>Menu
 
+## Features
+The features listed here are the ones specifically added as a possible prevention or reduction technique to cybersickness.  
 
-# How to integrate your own scripts into the framework
+Experiment:
+- Personal rotational susceptibility test
 
-## Create the files
+Environment:
+- Background Music (calming or upbeat)
+
+Vision:
+- Reduced Field of View
+- Depth of Field Blur
+- Rest Frames (nose and hats)
+- Color Manipulation
+- Vision Snapper
+
+Locomotion/Movement:
+- Teleportation
+- Continous movement/ rotation
+- Snap rotation
+- Grab Move
+- Passive Movement
+
+## Creating a Preset
+To create a new preset instance, in the folder location of your choice:
+    [right click] > Create > CSFramework > Preset Instances > [Your Preset's Category] > [Your Presets Type]
+
+## How to integrate your own scripts into the framework
+### Create the files
 First, open the CSFramework window using the panels at the top of the screen: `CSFramework/Setup`. Feel free to dock the window next to the inspector and make sure it is not too small.
 
 ![create_buttons image](images/create_buttons.png)
@@ -40,7 +74,7 @@ To benefit from ready-to-use templates, we suggest that you create your scripts 
 
 For example, from the _Vision_ panel, using `CameraRotator` as a name and `Camera` as the extended type and clicking on _Create Extension_ will create a new script called `CameraRotator` which is an `Extension` for `Camera` of category _Vision_ and the corresponding `CameraRotatorPreset`.
 
-## Define the fields exposed in the preset
+### Define the fields exposed in the preset
 The default generated preset script will look like this:
 ```cs
 [CreateAssetMenu(menuName = "CSFramework/Preset Instances/Vision/CameraRotatorPreset", fileName = "new CameraRotatorPreset")]
@@ -72,8 +106,8 @@ public class CameraRotatorPreset: Preset<CameraRotator>
     public float RotationSpeed { get; private set; }
 }
 ```
-## Write the behaviour of the presettable
-### PresettableMonoBehaviour
+### Write the behaviour of the presettable
+#### PresettableMonoBehaviour
 When creating a non-extension `Presettable`, here is the generated template:
 ```cs
 public class GameStarter : PresettableMonoBehaviour<GameStarterPreset>
@@ -105,8 +139,7 @@ public class GameStarter : PresettableMonoBehaviour<GameStarterPreset>
   public override PresettableCategory GetCategory() => Experiment;
 }
 ```
-
-### Extension
+#### Extension
 The same principles can be applied to extensions, with the addition that the generated template includes a `GetComponent<Extended>()` call in `Awake()` to get the extended object. You may replace this call by any other way of getting it. If you don't use directly `GetComponent<Extended>()`, don't forget to remove the `RequireComponent()` attribute.
 ```cs
 [RequireComponent(typeof(Camera))]
@@ -141,9 +174,9 @@ public class CameraRotator : Extension<Camera, CameraRotatorPreset>
 }
 ```
 
-You can now add it to the scene and create a preset for it as any other `Presettable`, following the steps presented in section ## TODO ##
+You can now add it to the scene and create a preset for it as any other `Presettable`, following the steps presented in [its section](#creating-a-preset).
 
-# How to integrate a custom `LocomotionProvider`
+## How to integrate a custom `LocomotionProvider`
 Your class needs to extend `LocomotionProvider` or any subclass of it and either `ICustomMovementLocomotionProvider` or `ICustomRotationLocomotionProvider`. We also suggest to make it a `Presettable` by extending `IPresettable<#YourPresetType#>`. As it is already a subclass of `LocomotionProvider` it can not inherit from `PresettableMonoBehaviour`, that's why we're using the interface instead.
 
 By extending these interfaces, you need to define the following methods and properties:
