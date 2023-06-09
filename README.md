@@ -9,3 +9,161 @@ Our solution is a complete Unity Project containing the necessary tools to set u
 Environment (trees, bushes, ...) from SimpleNaturePack by JustCreate  
 PathCreator Tool by Sebastian Lague  
 Coin Sound from Zapsplat.com
+
+## Presettable
+A presettable is simply a script that has a `Preset` attached to it. The goal is to facilitate the communication of experiment parameter values for researchers.
+## Extensions
+An extension is a special kind of `Presettable` used to provide new functionalites (extensions) to an existing `Monobehaviour`. It is itself a `Monobehaviour` so it should be added as a component to some `GameObject`. 
+It is a generic type that takes the `Monobehaviour` it extends as type parameter. We chose to bound it to a unique, specific `Monobehaviour` to be able to display all extensions available for the `GameObject`s in our scene. If they weren't linked to a `Monobehaviour`, every `GameObject` of our Scene would show up in the window we created.
+
+## Presets
+Each `Presettable` is inherently linked to a `Preset`, given as a type parameter. The goal of the preset is to provide every parameter that we potentially want to share / save to the associated presettable. The `Preset`s are simply `ScriptableObject`s which makes it easy to create different variants of them.
+
+# How to integrate your own scripts into the framework
+
+## Create the files
+First, open the CSFramework window using the panels at the top of the screen: `CSFramework/Setup`. Feel free to dock the window next to the inspector and make sure it is not too small.
+
+![create_buttons image](images/create_buttons.png)
+To benefit from ready-to-use templates, we suggest that you create your scripts from the window directly. To do so, go to the desired category panel for your script and fill the name of your `Presettable` and the name of the extended type, if you want to create an `Extension`. Then, when clicking on the _Create Presettable_ or the _Create Extension_ buttons, a new `Presettable` script will be generated in the _Assets_ folder, along with its preset.
+
+For example, from the _Vision_ panel, using `CameraRotator` as a name and `Camera` as the extended type and clicking on _Create Extension_ will create a new script called `CameraRotator` which is an `Extension` for `Camera` of category _Vision_ and the corresponding `CameraRotatorPreset`.
+
+## Define the fields exposed in the preset
+The default generated preset script will look like this:
+```cs
+[CreateAssetMenu(menuName = "CSFramework/Preset Instances/Vision/CameraRotatorPreset", fileName = "new CameraRotatorPreset")]
+public class CameraRotatorPreset: Preset<CameraRotator>
+{
+    // TODO replace with your own fields following this format
+    [field: SerializeField]
+    public int Field { get; private set; }
+}
+```
+We'll quickly go over what each line does
+- `CreateAssetMenu` attribute allows us to create a preset instance from the editor directly. It is a common practice to create `ScriptableObject`s.
+- `Preset` is the base class for presets in our framework, it takes the type it is a preset for as a type parameter. It extends `ScriptableObject` so that we can create instances of them.
+- `[field: SerializeField]` is equivalent to a simple `[SerializeField]` (to modify its value in the inspector) except that without the `field:` annotation it doesn't work with auto-implemented properties. It basically serializes the backing field of the property.
+- Although it is not required, we strongly suggest you to declare only `public { get; private set; }` properties so that you can not modify them publicly but you can fetch all of the fields, that's the point of a preset. 
+
+Now, you need to define every field you may want to change in your preset. Following the same example, we will define a `RotationAxis` and a `RotationSpeed` properties.
+
+The final file should look similar to this:
+```cs
+[CreateAssetMenu(menuName = "CSFramework/Preset Instances/Vision/CameraRotatorPreset", fileName = "new CameraRotatorPreset")]
+public class CameraRotatorPreset: Preset<CameraRotator>
+{
+    [field: SerializeField,
+            Tooltip("The axis along which the rotation will be applied")]
+    public Vector3 RotationAxis { get; private set; }
+    [field: SerializeField,
+            Tooltip("The speed of rotation")]
+    public float RotationSpeed { get; private set; }
+}
+```
+## Write the behaviour of the presettable
+### PresettableMonoBehaviour
+When creating a non-extension `Presettable`, here is the generated template:
+```cs
+public class GameStarter : PresettableMonoBehaviour<GameStarterPreset>
+{
+      public override PresettableCategory GetCategory() => Experiment;
+      
+      // You can access your Preset's fields: Preset.fieldName
+}
+```
+In this example `GameStarter` is supposed to start the game after some delay, given by its preset.
+
+By extending `PresettableMonoBehaviour<GameStarterPreset>`, a `GameStarterPreset Preset` field is already available to use. You can then define your behaviour as you would normally do for normal `MonoBehaviour`:
+```cs
+public class GameStarter : PresettableMonoBehaviour<GameStarterPreset>
+{
+  private float timer;
+
+  private void Awake() => timer = Preset.Delay;
+
+  private void Update()
+  {
+    timer -= Time.deltaTime;
+    if (timer <= 0)
+      StartGame();
+  }
+
+  private void StartGame() { ... }
+  
+  public override PresettableCategory GetCategory() => Experiment;
+}
+```
+
+### Extension
+The same principles can be applied to extensions, with the addition that the generated template includes a `GetComponent<Extended>()` call in `Awake()` to get the extended object. You may replace this call by any other way of getting it. If you don't use directly `GetComponent<Extended>()`, don't forget to remove the `RequireComponent()` attribute.
+```cs
+[RequireComponent(typeof(Camera))]
+public class CameraRotator : Extension<Camera, CameraRotatorPreset>
+{
+  public override PresettableCategory GetCategory() => Vision;
+
+  private Camera _camera;
+
+  // You can access your Preset's fields: Preset.fieldName
+      
+  private void Awake()
+  {
+    // You might want to get your component in another way
+    _camera = GetComponent<Camera>();
+  }
+}
+```
+
+In our example, the final script would look like this:
+```cs
+[RequireComponent(typeof(Camera))]
+public class CameraRotator : Extension<Camera, CameraRotatorPreset>
+{
+  private Camera _camera;
+      
+  private void Awake() => _camera = GetComponent<Camera>();
+
+  private void Update() => _camera.transform.Rotate(Preset.RotationAxis, Preset.RotationSpeed * Time.deltaTime);
+
+  public override PresettableCategory GetCategory() => Vision;
+}
+```
+
+You can now add it to the scene and create a preset for it as any other `Presettable`, following the steps presented in section ## TODO ##
+
+# How to integrate a custom `LocomotionProvider`
+Your class needs to extend `LocomotionProvider` or any subclass of it and either `ICustomMovementLocomotionProvider` or `ICustomRotationLocomotionProvider`. We also suggest to make it a `Presettable` by extending `IPresettable<#YourPresetType#>`. As it is already a subclass of `LocomotionProvider` it can not inherit from `PresettableMonoBehaviour`, that's why we're using the interface instead.
+
+By extending these interfaces, you need to define the following methods and properties:
+- `public List<InputActionReference> LeftInputReferences, RightInputReferences` represents all the input action references used by this provider attached to the left and right hand respectively
+- Either `public RotationType RotationType` or `public MovementType MovementType` depending on the script.
+- `public #YourPresetType# Preset` and `public PresettableCategory GetCategory()` if you decided to define a `Presettable`
+
+Here is a typical example, you can find more under `Assets/Common/Scripts/Locomotion/`:
+```cs
+public class CustomActionBasedContinuousTurnProvider : 
+    ActionBasedContinuousTurnProvider, 
+    ICustomRotationLocomotionProvider, 
+    IPresettable<CustomActionBasedContinuousTurnProviderPreset>
+{
+    [SerializeField] private CustomActionBasedContinuousTurnProviderPreset preset;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        if (Preset == null) return;
+        turnSpeed = Preset.TurnSpeed;
+    }
+
+    public List<InputActionReference> LeftInputReferences => new(1) { leftHandTurnAction.reference };
+    public List<InputActionReference> RightInputReferences => new(1) { rightHandTurnAction.reference };
+
+    public RotationType RotationType => RotationType.Continuous;
+
+    public PresettableCategory GetCategory() => PresettableCategory.Locomotion;
+    public CustomActionBasedContinuousTurnProviderPreset Preset => preset;
+}
+```
+Doing this is sufficient to use it as a part of the `LocomotionHandler`.
