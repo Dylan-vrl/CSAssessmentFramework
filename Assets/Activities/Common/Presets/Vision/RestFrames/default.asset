@@ -18,3 +18,5 @@ MonoBehaviour:
   noseFlatness: 0.287
   hat: 0
   hatPrefabName: Sombrero
+  other: 0
+  otherPrefabName: 

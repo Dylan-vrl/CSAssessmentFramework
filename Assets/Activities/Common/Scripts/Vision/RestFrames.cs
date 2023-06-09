@@ -19,6 +19,7 @@ namespace CSFramework.Presettables
 
         private bool hat;
         private GameObject hatPrefab;
+        private GameObject otherPrefab;
 
         void Awake() {
             nose = Preset.nose;
@@ -34,6 +35,8 @@ namespace CSFramework.Presettables
             if(hatPrefab != null) {
                 hatPrefab.SetActive(hat);
             }
+
+            otherPrefab = GameObject.Find(Preset.otherPrefabName);
         }
 		
 		void Start()
@@ -75,6 +78,14 @@ namespace CSFramework.Presettables
             else if (hatPrefab != null)
             {
                 hatPrefab.SetActive(hat);
+            }
+
+
+            // OTHER --------------------------------------------------
+            if(otherPrefab != null){
+                otherPrefab.SetActive(Preset.other);
+            } else if(Preset.other) {
+                Debug.Log("Other rest frame object cannot be found active in the scene.");
             }
         }
 	}

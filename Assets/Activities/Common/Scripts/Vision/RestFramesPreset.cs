@@ -18,5 +18,9 @@ namespace CSFramework.Presets
         [Header("Hat")]
         [SerializeField] public bool hat;
         [SerializeField] public string hatPrefabName;
+
+        [Header("Other")]
+        [SerializeField] public bool other;
+        [SerializeField] public string otherPrefabName;
     }
 }
