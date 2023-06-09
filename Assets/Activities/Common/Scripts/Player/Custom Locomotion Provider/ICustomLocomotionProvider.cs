@@ -11,7 +11,6 @@ public interface ICustomLocomotionProvider
 {
     public List<InputActionReference> LeftInputReferences { get; }
     public List<InputActionReference> RightInputReferences { get; }
-    public string DisplayName { get; }
 
     public void EnableLeftActions() => LeftInputReferences.ForEach(EnableAction);
 
