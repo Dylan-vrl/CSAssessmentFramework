@@ -68,11 +68,13 @@ namespace CSFramework.Editor
                         root.RemoveAt(root.childCount - 1);
 
                     if (gameObject.GetComponents(typeof(IPresettable)).Length > 1)
-                        Object.DestroyImmediate(component);
+                    {
+                        Undo.DestroyObjectImmediate(component);
+                    }
                     else
                     {
                         toggle.SetEnabled(false);
-                        Object.DestroyImmediate(gameObject);
+                        Undo.DestroyObjectImmediate(gameObject);
                     }
                 }
                 else
@@ -99,7 +101,7 @@ namespace CSFramework.Editor
 
                     if (root.childCount >= 2)
                         root.RemoveAt(root.childCount - 1);
-                    Object.DestroyImmediate(component);
+                    Undo.DestroyObjectImmediate(gameObject);
                 }
                 else
                 {
