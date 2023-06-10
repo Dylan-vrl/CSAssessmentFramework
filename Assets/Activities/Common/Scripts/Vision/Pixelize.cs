@@ -4,7 +4,7 @@ using UnityEngine;
 using CSFramework.Presets;
 using UnityEngine.Rendering;
 using static CSFramework.Core.PresettableCategory;
-
+/*
 namespace CSFramework.Extensions
 {
 	[RequireComponent(typeof(Volume))]
@@ -35,3 +35,4 @@ namespace CSFramework.Extensions
 		}
 	}
 }
+*/
