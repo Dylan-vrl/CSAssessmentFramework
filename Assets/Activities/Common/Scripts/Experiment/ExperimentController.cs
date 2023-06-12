@@ -90,7 +90,7 @@ namespace CSFramework.Presettables
         public static void GoBackToMenu()
         {
             GameStateManager.EndGame();
-            SceneManager.LoadScene("Menu");
+            GameStateManager.LoadMainMenu();
         }
 
         public override PresettableCategory GetCategory() => PresettableCategory.Experiment;

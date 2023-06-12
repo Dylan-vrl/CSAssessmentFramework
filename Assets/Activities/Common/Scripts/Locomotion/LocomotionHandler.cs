@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CSFramework.Core;
@@ -23,6 +24,7 @@ public class LocomotionHandler : PresettableMonoBehaviour<LocomotionHandlerPrese
         );
         
         SpawnControllers();
+        GameStateManager.ReturnToMainMenu += DisableActionRefs;
     }
     
     public void UpdateProviders(
@@ -105,11 +107,7 @@ public class LocomotionHandler : PresettableMonoBehaviour<LocomotionHandlerPrese
 
     private void UpdateActionRefs()
     {
-        // Disable all action references
-        FindObjectsOfType<LocomotionProvider>()
-            .OfType<ICustomLocomotionProvider>()
-            .ToList()
-            .ForEach(provider => provider.DisableActions());
+        DisableActionRefs();
         
         // (Re-)enable active actions references for each hand
         leftCustomLocomotionProviders.ForEach(provider => provider.EnableLeftActions());
@@ -120,6 +118,22 @@ public class LocomotionHandler : PresettableMonoBehaviour<LocomotionHandlerPrese
     {
         Instantiate(Preset.LeftControllerPrefab, controllersParent);
         Instantiate(Preset.RightControllerPrefab, controllersParent);
+    }
+
+
+    private void DisableActionRefs()
+    {
+        // Disable all action references
+        FindObjectsOfType<LocomotionProvider>()
+            .OfType<ICustomLocomotionProvider>()
+            .ToList()
+            .ForEach(provider => provider.DisableActions());
+    }
+    
+    private void OnDisable()
+    {
+        DisableActionRefs();
+        GameStateManager.ReturnToMainMenu -= DisableActionRefs;
     }
 
     public override PresettableCategory GetCategory() => PresettableCategory.Locomotion;

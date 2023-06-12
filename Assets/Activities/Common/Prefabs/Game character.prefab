@@ -289,10 +289,10 @@ MonoBehaviour:
   m_TrackingStateInput:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Tracking State Input
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 591f3a4c-0320-4c05-ad0d-f9c6cb218d72
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -349,8 +349,8 @@ GameObject:
   - component: {fileID: 8167696751386711846}
   - component: {fileID: 9148614172910889515}
   - component: {fileID: 4362530361121219029}
-  m_Layer: 0
-  m_Name: Game Character
+  m_Layer: 8
+  m_Name: Game character
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -371,7 +371,7 @@ Transform:
   - {fileID: 3451296890244926784}
   - {fileID: 7148433862182099961}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5880819717141815419
 MonoBehaviour:

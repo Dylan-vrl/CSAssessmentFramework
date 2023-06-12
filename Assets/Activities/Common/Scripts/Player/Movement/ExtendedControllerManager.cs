@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 // ReSharper disable InconsistentNaming
 
-namespace Player.Movement
+namespace Activities.Common.Scripts.Player.Movement
 {
     /// <summary>
     /// This class Is an extended Copy of <see cref="ActionBasedControllerManager"/>.
@@ -77,6 +76,10 @@ namespace Player.Movement
         [Tooltip("The reference to the action of moving the XR Origin with this controller.")]
         private InputActionReference move;
 
+        [SerializeField]
+        [Tooltip("The reference to the action of interacting with an interactable.")]
+        private InputActionReference interact;
+
         private bool m_DirectHover;
         private bool m_DirectSelect;
         private bool m_Teleporting;
@@ -90,6 +93,8 @@ namespace Player.Movement
         public InputActionReference SnapTurn => snapTurn;
 
         public InputActionReference Move => move;
+
+        public InputActionReference Interact => interact;
         
         // For our input mediation, we are enforcing a few rules between direct, ray, and teleportation interaction:
         // 1. If the Teleportation Ray is engaged, the Direct and Ray interactors are disabled
@@ -97,18 +102,26 @@ namespace Player.Movement
         // 3. If the Ray interactor is selecting, all locomotion controls are disabled (teleport ray and snap controls) to prevent input collision
         void SetupInteractorEvents()
         {
+            if (directInteractor == null && m_RayInteractor == null)
+            {
+                DisableAllInteractions();
+            }
+            
+
             if (directInteractor != null)
             {
                 directInteractor.hoverEntered.AddListener(DirectHoverEntered);
                 directInteractor.hoverExited.AddListener(DirectHoverExited);
                 directInteractor.selectEntered.AddListener(DirectSelectEntered);
                 directInteractor.selectExited.AddListener(DirectSelectExited);
+                EnableAction(interact);
             }
 
             if (m_RayInteractor != null)
             {
                 m_RayInteractor.selectEntered.AddListener(RaySelectEntered);
                 m_RayInteractor.selectExited.AddListener(RaySelectExited);
+                EnableAction(interact);
             }
 
             if (teleportModeActivate != null && teleportModeCancel != null)
@@ -129,12 +142,14 @@ namespace Player.Movement
                 directInteractor.hoverExited.RemoveListener(DirectHoverExited);
                 directInteractor.selectEntered.RemoveListener(DirectSelectEntered);
                 directInteractor.selectExited.RemoveListener(DirectSelectExited);
+                DisableAction(interact);
             }
 
             if (m_RayInteractor != null)
             {
                 m_RayInteractor.selectEntered.RemoveListener(RaySelectEntered);
                 m_RayInteractor.selectExited.RemoveListener(RaySelectExited);
+                DisableAction(interact);
             }
 
             if (teleportModeActivate != null && teleportModeCancel != null)
@@ -257,6 +272,21 @@ namespace Player.Movement
 
                 if (!m_Teleporting && m_TeleportInteractor.gameObject.activeSelf)
                     m_TeleportInteractor.gameObject.SetActive(false);
+            }
+        }
+        
+        /// <summary>
+        /// All interactions are enabled by default, but are not used. This method disables them.
+        /// </summary>
+        private void DisableAllInteractions()
+        {
+            //TODO: modify this method if other interaction types are to be used. As this breaks them
+            if (interact != null)
+            {
+                foreach (InputAction action in interact.action.actionMap)
+                {
+                    action.Disable();
+                }
             }
         }
 
