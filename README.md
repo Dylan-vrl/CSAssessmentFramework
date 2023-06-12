@@ -69,7 +69,7 @@ To create a new preset instance, in the folder location of your choice:
 
 ## Use existing features
 
-### How to use the setup window
+### __How to use the setup window__
 You can open the setup window from the top bar: `CSFramework > Setup`, we suggest to dock it right next to the inspector and to open it wide enough so that most of its content fit in your screen.
 
 ![Figure of the setup window](Assets/Resources/README/images/setup_window.png)
@@ -90,18 +90,18 @@ From the top to the bottom, here is an explanation of each component:
 
   ![Figure of the setup window](Assets/Resources/README/images/non-extensions.png) 
 
-### How to use the `LocomotionHandler`
+### __How to use the `LocomotionHandler`__
 
 ## Integrate your own features
 
-### How to integrate your own scripts into the framework
-#### Create the files
+### __How to integrate your own scripts into the framework__
+#### __Create the files__
 ![Figure of the create buttons](Assets/Resources/README/images/create_buttons.png)
 To benefit from ready-to-use templates, we suggest that you create your scripts from the window directly. To do so, go to the desired category panel for your script and fill the name of your `Presettable` and the name of the extended type, if you want to create an `Extension`. Then, when clicking on the _Create Presettable_ or the _Create Extension_ buttons, a new `Presettable` script will be generated in the _Assets_ folder, along with its preset.
 
 For example, from the _Vision_ panel, using `CameraRotator` as a name and `Camera` as the extended type and clicking on _Create Extension_ will create a new script called `CameraRotator` which is an `Extension` for `Camera` of category _Vision_ and the corresponding `CameraRotatorPreset`.
 
-#### Define the fields exposed in the preset
+#### __Define the fields exposed in the preset__
 The default generated preset script will look like this:
 ```cs
 [CreateAssetMenu(menuName = "CSFramework/Preset Instances/Vision/CameraRotatorPreset", fileName = "new CameraRotatorPreset")]
@@ -205,7 +205,7 @@ public class CameraRotator : Extension<Camera, CameraRotatorPreset>
 
 You can now add it to the scene and create a preset for it as any other `Presettable`, following the steps presented in [its section](#creating-a-preset).
 
-### How to integrate a custom `LocomotionProvider`
+### __How to integrate a custom `LocomotionProvider`__
 Your class needs to extend `LocomotionProvider` or any subclass of it and either `ICustomMovementLocomotionProvider` or `ICustomRotationLocomotionProvider`. We also suggest to make it a `Presettable` by extending `IPresettable<#YourPresetType#>`. As it is already a subclass of `LocomotionProvider` it can not inherit from `PresettableMonoBehaviour`, that's why we're using the interface instead.
 
 By extending these interfaces, you need to define the following methods and properties:
