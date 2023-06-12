@@ -825,7 +825,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!95 &9167742967363915766
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -842,7 +842,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &2864296513192174047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -855,6 +856,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 437d5982ecaee244f9e0a71b0ebdf037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionRelatedAction: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  locomotionRelatedAction: {fileID: 1010738217276881514, guid: 777319c6e78c14cf3869659af9525160,
+    type: 3}
   triggerValue: {fileID: -2119002694758190702, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   gripValue: {fileID: -1707091331463662166, guid: c348712bda248c246b8c49b3db54643f,
@@ -865,16 +870,6 @@ MonoBehaviour:
     type: 3}
   joystickValue: {fileID: 4613619346418574047, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  triggerRelatedActions: []
-  gripRelatedActions:
-  - {fileID: -3742484312079769484, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  primaryBRelatedActions: []
-  secondaryBRelatedActions: []
-  joystickRelatedActions:
-  - {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  - {fileID: -7374733323251553461, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  - {fileID: 1010738217276881514, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  - {fileID: 1263111715868034790, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   enabledMaterial: {fileID: 2100000, guid: 0e6af354a89f5994298052955990b514, type: 2}
   disabledMaterial: {fileID: 2100000, guid: f6e32b22eca20204db222e6d1f3a6bc4, type: 2}
   triggerRenderer: {fileID: 6958626615685456081}
