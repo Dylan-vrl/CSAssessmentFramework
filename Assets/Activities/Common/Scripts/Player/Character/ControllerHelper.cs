@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
-using UnityEngine.XR;
+using UnityEngine.Serialization;
 
 namespace Player.Character
 {
@@ -13,8 +12,9 @@ namespace Player.Character
     /// </summary>
     public class ControllerHelper : MonoBehaviour
     {
-        [Header("Example actions related to interaction and Locomotion")]
-        [SerializeField] private InputActionReference interactionRelatedAction;
+        [FormerlySerializedAs("interactionRelatedAction")]
+        [Header("Actions related to interaction and Locomotion")]
+        [SerializeField] private InputActionReference interactionAction;
         [SerializeField] private InputActionReference locomotionRelatedAction;
 
         [Header("Actions with Button Values, for animation")]
@@ -83,11 +83,10 @@ namespace Player.Character
             _actions.Add(TriggerName, new HashSet<InputAction>());
             _actions.Add(PrimaryButtonName, new HashSet<InputAction>());
             _actions.Add(SecondaryButtonName, new HashSet<InputAction>());
-
-            Debug.Log(interactionRelatedAction.action.actionMap.name);
-            AddActiveInputActions(interactionRelatedAction.action.actionMap);
             
-            Debug.Log(locomotionRelatedAction.action.actionMap.name);
+            // we only add a single action instead of all in the actionmap since interactions are more difficult to disable.
+            AddActiveInputActions(interactionAction.action);
+            
             AddActiveInputActions(locomotionRelatedAction.action.actionMap);
             OnActionsModified();
             
@@ -97,20 +96,28 @@ namespace Player.Character
         {
             foreach (InputAction inputAction in inputActionMap)
             {
-                foreach (InputBinding binding in inputAction.bindings)
+                AddActiveInputActions(inputAction);
+            }
+        }
+
+        /// <summary>
+        /// Adds all input actions that have a binding to an element of the controller that interests us to the <see cref="_actions"/> dictionary.
+        /// </summary>
+        /// <param name="inputAction">The input Action for which we want to check the bindings.</param>
+        private void AddActiveInputActions(InputAction inputAction)
+        {
+            foreach (InputBinding binding in inputAction.bindings)
+            {
+                var bindingPath = binding.effectivePath;
+                var bindingName = bindingPath[(bindingPath.LastIndexOf("/", StringComparison.Ordinal) + 1)..];
+
+                foreach (var key in _actions.Keys)
                 {
-                    var bindingPath = binding.effectivePath;
-                    var bindingName = bindingPath[(bindingPath.LastIndexOf("/", StringComparison.Ordinal) + 1)..];
-                    
-                    foreach (var key in _actions.Keys)
+                    if (bindingName.Contains(key, StringComparison.InvariantCultureIgnoreCase))
                     {
-                        if (bindingName.Contains(key, StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            _actions[key].Add(inputAction);
-                        }
+                        _actions[key].Add(inputAction);
                     }
                 }
-                
             }
         }
 
@@ -148,7 +155,11 @@ namespace Player.Character
 
         private void Update()
         {
-            
+            AnimateButtons();
+        }
+
+        private void AnimateButtons()
+        {
             if (_animator != null)
             {
                 if (joystickValue != null)

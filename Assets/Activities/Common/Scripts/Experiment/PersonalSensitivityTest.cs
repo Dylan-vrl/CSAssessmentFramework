@@ -110,7 +110,7 @@ namespace CSFramework.Extensions
                     }
                 }
             }
-            SceneManager.LoadScene("Menu");
+            GameStateManager.LoadMainMenu();
         }
 
         async Task Rotate360(Quaternion turnAxis)

@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
-
 // ReSharper disable InconsistentNaming
 
 namespace Activities.Common.Scripts.Player.Movement
@@ -103,7 +102,11 @@ namespace Activities.Common.Scripts.Player.Movement
         // 3. If the Ray interactor is selecting, all locomotion controls are disabled (teleport ray and snap controls) to prevent input collision
         void SetupInteractorEvents()
         {
-            DisableAllInteractions();
+            if (directInteractor == null && m_RayInteractor == null)
+            {
+                DisableAllInteractions();
+            }
+            
 
             if (directInteractor != null)
             {
@@ -282,7 +285,7 @@ namespace Activities.Common.Scripts.Player.Movement
             {
                 foreach (InputAction action in interact.action.actionMap)
                 {
-                    //action.Disable();
+                    action.Disable();
                 }
             }
         }
