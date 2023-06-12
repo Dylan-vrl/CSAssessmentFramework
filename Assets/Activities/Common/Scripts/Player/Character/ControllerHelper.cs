@@ -135,7 +135,8 @@ namespace Player.Character
             {
                 if (relatedActions.Any(r => r.enabled))
                 {
-                    Debug.Log($"enabled {buttonRenderer.name} from {string.Join(", ",relatedActions.Where(i => i.enabled))}");
+                    // If you wish to know why they are blue
+                    //Debug.Log($"enabled {buttonRenderer.name} from {string.Join(", ",relatedActions.Where(i => i.enabled))}");
                     if (buttonRenderer.material != enabledMaterial)
                     {
                         buttonRenderer.material = enabledMaterial;
