@@ -63,13 +63,22 @@ Locomotion/Movement:
 
 ## Creating a Preset
 To create a new preset instance, in the folder location of your choice:
-    [right click] > Create > CSFramework > Preset Instances > [Your Preset's Category] > [Your Presets Type]
+    `[right click] > Create > CSFramework > Preset Instances > [Your Preset's category] > [Your Preset's type]`
+
+## How to use the setup window
+You can open the setup window from the top bar: `CSFramework > Setup`, we suggest to dock it right next to the inspector and to open it wide enough so that most of its content fit in your screen.
+
+![Figure of the setup window](Assets/Resources/README/images/setup_window.png)
+
+From the top to the bottom, here is an explanation of each component:
+
+- Category panels. Each `Presettable` belongs to a category, you will find them in the corresponding panel. To add a new category, you just have to define a new case for the `PresettableCategory` `enum`.
+- Script creation fields and buttons. They can be used to generate your own `Presettable`s from a template. You can find more information about this in the [integrating a new script](#how-to-integrate-your-own-scripts-into-the-framework) section.
+- ![Figure of the setup window](Assets/Resources/README/images/non-extensions.png) In scene non-extensions are the classes extending `IPresettable` but not `IExtension` that are present in the scene. 
 
 ## How to integrate your own scripts into the framework
 ### Create the files
-First, open the CSFramework window using the panels at the top of the screen: `CSFramework/Setup`. Feel free to dock the window next to the inspector and make sure it is not too small.
-
-![create_buttons image](images/create_buttons.png)
+![Figure of the create buttons](Assets/Resources/README/images/create_buttons.png)
 To benefit from ready-to-use templates, we suggest that you create your scripts from the window directly. To do so, go to the desired category panel for your script and fill the name of your `Presettable` and the name of the extended type, if you want to create an `Extension`. Then, when clicking on the _Create Presettable_ or the _Create Extension_ buttons, a new `Presettable` script will be generated in the _Assets_ folder, along with its preset.
 
 For example, from the _Vision_ panel, using `CameraRotator` as a name and `Camera` as the extended type and clicking on _Create Extension_ will create a new script called `CameraRotator` which is an `Extension` for `Camera` of category _Vision_ and the corresponding `CameraRotatorPreset`.
