@@ -11,11 +11,12 @@ using UnityEditor;
 
 public class SingleNose : MonoBehaviour
 {
-    [SerializeField] private float noseWidth;
-    [SerializeField] private float noseFlatness;
+    private float noseWidth;
+    private float noseFlatness;
 
     [SerializeField] public float NoseWidth { get { return noseWidth; } set { noseWidth = value; } }
     [SerializeField] public float NoseFlatness { get { return noseFlatness; } set { noseFlatness = value; } }
+    [SerializeField] public Color color;
 
     void Start()
     {
@@ -24,6 +25,8 @@ public class SingleNose : MonoBehaviour
         float zScale = Mathf.Lerp(.03f, .15f, .5f);
 
         transform.localScale = new Vector3(xScale, yScale, zScale);
+        var renderer = GetComponent<MeshRenderer>();
+        renderer.material.color = color;
     }
 
 }

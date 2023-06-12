@@ -12,6 +12,7 @@ namespace CSFramework.Presets
         [Header("Nose")]
         [SerializeField] public bool nose;
         [SerializeField] public string nosePrefabName;
+        [SerializeField] public Color noseColor;
         [Range(0f, 1f)][SerializeField] public float noseWidth = 1;
         [Range(0f, 1f)][SerializeField] public float noseFlatness = 1;
 

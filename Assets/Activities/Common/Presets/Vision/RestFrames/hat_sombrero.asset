@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f959308f30bf3c046bf28787e357dec8, type: 3}
-  m_Name: default
+  m_Name: hat_sombrero
   m_EditorClassIdentifier: 
   nose: 0
   nosePrefabName: Nose
   noseColor: {r: 0, g: 0, b: 0, a: 0}
   noseWidth: 0.393
   noseFlatness: 0.287
-  hat: 0
+  hat: 1
   hatPrefabName: Sombrero
   other: 0
   otherPrefabName: 
