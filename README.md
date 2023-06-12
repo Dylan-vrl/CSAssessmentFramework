@@ -8,7 +8,7 @@ Our solution is a complete Unity Project containing the necessary tools to set u
 - [Installation Guide](#installation-guide)
    - [Requirements](#requirements)
    - [Installation](#installation)
-- [Available Features](#features)
+- [Features](#features)
 - [Creating a preset](#creating-a-preset)
 - [Use existing features](#use-existing-features)
   - [Using the setup window](#how-to-use-the-setup-window)
@@ -43,11 +43,21 @@ We highly recommend and only officially support the latest LTS version of Unity 
 ## Features
 The features listed here are the ones specifically added as a possible prevention or reduction technique to cybersickness.  
 
-Experiment:
-- Personal rotational susceptibility test
+Experiment - <ins>Personal Sensitivity Test</ins>:   
 
-Environment:
-- Background Music (calming or upbeat)
+This test is added to observe participant's individual rotational susceptibility. This feature has a special scene for it but can still be used in other game scenes. The subject is rotated 360 degrees in each axis a total of 9 times (called 'turns') in three groups: {0,1,2}, {1,0,2}, {0,2,1} where 0 = "PITCH", 1 = "YAW", and 2 = "ROLL". The preset parameters:  
+  -  Inside Game Scene -> true when the test is not played in its own special scene  
+  -  Turn Per Axis -> number of 360 degree rotations per turn (the total amount of turns become 9 * turnPerAxis)  
+  -  Turn Duration Per Axis -> the amount of seconds for a single 360 degree turn takes.  
+  -  Wait Duration Btw Each Turn -> the time waited after completing a turn and moving onto another axis inside the group (also equal to the time turn axis indicators are shown on the screen)  
+  -  Wait Duration Btw 3 Axis Turns -> the time waited between each 3 groups of turns.  
+  
+
+Environment - <ins>Background Music</ins>:  
+This features adds a looping background music to the scenes. 
+  -  [Optional] Music Start -> An initial sequence of a music which will not be looped.
+  -  Music Loop -> The music that will be looped throught the game.
+
 
 Vision:
 - Reduced Field of View
