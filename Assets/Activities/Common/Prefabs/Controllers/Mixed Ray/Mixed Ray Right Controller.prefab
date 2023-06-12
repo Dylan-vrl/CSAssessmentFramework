@@ -518,7 +518,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -8270564778575511633, guid: c348712bda248c246b8c49b3db54643f,
+    m_Reference: {fileID: -8270564778575511633, guid: 777319c6e78c14cf3869659af9525160,
       type: 3}
   m_SelectActionValue:
     m_UseReference: 1
@@ -531,7 +531,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -8270564778575511633, guid: c348712bda248c246b8c49b3db54643f,
+    m_Reference: {fileID: -8270564778575511633, guid: 777319c6e78c14cf3869659af9525160,
       type: 3}
   m_ActivateAction:
     m_UseReference: 1

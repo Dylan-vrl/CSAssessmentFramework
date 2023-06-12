@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f959308f30bf3c046bf28787e357dec8, type: 3}
-  m_Name: default
+  m_Name: nose_fairskin
   m_EditorClassIdentifier: 
-  nose: 0
+  nose: 1
   nosePrefabName: Nose
-  noseColor: {r: 0, g: 0, b: 0, a: 0}
+  noseColor: {r: 0.84313726, g: 0.7137255, b: 0.64705884, a: 1}
   noseWidth: 0.393
   noseFlatness: 0.287
   hat: 0

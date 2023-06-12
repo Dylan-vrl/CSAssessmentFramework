@@ -89,7 +89,7 @@ namespace CSFramework.Extensions
         private async void Begin()
         {
             rotating = true;
-            int [,] rotationTurns = {{0,1,2}, {1,0,2}, {2,1,0}};
+            int [,] rotationTurns = {{0,1,2}, {1,0,2}, {0,2,1}};
             for (int k = 0; k < 3; k++) {
                 await Task.Delay((int) (waitDuration*1000));
                 for(int j=0; j < 3; j++)

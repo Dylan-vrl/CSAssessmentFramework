@@ -59,6 +59,7 @@ namespace CSFramework.Presettables
                 var noseScript = nosePrefab.GetComponent<SingleNose>();
                 noseScript.NoseWidth = noseWidth;
                 noseScript.NoseFlatness = noseFlatness;
+                noseScript.color = Preset.noseColor;
             }
 
 

@@ -8,13 +8,14 @@ Our solution is a complete Unity Project containing the necessary tools to set u
 - [Installation Guide](#installation-guide)
    - [Requirements](#requirements)
    - [Installation](#installation)
-- [Available Features](#features)
+- [Features](#features)
 - [Creating a preset](#creating-a-preset)
-- [Integrating a new script](#how-to-integrate-your-own-scripts-into-the-framework)
-   - [Creating files](#create-the-files)
-   - [Defining Preset Fields](#define-the-fields-exposed-in-the-preset)
-   - [Writing the behaviour of the presettable](#write-the-behaviour-of-the-presettable)
-- [Integrating a custom LocomotionProvider](#how-to-integrate-a-custom-locomotionprovider)
+- [Use existing features](#use-existing-features)
+  - [Using the setup window](#how-to-use-the-setup-window)
+  - [Using the `LocomotionHandler`](#how-to-use-the-locomotionhandler)
+- [Integrate your own features](#integrate-your-own-features)
+  - [Integrating a new script](#how-to-integrate-your-own-scripts-into-the-framework)
+  - [Integrating a custom LocomotionProvider](#how-to-integrate-a-custom-locomotionprovider)
 - [Glossary](#glossary-for-the-framework)
 - [Sources](#sources)
  
@@ -22,6 +23,7 @@ Our solution is a complete Unity Project containing the necessary tools to set u
 ### Requirements
 - Unity Editor 2022.2.11f+
 - Unity Universal Render Pipeline
+- Unity XR Toolkit
 - Git LFS support  
 
 We highly recommend and only officially support the latest LTS version of Unity starting from the given version.
@@ -41,11 +43,21 @@ We highly recommend and only officially support the latest LTS version of Unity 
 ## Features
 The features listed here are the ones specifically added as a possible prevention or reduction technique to cybersickness.  
 
-Experiment:
-- Personal rotational susceptibility test
+Experiment - <ins>Personal Sensitivity Test</ins>:   
 
-Environment:
-- Background Music (calming or upbeat)
+This test is added to observe participant's individual rotational susceptibility. This feature has a special scene for it but can still be used in other game scenes. The subject is rotated 360 degrees in each axis a total of 9 times (called 'turns') in three groups: {0,1,2}, {1,0,2}, {0,2,1} where 0 = "PITCH", 1 = "YAW", and 2 = "ROLL". The preset parameters:  
+  -  Inside Game Scene -> true when the test is not played in its own special scene  
+  -  Turn Per Axis -> number of 360 degree rotations per turn (the total amount of turns become 9 * turnPerAxis)  
+  -  Turn Duration Per Axis -> the amount of seconds for a single 360 degree turn takes.  
+  -  Wait Duration Btw Each Turn -> the time waited after completing a turn and moving onto another axis inside the group (also equal to the time turn axis indicators are shown on the screen)  
+  -  Wait Duration Btw 3 Axis Turns -> the time waited between each 3 groups of turns.  
+  
+
+Environment - <ins>Background Music</ins>:  
+This features adds a looping background music to the scenes. 
+  -  [Optional] Music Start -> An initial sequence of a music which will not be looped.
+  -  Music Loop -> The music that will be looped throught the game.
+
 
 Vision:
 - Reduced Field of View
@@ -63,18 +75,53 @@ Locomotion/Movement:
 
 ## Creating a Preset
 To create a new preset instance, in the folder location of your choice:
-    [right click] > Create > CSFramework > Preset Instances > [Your Preset's Category] > [Your Presets Type]
+    `[right click] > Create > CSFramework > Preset Instances > [Your Preset's category] > [Your Preset's type]`
 
-## How to integrate your own scripts into the framework
-### Create the files
-First, open the CSFramework window using the panels at the top of the screen: `CSFramework/Setup`. Feel free to dock the window next to the inspector and make sure it is not too small.
+## Use existing features
 
-![create_buttons image](images/create_buttons.png)
+### __How to use the setup window__
+You can open the setup window from the top bar: `CSFramework > Setup`, we suggest to dock it right next to the inspector and to open it wide enough so that most of its content fit in your screen.
+
+![Figure of the setup window](Assets/Resources/README/images/setup_window.png)
+
+From the top to the bottom, here is an explanation of each component:
+
+- __Category panels__: Each `Presettable` belongs to a category, you will find them in the corresponding panel. To add a new category, you just have to define a new case for the `PresettableCategory` `enum`.
+- __Script creation fields and buttons__: They can be used to generate your own `Presettable`s from a template. You can find more information about this in the [integrating a new script](#how-to-integrate-your-own-scripts-into-the-framework) section.
+
+
+- __Non-extensions__: They are the classes extending `IPresettable` but not `IExtension`. They're separated between the ones which are present in the scene and the ones which are not. 
+  ![Figure of the non-extensions part of the setup window](Assets/Resources/README/images/non-extensions.png) 
+  - __In Scene__
+    - If it is in the scene, disabling the toggle next to it name will destroy the attached `GameObject`. 
+    - Selecting the circle next to the preset field will display the list of all available preset for this script. You can also drag and drop the `ScriptableObject` file in the field.
+    - You can open the _Modify preset_ foldout to display the inspector of the preset and modify its value. Changes are persistent, it is equivalent to modifying the `ScriptableObject` file directly.
+  - __Not In Scene__
+    - All existing non-extension `Presettable`s for the current category will appear here. You can create any of them by clicking the corresponding button, it will create a new `GameObject` with the same name as the script with the component attached to it.
+
+- __Extensions__: They are the classes extending `IExtension`. Every `GameObject` with a component for which an extension exists will appear in this section and the available extensions for it will be proposed. For example, if you defined an extension `CameraRotator` for the `Camera` component, then each camera in the scene will be displayed in the window and the `CameraRotator` extension will be proposed for all of them. The toggle next to its name will add or remove this component to the associated `GameObject`. As for `PresettableMonoBehaviour`s, you can look at the preset values and modify them directly from the window.
+
+### __How to use the `LocomotionHandler`__
+![Figure of the LocomotionHandler inspector](Assets/Resources/README/images/locomotionhandler.png) 
+
+The `LocomotionHandler` inspector consists of three sections:
+- Left and right controller prefabs  
+You need to reference the controller prefabs you want to use for both hands here. For example you may want to use a ray interactor on the left hand and a direct interactor on the right hand, so you have to set them here.
+- Left and right active locomotion providers  
+These are the locomotion providers that will be used for the left and right hand. If you select the continuous move provider for the left hand and the continuous turn provider for the right hand, only the correct actions will be enabled. Note that in the Coins scene, these settings will be overriden by the in-game ui selected categories. So you shouldn't touch the `LocomotionHandler` in this scene.
+- Active locomotion providers' inspector  
+The inspector of each active provider will appear from here to modify any settings you want directly from the main window.
+
+## Integrate your own features
+
+### __How to integrate your own scripts into the framework__
+#### __Create the files__
+![Figure of the create buttons](Assets/Resources/README/images/create_buttons.png)
 To benefit from ready-to-use templates, we suggest that you create your scripts from the window directly. To do so, go to the desired category panel for your script and fill the name of your `Presettable` and the name of the extended type, if you want to create an `Extension`. Then, when clicking on the _Create Presettable_ or the _Create Extension_ buttons, a new `Presettable` script will be generated in the _Assets_ folder, along with its preset.
 
 For example, from the _Vision_ panel, using `CameraRotator` as a name and `Camera` as the extended type and clicking on _Create Extension_ will create a new script called `CameraRotator` which is an `Extension` for `Camera` of category _Vision_ and the corresponding `CameraRotatorPreset`.
 
-### Define the fields exposed in the preset
+#### __Define the fields exposed in the preset__
 The default generated preset script will look like this:
 ```cs
 [CreateAssetMenu(menuName = "CSFramework/Preset Instances/Vision/CameraRotatorPreset", fileName = "new CameraRotatorPreset")]
@@ -106,8 +153,9 @@ public class CameraRotatorPreset: Preset<CameraRotator>
     public float RotationSpeed { get; private set; }
 }
 ```
-### Write the behaviour of the presettable
-#### PresettableMonoBehaviour
+#### Write the behaviour of the presettable
+__PresettableMonoBehaviour__
+
 When creating a non-extension `Presettable`, here is the generated template:
 ```cs
 public class GameStarter : PresettableMonoBehaviour<GameStarterPreset>
@@ -139,7 +187,8 @@ public class GameStarter : PresettableMonoBehaviour<GameStarterPreset>
   public override PresettableCategory GetCategory() => Experiment;
 }
 ```
-#### Extension
+__Extension__
+
 The same principles can be applied to extensions, with the addition that the generated template includes a `GetComponent<Extended>()` call in `Awake()` to get the extended object. You may replace this call by any other way of getting it. If you don't use directly `GetComponent<Extended>()`, don't forget to remove the `RequireComponent()` attribute.
 ```cs
 [RequireComponent(typeof(Camera))]
@@ -176,7 +225,7 @@ public class CameraRotator : Extension<Camera, CameraRotatorPreset>
 
 You can now add it to the scene and create a preset for it as any other `Presettable`, following the steps presented in [its section](#creating-a-preset).
 
-## How to integrate a custom `LocomotionProvider`
+### __How to integrate a custom `LocomotionProvider`__
 Your class needs to extend `LocomotionProvider` or any subclass of it and either `ICustomMovementLocomotionProvider` or `ICustomRotationLocomotionProvider`. We also suggest to make it a `Presettable` by extending `IPresettable<#YourPresetType#>`. As it is already a subclass of `LocomotionProvider` it can not inherit from `PresettableMonoBehaviour`, that's why we're using the interface instead.
 
 By extending these interfaces, you need to define the following methods and properties:

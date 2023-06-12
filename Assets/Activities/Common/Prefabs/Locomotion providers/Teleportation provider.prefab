@@ -73,6 +73,19 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 737890489006591557, guid: 777319c6e78c14cf3869659af9525160,
       type: 3}
+  leftTeleportSelect:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Left Teleport Select
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 185c36f5-d792-4879-8132-7a98d2309b96
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -4084014799535200556, guid: 777319c6e78c14cf3869659af9525160,
+      type: 3}
   rightTeleportModeActivate:
     m_UseReference: 1
     m_Action:
@@ -98,4 +111,17 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 2307464322626738743, guid: 777319c6e78c14cf3869659af9525160,
+      type: 3}
+  rightTeleportSelect:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Right Teleport Select
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 0be43788-9dd0-43ee-9a13-a20a1a6d22d3
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -8270564778575511633, guid: 777319c6e78c14cf3869659af9525160,
       type: 3}
