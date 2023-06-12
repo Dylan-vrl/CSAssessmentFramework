@@ -78,19 +78,29 @@ From the top to the bottom, here is an explanation of each component:
 
 - __Category panels__: Each `Presettable` belongs to a category, you will find them in the corresponding panel. To add a new category, you just have to define a new case for the `PresettableCategory` `enum`.
 - __Script creation fields and buttons__: They can be used to generate your own `Presettable`s from a template. You can find more information about this in the [integrating a new script](#how-to-integrate-your-own-scripts-into-the-framework) section.
+
+
 - __Non-extensions__: They are the classes extending `IPresettable` but not `IExtension`. They're separated between the ones which are present in the scene and the ones which are not. 
+  ![Figure of the non-extensions part of the setup window](Assets/Resources/README/images/non-extensions.png) 
   - __In Scene__
     - If it is in the scene, disabling the toggle next to it name will destroy the attached `GameObject`. 
     - Selecting the circle next to the preset field will display the list of all available preset for this script. You can also drag and drop the `ScriptableObject` file in the field.
     - You can open the _Modify preset_ foldout to display the inspector of the preset and modify its value. Changes are persistent, it is equivalent to modifying the `ScriptableObject` file directly.
   - __Not In Scene__
     - All existing non-extension `Presettable`s for the current category will appear here. You can create any of them by clicking the corresponding button, it will create a new `GameObject` with the same name as the script with the component attached to it.
-  
-- __Extensions__: They are the classes extending `IExtension`. Every `GameObject` with a component for which an extension exists will appear in this section and the available extensions for it will be proposed. For example, if you defined an extension `AnimatedVignette` for the `Volume` component, then each volume in the scene will be displayed in the window and the `AnimatedVignette` extension will be proposed for all of them.
 
-  ![Figure of the setup window](Assets/Resources/README/images/non-extensions.png) 
+- __Extensions__: They are the classes extending `IExtension`. Every `GameObject` with a component for which an extension exists will appear in this section and the available extensions for it will be proposed. For example, if you defined an extension `CameraRotator` for the `Camera` component, then each camera in the scene will be displayed in the window and the `CameraRotator` extension will be proposed for all of them. The toggle next to its name will add or remove this component to the associated `GameObject`. As for `PresettableMonoBehaviour`s, you can look at the preset values and modify them directly from the window.
 
 ### __How to use the `LocomotionHandler`__
+![Figure of the LocomotionHandler inspector](Assets/Resources/README/images/locomotionhandler.png) 
+
+The `LocomotionHandler` inspector consists of three sections:
+- Left and right controller prefabs  
+You need to reference the controller prefabs you want to use for both hands here. For example you may want to use a ray interactor on the left hand and a direct interactor on the right hand, so you have to set them here.
+- Left and right active locomotion providers  
+These are the locomotion providers that will be used for the left and right hand. If you select the continuous move provider for the left hand and the continuous turn provider for the right hand, only the correct actions will be enabled. Note that in the Coins scene, these settings will be overriden by the in-game ui selected categories. So you shouldn't touch the `LocomotionHandler` in this scene.
+- Active locomotion providers' inspector  
+The inspector of each active provider will appear from here to modify any settings you want directly from the main window.
 
 ## Integrate your own features
 
