@@ -23,6 +23,9 @@ namespace CSFramework.Presettables
         [SerializeField]
         [Tooltip("The reference to the action to cancel the teleport aiming mode for this controller.")]
         private InputActionProperty leftTeleportModeCancel;
+        [SerializeField]
+        [Tooltip("The reference to the action to select teleport for this controller.")]
+        private InputActionProperty leftTeleportSelect;
         
         [Header("Right hand")]
         [SerializeField]
@@ -31,6 +34,9 @@ namespace CSFramework.Presettables
         [SerializeField]
         [Tooltip("The reference to the action to cancel the teleport aiming mode for this controller.")]
         private InputActionProperty rightTeleportModeCancel;
+        [SerializeField]
+        [Tooltip("The reference to the action to select teleport for this controller.")]
+        private InputActionProperty rightTeleportSelect;
         
         protected override void Awake()
         {
@@ -47,8 +53,8 @@ namespace CSFramework.Presettables
             }
         }
 
-        public List<InputActionReference> LeftInputReferences => new() { leftTeleportModeActivate.reference, leftTeleportModeCancel.reference };
-        public List<InputActionReference> RightInputReferences => new() { rightTeleportModeActivate.reference, rightTeleportModeCancel.reference };
+        public List<InputActionReference> LeftInputReferences => new() { leftTeleportModeActivate.reference, leftTeleportModeCancel.reference, leftTeleportSelect.reference };
+        public List<InputActionReference> RightInputReferences => new() { rightTeleportModeActivate.reference, rightTeleportModeCancel.reference, rightTeleportSelect.reference };
         public LocomotionType LocomotionType => LocomotionType.Movement;
         public string DisplayName => "Teleportation";
         public PresettableCategory GetCategory() => PresettableCategory.Locomotion;
