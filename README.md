@@ -10,6 +10,7 @@ Our solution is a complete Unity Project containing the necessary tools to set u
    - [Installation](#installation)
 - [Available Features](#features)
 - [Creating a preset](#creating-a-preset)
+- [Using the setup window](#how-to-use-the-setup-window)
 - [Integrating a new script](#how-to-integrate-your-own-scripts-into-the-framework)
    - [Creating files](#create-the-files)
    - [Defining Preset Fields](#define-the-fields-exposed-in-the-preset)
@@ -22,6 +23,7 @@ Our solution is a complete Unity Project containing the necessary tools to set u
 ### Requirements
 - Unity Editor 2022.2.11f+
 - Unity Universal Render Pipeline
+- Unity XR Toolkit
 - Git LFS support  
 
 We highly recommend and only officially support the latest LTS version of Unity starting from the given version.
@@ -72,9 +74,20 @@ You can open the setup window from the top bar: `CSFramework > Setup`, we sugges
 
 From the top to the bottom, here is an explanation of each component:
 
-- Category panels. Each `Presettable` belongs to a category, you will find them in the corresponding panel. To add a new category, you just have to define a new case for the `PresettableCategory` `enum`.
-- Script creation fields and buttons. They can be used to generate your own `Presettable`s from a template. You can find more information about this in the [integrating a new script](#how-to-integrate-your-own-scripts-into-the-framework) section.
-- ![Figure of the setup window](Assets/Resources/README/images/non-extensions.png) In scene non-extensions are the classes extending `IPresettable` but not `IExtension` that are present in the scene. 
+- __Category panels__: Each `Presettable` belongs to a category, you will find them in the corresponding panel. To add a new category, you just have to define a new case for the `PresettableCategory` `enum`.
+- __Script creation fields and buttons__: They can be used to generate your own `Presettable`s from a template. You can find more information about this in the [integrating a new script](#how-to-integrate-your-own-scripts-into-the-framework) section.
+- __Non-extensions__: They are the classes extending `IPresettable` but not `IExtension`. They're separated between the ones which are present in the scene and the ones which are not. 
+  - __In Scene__
+    - If it is in the scene, disabling the toggle next to it name will destroy the attached `GameObject`. 
+    - Selecting the circle next to the preset field will display the list of all available preset for this script. You can also drag and drop the `ScriptableObject` file in the field.
+    - You can open the _Modify preset_ foldout to display the inspector of the preset and modify its value. Changes are persistent, it is equivalent to modifying the `ScriptableObject` file directly.
+  - __Not In Scene__
+    - All existing non-extension `Presettable`s for the current category will appear here. You can create any of them by clicking the corresponding button, it will create a new `GameObject` with the same name as the script with the component attached to it.
+  
+- __Extensions__: They are the classes extending `IExtension`. Every `GameObject` with a component for which an extension exists will appear in this section and the available extensions for it will be proposed. For example, if you defined an extension `AnimatedVignette` for the `Volume` component, then each volume in the scene will be displayed in the window and the `AnimatedVignette` extension will be proposed for all of them.
+
+  ![Figure of the setup window](Assets/Resources/README/images/non-extensions.png) 
+
 
 ## How to integrate your own scripts into the framework
 ### Create the files
