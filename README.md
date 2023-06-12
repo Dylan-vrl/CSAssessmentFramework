@@ -10,12 +10,12 @@ Our solution is a complete Unity Project containing the necessary tools to set u
    - [Installation](#installation)
 - [Available Features](#features)
 - [Creating a preset](#creating-a-preset)
-- [Using the setup window](#how-to-use-the-setup-window)
-- [Integrating a new script](#how-to-integrate-your-own-scripts-into-the-framework)
-   - [Creating files](#create-the-files)
-   - [Defining Preset Fields](#define-the-fields-exposed-in-the-preset)
-   - [Writing the behaviour of the presettable](#write-the-behaviour-of-the-presettable)
-- [Integrating a custom LocomotionProvider](#how-to-integrate-a-custom-locomotionprovider)
+- [Use existing features](#use-existing-features)
+  - [Using the setup window](#how-to-use-the-setup-window)
+  - [Using the `LocomotionHandler`](#how-to-use-the-locomotionhandler)
+- [Integrate your own features](#integrate-your-own-features)
+  - [Integrating a new script](#how-to-integrate-your-own-scripts-into-the-framework)
+  - [Integrating a custom LocomotionProvider](#how-to-integrate-a-custom-locomotionprovider)
 - [Glossary](#glossary-for-the-framework)
 - [Sources](#sources)
  
@@ -67,7 +67,9 @@ Locomotion/Movement:
 To create a new preset instance, in the folder location of your choice:
     `[right click] > Create > CSFramework > Preset Instances > [Your Preset's category] > [Your Preset's type]`
 
-## How to use the setup window
+## Use existing features
+
+### How to use the setup window
 You can open the setup window from the top bar: `CSFramework > Setup`, we suggest to dock it right next to the inspector and to open it wide enough so that most of its content fit in your screen.
 
 ![Figure of the setup window](Assets/Resources/README/images/setup_window.png)
@@ -88,15 +90,18 @@ From the top to the bottom, here is an explanation of each component:
 
   ![Figure of the setup window](Assets/Resources/README/images/non-extensions.png) 
 
+### How to use the `LocomotionHandler`
 
-## How to integrate your own scripts into the framework
-### Create the files
+## Integrate your own features
+
+### How to integrate your own scripts into the framework
+#### Create the files
 ![Figure of the create buttons](Assets/Resources/README/images/create_buttons.png)
 To benefit from ready-to-use templates, we suggest that you create your scripts from the window directly. To do so, go to the desired category panel for your script and fill the name of your `Presettable` and the name of the extended type, if you want to create an `Extension`. Then, when clicking on the _Create Presettable_ or the _Create Extension_ buttons, a new `Presettable` script will be generated in the _Assets_ folder, along with its preset.
 
 For example, from the _Vision_ panel, using `CameraRotator` as a name and `Camera` as the extended type and clicking on _Create Extension_ will create a new script called `CameraRotator` which is an `Extension` for `Camera` of category _Vision_ and the corresponding `CameraRotatorPreset`.
 
-### Define the fields exposed in the preset
+#### Define the fields exposed in the preset
 The default generated preset script will look like this:
 ```cs
 [CreateAssetMenu(menuName = "CSFramework/Preset Instances/Vision/CameraRotatorPreset", fileName = "new CameraRotatorPreset")]
@@ -128,8 +133,9 @@ public class CameraRotatorPreset: Preset<CameraRotator>
     public float RotationSpeed { get; private set; }
 }
 ```
-### Write the behaviour of the presettable
-#### PresettableMonoBehaviour
+#### Write the behaviour of the presettable
+__PresettableMonoBehaviour__
+
 When creating a non-extension `Presettable`, here is the generated template:
 ```cs
 public class GameStarter : PresettableMonoBehaviour<GameStarterPreset>
@@ -161,7 +167,8 @@ public class GameStarter : PresettableMonoBehaviour<GameStarterPreset>
   public override PresettableCategory GetCategory() => Experiment;
 }
 ```
-#### Extension
+__Extension__
+
 The same principles can be applied to extensions, with the addition that the generated template includes a `GetComponent<Extended>()` call in `Awake()` to get the extended object. You may replace this call by any other way of getting it. If you don't use directly `GetComponent<Extended>()`, don't forget to remove the `RequireComponent()` attribute.
 ```cs
 [RequireComponent(typeof(Camera))]
@@ -198,7 +205,7 @@ public class CameraRotator : Extension<Camera, CameraRotatorPreset>
 
 You can now add it to the scene and create a preset for it as any other `Presettable`, following the steps presented in [its section](#creating-a-preset).
 
-## How to integrate a custom `LocomotionProvider`
+### How to integrate a custom `LocomotionProvider`
 Your class needs to extend `LocomotionProvider` or any subclass of it and either `ICustomMovementLocomotionProvider` or `ICustomRotationLocomotionProvider`. We also suggest to make it a `Presettable` by extending `IPresettable<#YourPresetType#>`. As it is already a subclass of `LocomotionProvider` it can not inherit from `PresettableMonoBehaviour`, that's why we're using the interface instead.
 
 By extending these interfaces, you need to define the following methods and properties:
