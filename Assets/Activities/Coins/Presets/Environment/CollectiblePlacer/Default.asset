@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15bf2604626ea4e31822348c7f598643, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: 
-  <Spacing>k__BackingField: 10
+  <Spacing>k__BackingField: 12
   <NumberOfVisibleCollectibles>k__BackingField: 5
   <Collectible>k__BackingField: {fileID: 3344826067158478766, guid: 7beed303fbfb09240a9edf1d7b0b24fa,
     type: 3}

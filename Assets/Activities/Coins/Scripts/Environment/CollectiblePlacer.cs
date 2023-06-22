@@ -56,8 +56,7 @@ namespace CSFramework.Presettables
             {
                 for (var i = 0; i < Preset.NumberOfVisibleCollectibles; i++)
                 {
-                    
-                    Vector3 point = pathCreator.path.GetPointAtDistance(i*_spacing);
+                    Vector3 point = pathCreator.path.GetPointAtDistance(i*_spacing, EndOfPathInstruction.Reverse);
                     Collectible instCol = Instantiate(Preset.Collectible, point, Quaternion.identity, holder.transform);
                     if (i == 0)
                     {
@@ -87,7 +86,7 @@ namespace CSFramework.Presettables
         {
             Collectible pickedCollectible = _collectibles.Dequeue();
             
-            Vector3 point = pathCreator.path.GetPointAtDistance(_currentDist);
+            Vector3 point = pathCreator.path.GetPointAtDistance(_currentDist, EndOfPathInstruction.Reverse);
             // Rotating is also possible, but not needed in our case
             //Quaternion rot = pathCreator.path.GetRotationAtDistance(_currentDist);
             Transform collectibleTransform = pickedCollectible.transform;
