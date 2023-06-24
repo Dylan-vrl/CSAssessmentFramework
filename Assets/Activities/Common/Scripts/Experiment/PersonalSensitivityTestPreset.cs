@@ -16,5 +16,6 @@ namespace CSFramework.Presets
         [SerializeField] public float turnDurationPerAxis;
         [SerializeField] public float waitDurationBtwEachTurn;
         [SerializeField] public float waitDurationBtw3AxisTurns;
+        [SerializeField] public Vector3 linearDistance;
     }
 }

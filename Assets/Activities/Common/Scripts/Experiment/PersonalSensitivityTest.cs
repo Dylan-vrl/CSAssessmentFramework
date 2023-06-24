@@ -31,12 +31,15 @@ namespace CSFramework.Extensions
         private TextMeshPro indicatorText;
         private string[] axisNames;
 
+        private Vector3 offset;
+
         private void Start()
         {
             lerpDuration = Preset.turnDurationPerAxis;
             lapCount = Preset.turnPerAxis;
             waitDuration = Preset.waitDurationBtw3AxisTurns;
             waitBtwnAxisTime = Preset.waitDurationBtwEachTurn;
+            offset = Preset.linearDistance;
 
             // disable tracked pose driver
             TrackedPoseDriver trackedPoseDriver = GetComponent(typeof(TrackedPoseDriver)) as TrackedPoseDriver;
@@ -137,6 +140,32 @@ namespace CSFramework.Extensions
                 await Task.Yield();
             }
             transform.rotation = startRotation;
+        }
+
+        async Task Linear(Quaternion turnAxis)
+        {
+            
+            float timeElapsed = 0f;
+            Vector3 startPosition = transform.position;
+            Vector3 midPosition = transform.position + turnAxis * offset ;
+
+            while (timeElapsed < lerpDuration)
+            {
+                //transform.position = ;
+                timeElapsed += Time.deltaTime;
+                await Task.Yield();
+            }
+            transform.position = midPosition;
+            
+            timeElapsed = 0f;
+            Vector3 finalPosition = transform.position - turnAxis * offset ;
+            while (timeElapsed < lerpDuration)
+            {
+                //transform.position = ;
+                timeElapsed += Time.deltaTime;
+                await Task.Yield();
+            }
+            transform.position = startPosition;
         }
     }
 }
