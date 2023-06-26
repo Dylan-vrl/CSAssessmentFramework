@@ -15,15 +15,18 @@ namespace CSFramework.Extensions
 	{
         public override PresettableCategory GetCategory() => Experiment;
 
-        // You can access your Preset's fields: Preset.fieldName
-
+        // preset variables
         private float lerpDuration;
         private float waitDuration;
         private int lapCount;
         private float waitBtwnAxisTime;
-        private bool rotating = false;
+        private float offset;
 
         private Quaternion[] axises;
+        private Vector3[] linAxises;
+        private bool started = false;
+
+        //indicator variables
         private Quaternion indicatorRotation;
         private Vector3 indicatorPosition;
         private GameObject indicator;
@@ -31,12 +34,12 @@ namespace CSFramework.Extensions
         private TextMeshPro indicatorText;
         private string[] axisNames;
 
-        private Vector3 offset;
 
         private void Start()
         {
-            lerpDuration = Preset.turnDurationPerAxis;
-            lapCount = Preset.turnPerAxis;
+            // get preset values
+            lerpDuration = Preset.lapDurationPerAxis;
+            lapCount = Preset.lapsPerAxis;
             waitDuration = Preset.waitDurationBtw3AxisTurns;
             waitBtwnAxisTime = Preset.waitDurationBtwEachTurn;
             offset = Preset.linearDistance;
@@ -46,70 +49,62 @@ namespace CSFramework.Extensions
             if(trackedPoseDriver != null) {
                 trackedPoseDriver.enabled = false;
             }
-
+            
+            // prepare axis vectors
             axises = new Quaternion[3];
             axises[0] = Quaternion.Euler(180, 0, 0);
             axises[1] = Quaternion.Euler(0, 180, 0);
             axises[2] = Quaternion.Euler(0, 0, 180);
+            linAxises = new Vector3[3];
+            linAxises[0] = new Vector3(1,0,0);
+            linAxises[1] = new Vector3(0,1,0);
+            linAxises[2] = new Vector3(0,0,1);
 
-            indicatorRotation = Quaternion.Euler(0, 180, 0);
-            indicatorPosition = new Vector3(0.008f, 0.052f, 1.281f);
-            indicator = (GameObject) Instantiate(Resources.Load("PitchRollYaw"), indicatorPosition, indicatorRotation);
-            // instantiate as a child
-            indicator.transform.parent = transform;
-            indicator.transform.localPosition = indicatorPosition;
-            indicator.transform.rotation = indicatorRotation;
-
-            indicatorText = indicator.transform.GetChild(3).gameObject.GetComponent<TextMeshPro>();
-            // disactive all axis
-            indicatorAxises = new GameObject[3];
-            indicatorAxises[0] = indicator.transform.GetChild(0).gameObject;
-            indicatorAxises[1] = indicator.transform.GetChild(2).gameObject;
-            indicatorAxises[2] = indicator.transform.GetChild(1).gameObject;
-            indicatorAxises[0].SetActive(false);
-            indicatorAxises[1].SetActive(false);
-            indicatorAxises[2].SetActive(false);
-            
-            indicatorText.text = "";
-            axisNames = new string[3];
-            axisNames[0] = "PITCH";
-            axisNames[2] = "ROLL";
-            axisNames[1] = "YAW";
+            PrepareIndicator();
         }
 
         private void Update()
         {
-            if ( GameStateManager.IsPlaying && !rotating)
+            if ( GameStateManager.IsPlaying && !started)
             {
                 GameStateManager.PauseGame(true);
                 Begin();
             }
-            if(!Preset.insideGameScene && !rotating) {
+            if( !Preset.insideGameScene && !started) {
                 Begin();
             }
         }
 
         private async void Begin()
         {
-            rotating = true;
+            started = true;
             int [,] rotationTurns = {{0,1,2}, {1,0,2}, {0,2,1}};
-            for (int k = 0; k < 3; k++) {
+            int rot = Preset.rotationalTest ? 1: 0;
+            int lin = Preset.linearTest ? 1 : 0;
+            int multip = rot + lin;
+
+            for (int k = 0; k < 3 * multip; k++) {
                 await Task.Delay((int) (waitDuration*1000));
                 for(int j=0; j < 3; j++)
                 {
                     for (int i = 0; i < lapCount; i++)
                     {
                         int axisNo = rotationTurns[k, j];
+                        int indNo = (Preset.linearTest && k < 3) ? axisNo + 3: axisNo;
                         // show next axis direction
                         indicatorText.text = axisNames[axisNo];
-                        indicatorAxises[axisNo].SetActive(true);
+                        indicatorAxises[indNo].SetActive(true);
                         
                         await Task.Delay((int) (waitBtwnAxisTime*1000));
                         // remove axis direction
-                        indicatorAxises[axisNo].SetActive(false);
+                        indicatorAxises[indNo].SetActive(false);
                         indicatorText.text = "";
 
-                        await Rotate360(axises[axisNo]);
+                        if(Preset.linearTest && k < 3) {
+                            await Linear(linAxises[axisNo]);
+                        } else {
+                            await Rotate360(axises[axisNo]);
+                        }
                     }
                 }
             }
@@ -118,7 +113,6 @@ namespace CSFramework.Extensions
 
         async Task Rotate360(Quaternion turnAxis)
         {
-            
             float timeElapsed = 0f;
             Quaternion startRotation = transform.rotation;
             Quaternion midRotation = transform.rotation * turnAxis;
@@ -142,30 +136,63 @@ namespace CSFramework.Extensions
             transform.rotation = startRotation;
         }
 
-        async Task Linear(Quaternion turnAxis)
+        async Task Linear(Vector3 axis)
         {
-            
             float timeElapsed = 0f;
             Vector3 startPosition = transform.position;
-            Vector3 midPosition = transform.position + turnAxis * offset ;
+            Vector3 rightPosition = transform.position + (axis * offset) ;
+            Vector3 leftPosition = transform.position - (axis * offset) ;
 
-            while (timeElapsed < lerpDuration)
+            while (timeElapsed < lerpDuration / 2)
             {
-                //transform.position = ;
+                transform.position = startPosition + axis * Mathf.Lerp(0, offset, timeElapsed / (lerpDuration/2));
                 timeElapsed += Time.deltaTime;
                 await Task.Yield();
             }
-            transform.position = midPosition;
+            transform.position = rightPosition;
             
             timeElapsed = 0f;
-            Vector3 finalPosition = transform.position - turnAxis * offset ;
             while (timeElapsed < lerpDuration)
             {
-                //transform.position = ;
+                transform.position = rightPosition - axis * Mathf.Lerp(0, offset * 2, timeElapsed / lerpDuration);
+                timeElapsed += Time.deltaTime;
+                await Task.Yield();
+            }
+            transform.position = leftPosition;
+
+            timeElapsed = 0f;
+            while (timeElapsed < lerpDuration / 2)
+            {
+                transform.position = leftPosition + axis * Mathf.Lerp(0, offset, timeElapsed / (lerpDuration/2));
                 timeElapsed += Time.deltaTime;
                 await Task.Yield();
             }
             transform.position = startPosition;
+        }
+
+        private void PrepareIndicator() {
+            // instantiate indicator as a child of camera
+            indicatorRotation = Quaternion.Euler(0, 180, 0);
+            indicatorPosition = new Vector3(0.008f, 0.052f, 1.281f);
+            indicator = (GameObject) Instantiate(Resources.Load("PitchRollYaw"), indicatorPosition, indicatorRotation);
+            indicator.transform.parent = transform;
+            indicator.transform.localPosition = indicatorPosition;
+            indicator.transform.rotation = indicatorRotation;
+            
+            // set and disactive all axis
+            indicatorAxises = new GameObject[6];
+            for( int i= 0; i<6; i++){
+                indicatorAxises[i] = indicator.transform.GetChild(i).gameObject;
+                indicatorAxises[i].SetActive(false);
+            }
+            
+            //prepare indicator text field
+            indicatorText = indicator.transform.GetChild(6).gameObject.GetComponent<TextMeshPro>();
+            indicatorText.text = "";
+            axisNames = new string[3];
+            axisNames[0] = "PITCH";
+            axisNames[2] = "ROLL";
+            axisNames[1] = "YAW";
         }
     }
 }

@@ -808,8 +808,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84cb37d578a94d4a9d98e7e135d0c03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preset: {fileID: 0}
-  rotateWithTerrain: {fileID: 0}
 --- !u!1 &91999537
 GameObject:
   m_ObjectHideFlags: 0
@@ -6925,7 +6923,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e54b96e21e44e884587f5c31b9d49a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sampleFrequencyInSeconds: 1
 --- !u!114 &1272189272
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df470318def896e4986f39f7a9732489, type: 3}
-  m_Name: in_game
+  m_Name: in_game_both
   m_EditorClassIdentifier: 
   insideGameScene: 1
-  turnPerAxis: 1
-  turnDurationPerAxis: 3
+  rotationalTest: 1
+  linearTest: 1
+  lapsPerAxis: 1
+  lapDurationPerAxis: 2
   waitDurationBtwEachTurn: 3
   waitDurationBtw3AxisTurns: 5
+  linearDistance: 1.5

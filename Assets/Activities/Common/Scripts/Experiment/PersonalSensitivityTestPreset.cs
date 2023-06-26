@@ -12,10 +12,13 @@ namespace CSFramework.Presets
         //[field: SerializeField]
         //public int Field { get; private set; }
         [SerializeField] public bool insideGameScene;
-        [SerializeField] public int turnPerAxis;
-        [SerializeField] public float turnDurationPerAxis;
+        [SerializeField] public bool rotationalTest;
+        [SerializeField] public bool linearTest;
+
+        [SerializeField] public int lapsPerAxis;
+        [SerializeField] public float lapDurationPerAxis;
         [SerializeField] public float waitDurationBtwEachTurn;
         [SerializeField] public float waitDurationBtw3AxisTurns;
-        [SerializeField] public Vector3 linearDistance;
+        [SerializeField] public float linearDistance;
     }
 }
