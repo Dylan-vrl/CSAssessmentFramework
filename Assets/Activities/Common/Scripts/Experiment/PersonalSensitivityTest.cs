@@ -25,6 +25,7 @@ namespace CSFramework.Extensions
         private Quaternion[] axises;
         private Vector3[] linAxises;
         private bool started = false;
+        private static float MIN_DIST = 5f;
 
         //indicator variables
         private Quaternion indicatorRotation;
@@ -42,7 +43,7 @@ namespace CSFramework.Extensions
             lapCount = Preset.lapsPerAxis;
             waitDuration = Preset.waitDurationBtw3AxisTurns;
             waitBtwnAxisTime = Preset.waitDurationBtwEachTurn;
-            offset = Preset.linearDistance;
+            offset = Preset.linearDistance < MIN_DIST ? MIN_DIST : Preset.linearDistance;
 
             // disable tracked pose driver
             TrackedPoseDriver trackedPoseDriver = GetComponent(typeof(TrackedPoseDriver)) as TrackedPoseDriver;
@@ -92,7 +93,7 @@ namespace CSFramework.Extensions
                         int axisNo = rotationTurns[k, j];
                         int indNo = (Preset.linearTest && k < 3) ? axisNo + 3: axisNo;
                         // show next axis direction
-                        indicatorText.text = axisNames[axisNo];
+                        indicatorText.text = axisNames[indNo];
                         indicatorAxises[indNo].SetActive(true);
                         
                         await Task.Delay((int) (waitBtwnAxisTime*1000));
@@ -140,32 +141,51 @@ namespace CSFramework.Extensions
         {
             float timeElapsed = 0f;
             Vector3 startPosition = transform.position;
-            Vector3 rightPosition = transform.position + (axis * offset) ;
-            Vector3 leftPosition = transform.position - (axis * offset) ;
+            if(Preset.insideGameScene && axis == Vector3.up) {
+                Vector3 rightPosition = transform.position + (axis * offset * 2) ;
+                while (timeElapsed < lerpDuration)
+                {
+                    transform.position = startPosition + axis * Mathf.Lerp(0, offset, timeElapsed / lerpDuration);
+                    timeElapsed += Time.deltaTime;
+                    await Task.Yield();
+                }
+                transform.position = rightPosition;
 
-            while (timeElapsed < lerpDuration / 2)
-            {
-                transform.position = startPosition + axis * Mathf.Lerp(0, offset, timeElapsed / (lerpDuration/2));
-                timeElapsed += Time.deltaTime;
-                await Task.Yield();
-            }
-            transform.position = rightPosition;
-            
-            timeElapsed = 0f;
-            while (timeElapsed < lerpDuration)
-            {
-                transform.position = rightPosition - axis * Mathf.Lerp(0, offset * 2, timeElapsed / lerpDuration);
-                timeElapsed += Time.deltaTime;
-                await Task.Yield();
-            }
-            transform.position = leftPosition;
+                timeElapsed = 0f;
+                while (timeElapsed < lerpDuration)
+                {
+                    transform.position = rightPosition - axis * Mathf.Lerp(0, offset, timeElapsed / lerpDuration);
+                    timeElapsed += Time.deltaTime;
+                    await Task.Yield();
+                }
+            } else {
+                Vector3 rightPosition = transform.position + (axis * offset) ;
+                Vector3 leftPosition = transform.position - (axis * offset) ;
 
-            timeElapsed = 0f;
-            while (timeElapsed < lerpDuration / 2)
-            {
-                transform.position = leftPosition + axis * Mathf.Lerp(0, offset, timeElapsed / (lerpDuration/2));
-                timeElapsed += Time.deltaTime;
-                await Task.Yield();
+                while (timeElapsed < lerpDuration / 2)
+                {
+                    transform.position = startPosition + axis * Mathf.Lerp(0, offset, timeElapsed / (lerpDuration/2));
+                    timeElapsed += Time.deltaTime;
+                    await Task.Yield();
+                }
+                transform.position = rightPosition;
+                
+                timeElapsed = 0f;
+                while (timeElapsed < lerpDuration)
+                {
+                    transform.position = rightPosition - axis * Mathf.Lerp(0, offset * 2, timeElapsed / lerpDuration);
+                    timeElapsed += Time.deltaTime;
+                    await Task.Yield();
+                }
+                transform.position = leftPosition;
+
+                timeElapsed = 0f;
+                while (timeElapsed < lerpDuration / 2)
+                {
+                    transform.position = leftPosition + axis * Mathf.Lerp(0, offset, timeElapsed / (lerpDuration/2));
+                    timeElapsed += Time.deltaTime;
+                    await Task.Yield();
+                }
             }
             transform.position = startPosition;
         }
@@ -189,10 +209,13 @@ namespace CSFramework.Extensions
             //prepare indicator text field
             indicatorText = indicator.transform.GetChild(6).gameObject.GetComponent<TextMeshPro>();
             indicatorText.text = "";
-            axisNames = new string[3];
+            axisNames = new string[6];
             axisNames[0] = "PITCH";
-            axisNames[2] = "ROLL";
             axisNames[1] = "YAW";
+            axisNames[2] = "ROLL";
+            axisNames[3] = "LATERAL";
+            axisNames[4] = "VERTICAL";
+            axisNames[5] = "LONGITUDINAL";
         }
     }
 }

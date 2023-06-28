@@ -19,4 +19,4 @@ MonoBehaviour:
   lapDurationPerAxis: 2
   waitDurationBtwEachTurn: 3
   waitDurationBtw3AxisTurns: 5
-  linearDistance: 2
+  linearDistance: 5
