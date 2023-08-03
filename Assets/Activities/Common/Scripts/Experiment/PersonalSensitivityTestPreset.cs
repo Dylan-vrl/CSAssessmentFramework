@@ -20,5 +20,7 @@ namespace CSFramework.Presets
         [SerializeField] public float waitDurationBtwEachTurn;
         [SerializeField] public float waitDurationBtw3AxisTurns;
         [SerializeField] public float linearDistance;
+
+        [SerializeField] public Optional<Material> indicatorMaterial;
     }
 }

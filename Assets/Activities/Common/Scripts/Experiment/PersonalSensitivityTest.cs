@@ -203,11 +203,19 @@ namespace CSFramework.Extensions
             indicatorAxises = new GameObject[6];
             for( int i= 0; i<6; i++){
                 indicatorAxises[i] = indicator.transform.GetChild(i).gameObject;
+                // color white for special scene
+                if(!Preset.insideGameScene || Preset.indicatorMaterial.Enabled) {
+                    indicatorAxises[i].GetComponent<MeshRenderer>().material = Preset.indicatorMaterial.Value;
+                }
                 indicatorAxises[i].SetActive(false);
             }
             
             //prepare indicator text field
             indicatorText = indicator.transform.GetChild(6).gameObject.GetComponent<TextMeshPro>();
+            // color white for special scene
+            if(!Preset.insideGameScene) {
+                indicatorText.color = Color.white;
+            }
             indicatorText.text = "";
             axisNames = new string[6];
             axisNames[0] = "PITCH";
@@ -216,6 +224,8 @@ namespace CSFramework.Extensions
             axisNames[3] = "LATERAL";
             axisNames[4] = "VERTICAL";
             axisNames[5] = "LONGITUDINAL";
+
+            
         }
     }
 }

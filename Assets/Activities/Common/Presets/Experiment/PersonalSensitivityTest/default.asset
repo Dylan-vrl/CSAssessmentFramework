@@ -20,3 +20,6 @@ MonoBehaviour:
   waitDurationBtwEachTurn: 3
   waitDurationBtw3AxisTurns: 5
   linearDistance: 5
+  indicatorMaterial:
+    enabled: 1
+    value: {fileID: 2100018, guid: 290f57b34312fbf448d3b8ca6b6bd41d, type: 3}
