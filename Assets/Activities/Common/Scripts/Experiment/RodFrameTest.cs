@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class RodFrameTest : MonoBehaviour
 {
@@ -36,10 +37,8 @@ public class RodFrameTest : MonoBehaviour
 
     public void Next()
     {
+        storedVals.Add("Case " + shuffledCards[index].ToString() + ": " + string.Format("{0:N1}", rod.transform.eulerAngles.z));
         if (index < LAP_COUNT) {
-            Debug.Log(shuffledCards[index]);
-            storedVals.Add("Case " + shuffledCards[index].ToString() + ": " + string.Format("{0:N1}", rod.transform.eulerAngles.z));
-            
             switch (shuffledCards[index]) {   
                 case 1:
                     // WriteString(string.Format("{0:N1}", rod.transform.eulerAngles.z) + ",case 1");
@@ -67,7 +66,8 @@ public class RodFrameTest : MonoBehaviour
             }
             index++;
         } else {
-            Debug.Log("End Session");
+            Debug.Log(storedVals);
+            Debug.Log("Session Ended.");
         }
     }
 

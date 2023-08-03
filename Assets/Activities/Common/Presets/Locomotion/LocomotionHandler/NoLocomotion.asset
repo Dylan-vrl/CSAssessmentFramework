@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f3b24e7e594c98859149aee50a080d, type: 3}
+  m_Name: NoLocomotion
+  m_EditorClassIdentifier: 
+  leftActiveLocomotionProviders: []
+  rightActiveLocomotionProviders:
+  - {fileID: 6341396779400365748, guid: 05c227c45791d4207b704de4999a7a5e, type: 3}
+  leftControllerPrefab: {fileID: 8977950681892835606, guid: 008d5f58ef8b54490bd145195697b71c,
+    type: 3}
+  rightControllerPrefab: {fileID: 5819607906537702169, guid: 507a8f0d979f64e7daae4b87abeb7517,
+    type: 3}
+  OnListChange:
+    m_PersistentCalls:
+      m_Calls: []

@@ -46,9 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_System: {fileID: 0}
   m_DelayTime: 0
-  preset: {fileID: 11400000, guid: 68f1189a7c2724221b9a347d7743c03d, type: 2}
+  preset: {fileID: 0}
   leftTeleportModeActivate:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
       m_Name: Left Teleport Mode Activate
       m_Type: 0
@@ -61,7 +61,7 @@ MonoBehaviour:
     m_Reference: {fileID: 1263111715868034790, guid: 777319c6e78c14cf3869659af9525160,
       type: 3}
   leftTeleportModeCancel:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
       m_Name: Left Teleport Mode Cancel
       m_Type: 0
@@ -74,7 +74,7 @@ MonoBehaviour:
     m_Reference: {fileID: 737890489006591557, guid: 777319c6e78c14cf3869659af9525160,
       type: 3}
   leftTeleportSelect:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
       m_Name: Left Teleport Select
       m_Type: 0
@@ -87,7 +87,7 @@ MonoBehaviour:
     m_Reference: {fileID: -4084014799535200556, guid: 777319c6e78c14cf3869659af9525160,
       type: 3}
   rightTeleportModeActivate:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
       m_Name: Right Teleport Mode Activate
       m_Type: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
     m_Reference: {fileID: -8061240218431744966, guid: 777319c6e78c14cf3869659af9525160,
       type: 3}
   rightTeleportModeCancel:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
       m_Name: Right Teleport Mode Cancel
       m_Type: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
     m_Reference: {fileID: 2307464322626738743, guid: 777319c6e78c14cf3869659af9525160,
       type: 3}
   rightTeleportSelect:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
       m_Name: Right Teleport Select
       m_Type: 0
